@@ -74,7 +74,7 @@
         
     //adding StreamLayer    
 	var buses = L.esri.streamFeatureLayer({
-		url: 'https://geoeventsample3.esri.com:6443/arcgis/rest/services/SeattleBus/StreamServer'
+		url: 'https://geoeventsample3.esri.com:6443/arcgis/rest/services/LABus/StreamServer'
 	}).addTo(map);
 console.log("added streamlayer");
 
