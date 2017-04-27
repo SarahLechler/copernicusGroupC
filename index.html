@@ -28,6 +28,9 @@
   <!-- Load Esri Leaflet Geocoder from CDN -->
   <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.3/dist/esri-leaflet-geocoder.css">
   <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.3"></script>
+  
+  <!-- Load Esri StreamLayer-->
+    <script src="dist\js\esri-leaflet-stream\dist\esri-leaflet-stream.min.js"></script>
 
   <style>
     html, body {
@@ -174,76 +177,6 @@
     
   </div> <!-- /.calcite-panels -->
   
-  <script>
-    
-    // ============
-    // Esri-Leaflet 
-    // ============
-
-    var map = L.map('map', {zoomControl: false}).setView([51.57, 7.37],5),
-      layer = L.esri.basemapLayer('NationalGeographic').addTo(map),
-      // layerLabels = L.esri.basemapLayer('xxxLabels').addTo(map);
-      layerLabels = null,
-      worldTransportation = L.esri.basemapLayer('ImageryTransportation');      
-	  
-	  map.fitBounds([
-	  [50.211672, 5.464801],
-	  [52.729268, 9.463824]
-	  ]);
-
-    function setBasemap(basemap) {
-      if (layer) {
-        map.removeLayer(layer);
-      }
-      if (basemap === 'OpenStreetMap') {
-        layer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
-      }
-      else {
-        layer = L.esri.basemapLayer(basemap);
-      }
-      map.addLayer(layer);
-      if (layerLabels) {
-        map.removeLayer(layerLabels);
-      }
-
-      if (basemap === 'ShadedRelief' || basemap === 'Oceans' || basemap === 'Gray' || basemap === 'DarkGray' || basemap === 'Imagery' || basemap === 'Terrain') {
-        layerLabels = L.esri.basemapLayer(basemap + 'Labels');
-        map.addLayer(layerLabels);
-      }
-        
-      // add world transportation service to Imagery basemap
-      if (basemap === 'Imagery') {
-        worldTransportation.addTo(map);            
-      } else if (map.hasLayer(worldTransportation)) {
-        // remove world transportation if Imagery basemap is not selected    
-        map.removeLayer(worldTransportation);
-      }
-    }
-
-    L.control.zoom({
-      position:'topright'
-    }).addTo(map);
-
-    //var searchControl = L.esri.Geocoding.Controls.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: false}).addTo(map);
-    var searchControl = L.esri.Geocoding.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: false}).addTo(map);
-    
-    searchControl.on('results', function(data){ 
-      if (data.results.length > 0) {
-        var popup = L.popup()
-          .setLatLng(data.results[0].latlng)
-          .setContent(data.results[0].text)
-          .openOn(map);
-        map.setView(data.results[0].latlng)
-      }
-    })
-	
-	L.easyPrint({
-			title: 'Click to print the map',
-			position: 'topright'
-		}).addTo(map);
-  
-  </script>
-
   <!-- ====== -->
   <!-- jQuery --> 
   <!-- ====== -->
@@ -251,50 +184,10 @@
   <!--script src="https://esri.github.io/calcite-bootstrap/scripts/vendor.js"></script-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Include all plugins or individual files as needed -->
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+  <script src="jQuery.js"></script>
 
-
-  <script type="text/javascript">
-
-    $(document).ready(function(){
-
-      // Basemap changed
-      $("#selectStandardBasemap").on("change", function(e) {
-        setBasemap($(this).val());
-      });
-
-      // Search
-      var input = $(".geocoder-control-input");
-      input.focus(function(){
-        $("#panelSearch .panel-body").css("height", "150px");
-      });
-      input.blur(function(){
-         $("#panelSearch .panel-body").css("height", "auto");
-      });
-
-      // Attach search control for desktop or mobile
-      function attachSearch() {
-        var parentName = $(".geocoder-control").parent().attr("id"),
-          geocoder = $(".geocoder-control"),
-          width = $(window).width();
-        if (width <= 767 && parentName !== "geocodeMobile") {
-          geocoder.detach();
-          $("#geocodeMobile").append(geocoder);
-        } else if (width > 767 && parentName !== "geocode"){
-          geocoder.detach();
-          $("#geocode").append(geocoder);
-        }
-      }
-
-      $(window).resize(function() {
-        attachSearch();
-      });
-
-      attachSearch();
-
-    });<!-- jQuery -->
-  </script>
-
+ 
   <!-- Bootstrap core JavaScript
   ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
@@ -309,6 +202,7 @@
   <!--script src="https://esri.github.io/calcite-bootstrap/scripts/vendor.js"></script-->
   <!--script src="https://esri.github.io/calcite-bootstrap/scripts/plugins.js"></script-->
   <script src="dist/js/jquery/calcitemaps-v0.3.js"></script>
+  <script src="map.js"></script>
 
 </body>
 </html>
