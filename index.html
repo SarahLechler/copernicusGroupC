@@ -27,10 +27,50 @@
 
   <!-- Load Esri Leaflet Geocoder from CDN -->
   <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.3/dist/esri-leaflet-geocoder.css">
+  <link rel="stylesheet" href="dist/leaflet.iconlabel.css">
   <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.3"></script>
   
   <!-- Load Esri StreamLayer-->
-    <script src="dist\js\esri-leaflet-stream\dist\esri-leaflet-stream.min.js"></script>
+    <script src="dist/js/esri-leaflet-stream/esri-leaflet-stream.min.js"></script>
+	<script src="dist/leaflet.iconlabel.js"></script>
+	
+  <!-- Load Draw Plugins -->
+  <script src="src/Leaflet.draw.js"></script>
+    <script src="src/Leaflet.Draw.Event.js"></script>
+    <link rel="stylesheet" href="../../src/leaflet.draw.css"/>
+
+    <script src="src/Toolbar.js"></script>
+    <script src="src/Tooltip.js"></script>
+
+    <script src="src/ext/GeometryUtil.js"></script>
+    <script src="src/ext/LatLngUtil.js"></script>
+    <script src="src/ext/LineUtil.Intersect.js"></script>
+    <script src="src/ext/Polygon.Intersect.js"></script>
+    <script src="src/ext/Polyline.Intersect.js"></script>
+    <script src="src/ext/TouchEvents.js"></script>
+
+    <script src="src/draw/DrawToolbar.js"></script>
+    <script src="src/draw/handler/Draw.Feature.js"></script>
+    <script src="src/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="src/draw/handler/Draw.Polyline.js"></script>
+    <script src="src/draw/handler/Draw.Circle.js"></script>
+    <script src="src/draw/handler/Draw.Marker.js"></script>
+    <script src="src/draw/handler/Draw.Polygon.js"></script>
+    <script src="src/draw/handler/Draw.Rectangle.js"></script>
+
+
+    <script src="src/edit/EditToolbar.js"></script>
+    <script src="src/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="src/edit/handler/EditToolbar.Delete.js"></script>
+
+    <script src="src/Control.Draw.js"></script>
+
+    <script src="src/edit/handler/Edit.Poly.js"></script>
+    <script src="src/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="src/edit/handler/Edit.Circle.js"></script>
+    <script src="src/edit/handler/Edit.Rectangle.js"></script>
+    <script src="src/edit/handler/Edit.Marker.js"></script>
+  
 
   <style>
     html, body {
@@ -175,7 +215,13 @@
       </div>
     </div>
     
-  </div> <!-- /.calcite-panels -->
+  </div> 
+  <div class='leaflet-control-container'>
+  <div class="leaflet-top leaflet-right" style="top:300px">
+  <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="weather_icon" title="Click to know the weather" src= 'images/partly_cloudy_day_filled1600.png' height='35' width='30' onclick='getWeather()'></img></div>
+  </div>
+  </div>
+  <!-- /.calcite-panels -->
   
   <!-- ====== -->
   <!-- jQuery --> 
@@ -184,8 +230,8 @@
   <!--script src="https://esri.github.io/calcite-bootstrap/scripts/vendor.js"></script-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Include all plugins or individual files as needed -->
-  <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
-  <script src="jQuery.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/jQuery.js"></script>
 
  
   <!-- Bootstrap core JavaScript
@@ -202,8 +248,13 @@
   <!--script src="https://esri.github.io/calcite-bootstrap/scripts/vendor.js"></script-->
   <!--script src="https://esri.github.io/calcite-bootstrap/scripts/plugins.js"></script-->
   <script src="dist/js/jquery/calcitemaps-v0.3.js"></script>
-  <script src="map.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/weatherdata.js"></script>
+  <script src="js/waterlevel.js"></script>
+  <script src="js/marker.js"></script>
 
 </body>
 </html>
+
+
 
