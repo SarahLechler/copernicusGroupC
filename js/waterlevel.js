@@ -6,7 +6,7 @@ $.ajax({
         dataType: "json",
         async:false,
         success: function(result){
-			console.log(result);
+			//console.log(result);
 			addWater(result);
         }, 
         error: function(xhr, textStatus, errorThrown){ 
@@ -28,11 +28,11 @@ function addWater(data){
 				dataType: "json",
 				async:false,
 				success: function(result){
-					console.log(result.timeseries[0].currentMeasurement,result.timeseries[0].currentMeasurement.stateMnwMhw);
+					//console.log(result.timeseries[0].currentMeasurement,result.timeseries[0].currentMeasurement.stateMnwMhw);
 					if((result.timeseries[0].currentMeasurement.stateMnwMhw =='normal' || result.timeseries[0].currentMeasurement.stateMnwMhw =='low') && result.timeseries[0].currentMeasurement.trend == '1'){
 						 var waterIcon = L.Icon.Label.extend({
 							options: {
-							iconUrl: 'images/water_positive.png',
+							iconUrl: 'images/water_positiveArrow.png',
 							shadowUrl: null,
 							iconSize: new L.Point(24, 24),
 							iconAnchor: new L.Point(0, 1),
@@ -44,7 +44,7 @@ function addWater(data){
 					else if((result.timeseries[0].currentMeasurement.stateMnwMhw == 'normal' || result.timeseries[0].currentMeasurement.stateMnwMhw == 'low')&&(result.timeseries[0].currentMeasurement.trend == '-1' || result.timeseries[0].currentMeasurement.trend == '0')){
 						var waterIcon = L.Icon.Label.extend({
 							options: {
-							iconUrl: 'images/water_negative.png',
+							iconUrl: 'images/water_negativeArrow.png',
 							shadowUrl: null,
 							iconSize: new L.Point(24, 24),
 							iconAnchor: new L.Point(0, 1),
@@ -56,7 +56,7 @@ function addWater(data){
 					else if(result.timeseries[0].currentMeasurement.stateMnwMhw == 'high'&& result.timeseries[0].currentMeasurement.trend == '1'){
 						var waterIcon = L.Icon.Label.extend({
 							options: {
-							iconUrl: 'images/high_positive.png',
+							iconUrl: 'images/high_positiveArrow.png',
 							shadowUrl: null,
 							iconSize: new L.Point(24, 24),
 							iconAnchor: new L.Point(0, 1),
@@ -68,7 +68,7 @@ function addWater(data){
 					else if(result.timeseries[0].currentMeasurement.stateMnwMhw=='high'&& (result.timeseries[0].currentMeasurement.trend=='-1'||result.timeseries[0].currentMeasurement.trend=='0')){
 						var waterIcon = L.Icon.Label.extend({
 							options: {
-							iconUrl: 'images/high_negative.png',
+							iconUrl: 'images/high_negativeArrow.png',
 							shadowUrl: null,
 							iconSize: new L.Point(24, 24),
 							iconAnchor: new L.Point(0, 1),
@@ -124,11 +124,18 @@ function addWater(data){
 							wrapperAnchor: new L.Point(12, 13),
 							}
 						});
+                                                
 					}
 				var marker = new L.Marker.Label([lat, lon],{ icon: new waterIcon({ labelText: "<b>" + result.timeseries[0].currentMeasurement.value + "</b>"})}).addTo(map);	
-				marker.bindPopup("<b>"+station_name+"</b><br> Water : " + result.water.shortname);
-				
-					
+				marker.bindPopup("<b>"+station_name+"</b><br> Water : " + result.water.shortname+ "<br> development: <img src= https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/"+station_name+"/W/measurements.png?start=P15D&width=250&height=80 />",{
+                                   width: 500 
+                                });
+                                
+                                complete: setTimeout(function() 
+                                    {addWater()}, 5000);
+                                timeout: 50
+				//popup needs to be sized to the image of the graph
+				console.log("polled");	
         }, 
         error: function(xhr, textStatus, errorThrown){ 
             alert("Unable to fetch Server data")               	 	
