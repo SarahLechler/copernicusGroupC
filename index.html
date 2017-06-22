@@ -70,9 +70,107 @@
     <script src="src/edit/handler/Edit.Circle.js"></script>
     <script src="src/edit/handler/Edit.Rectangle.js"></script>
     <script src="src/edit/handler/Edit.Marker.js"></script>
-  
+	
+	<!--range slider -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.20/themes/base/jquery-ui.css" type="text/css" media="all" />
+
+	<!-- chart -->
+<script src="src/canvasjs.min.js"></script>
+
+
 
   <style>
+  
+  input[type=range] {
+  height: 25px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: #8A4DA8;
+  border-radius: 50px;
+  border: 1px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 17px;
+  width: 5px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #8A4DA8;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000;
+  background: #8A4DA8;
+  border-radius: 50px;
+  border: 1px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 17px;
+  width: 5px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #8A4DA8;
+  border: 1px solid #000000;
+  border-radius: 100px;
+  box-shadow: 1px 1px 1px #000000;
+}
+input[type=range]::-ms-fill-upper {
+  background: #8A4DA8;
+  border: 1px solid #000000;
+  border-radius: 100px;
+  box-shadow: 1px 1px 1px #000000;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 1px 1px 1px #000000;
+  border: 1px solid #000000;
+  height: 17px;
+  width: 5px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #8A4DA8;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #8A4DA8;
+}
+
     html, body {
       margin: 0;
       padding: 0;
@@ -107,6 +205,7 @@
 </head>
 <body class="calcite-maps calcite-nav-top">
 
+  
   <!-- Navbar -->
 
   <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark calcite-bgcolor-dark-purple">
@@ -142,8 +241,8 @@
 
   <!-- Map Container  -->
 
-  <div class="calcite-map">                
-    <div id="map" class="calcite-map-absolute"></div>    
+  <div class="calcite-map" >                
+    <div id="map" class="calcite-map-absolute" style="height:90%"></div>    
   </div><!-- /.container -->
 
   <!-- Panel -->
@@ -221,8 +320,29 @@
   <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="weather_icon" title="Click to know the weather" src= 'images/partly_cloudy_day_filled1600.png' height='35' width='30' onclick='getWeather()'></img></div>
   </div>
   </div>
+  
+ <!-- <div id = 'slider'  style=" margin-top : 570px ; z-index:1000000 ; position: relative ;">
+  <form style = "float:left;display:inline ;">
+  <input style = "width : 400px" type='range' min='0' max='4' step='1' value='0' id='rangeSlider' />
+  </form>
+  <button type="button" id="start" onclick = "start()">start</button>
+  <button type="button" id="stop">stop</button>
+  </div> -->
+  
+      
+  <div style="width:1100px;display:block; margin:150px ;">
+            <div id="slider" style="margin-top : 40vw ; z-index:1000000 ; width:1050px; position:relative" >
+			<input id = "range" style = "width : 1100px" type='range' min='0' max='30' step='1' value='0' id='rangeSlider' onchange = "selectedTime()" /></div>
+            <div id = "steps" class="steps">
+			</div>		
+	</div>
+                
+  
+ 
+  
   <!-- /.calcite-panels -->
   
+    
   <!-- ====== -->
   <!-- jQuery --> 
   <!-- ====== -->
@@ -249,9 +369,11 @@
   <!--script src="https://esri.github.io/calcite-bootstrap/scripts/plugins.js"></script-->
   <script src="dist/js/jquery/calcitemaps-v0.3.js"></script>
   <script src="js/map.js"></script>
+  <script src="js/time.js"></script>
   <script src="js/weatherdata.js"></script>
   <script src="js/waterlevel.js"></script>
   <script src="js/marker.js"></script>
+  
 
 </body>
 </html>
