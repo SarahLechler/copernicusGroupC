@@ -40,7 +40,7 @@ function addWater(result){
 >>>>>>> fae3bf4f7ce32c4f23d12d806dafe970882624e5
 						 var waterIcon = L.Icon.Label.extend({
 							options: {
-							iconUrl: 'images/water_positiveArrow.png',
+							iconUrl: 'images/low_positive.png',
 							shadowUrl: null,
 							iconSize: new L.Point(24, 24),
 							iconAnchor: new L.Point(0, 1),
@@ -52,7 +52,7 @@ function addWater(result){
 					else if((result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'normal' || result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'low')&&(result[i].timeseries[0].currentMeasurement.trend == '-1' || result[i].timeseries[0].currentMeasurement.trend == '0')){
 						var waterIcon = L.Icon.Label.extend({
 							options: {
-							iconUrl: 'images/water_negativeArrow.png',
+							iconUrl: 'images/low_negative.png',
 							shadowUrl: null,
 							iconSize: new L.Point(24, 24),
 							iconAnchor: new L.Point(0, 1),
@@ -64,7 +64,7 @@ function addWater(result){
 					else if(result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'high'&& result[i].timeseries[0].currentMeasurement.trend == '1'){
 						var waterIcon = L.Icon.Label.extend({
 							options: {
-							iconUrl: 'images/high_positiveArrow.png',
+							iconUrl: 'images/high_positive.png',
 							shadowUrl: null,
 							iconSize: new L.Point(24, 24),
 							iconAnchor: new L.Point(0, 1),
@@ -76,7 +76,7 @@ function addWater(result){
 					else if(result[i].timeseries[0].currentMeasurement.stateMnwMhw=='high'&& (result[i].timeseries[0].currentMeasurement.trend=='-1'||result[i].timeseries[0].currentMeasurement.trend=='0')){
 						var waterIcon = L.Icon.Label.extend({
 							options: {
-							iconUrl: 'images/high_negativeArrow.png',
+							iconUrl: 'images/high_negative.png',
 							shadowUrl: null,
 							iconSize: new L.Point(24, 24),
 							iconAnchor: new L.Point(0, 1),
@@ -100,7 +100,7 @@ function addWater(result){
 					else if((result[i].timeseries[0].currentMeasurement.stateMnwMhw=='low'||result[i].timeseries[0].currentMeasurement.stateMnwMhw=='normal') && result[i].timeseries[0].currentMeasurement.trend=='-999'){
 						var waterIcon = L.Icon.Label.extend({
 							options: {
-							iconUrl: 'images/water.png',
+							iconUrl: 'images/low.png',
 							shadowUrl: null,
 							iconSize: new L.Point(24, 24),
 							iconAnchor: new L.Point(0, 1),
