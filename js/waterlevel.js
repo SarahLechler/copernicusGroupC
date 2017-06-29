@@ -1,5 +1,3 @@
-
-
 //https://www.pegelonline.wsv.de/webservices/gis/aktuell/wfs?service=wfs&version=1.1.0&request=GetFeature&typeName=gk:waterlevels&outputFormat=json&BBOX=50.31,5.77,52.62,9.46
 
 
@@ -26,18 +24,7 @@ function addWater(result){
 		var lat = result[i].latitude;
 		var lon = result[i].longitude;
 		if(lat!=null && lon!=null){
-<<<<<<< HEAD
-			$.ajax({
-				url: "http://pegelonline.wsv.de/webservices/rest-api/v2/stations/"+station_name+".json?includeTimeseries=true&includeCurrentMeasurement=true",
-				method: "GET",
-				dataType: "json",
-				async:false,
-				success: function(result){
-					//console.log(result.timeseries[0].currentMeasurement,result.timeseries[0].currentMeasurement.stateMnwMhw);
-					if((result.timeseries[0].currentMeasurement.stateMnwMhw =='normal' || result.timeseries[0].currentMeasurement.stateMnwMhw =='low') && result.timeseries[0].currentMeasurement.trend == '1'){
-=======
 					if((result[i].timeseries[0].currentMeasurement.stateMnwMhw =='normal' || result[i].timeseries[0].currentMeasurement.stateMnwMhw =='low') && result[i].timeseries[0].currentMeasurement.trend == '1'){
->>>>>>> fae3bf4f7ce32c4f23d12d806dafe970882624e5
 						 var waterIcon = L.Icon.Label.extend({
 							options: {
 							iconUrl: 'images/low_positive.png',
@@ -133,17 +120,9 @@ function addWater(result){
 							}
 						});
 					}
-<<<<<<< HEAD
-				var marker = new L.Marker.Label([lat, lon],{ icon: new waterIcon({ labelText: "<b>" + result.timeseries[0].currentMeasurement.value + "</b>"})}).addTo(map);	
-				marker.bindPopup("<b>"+station_name+"</b><br> Water : " + result.water.shortname+ "<br> development: <img src= https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/"+station_name+"/W/measurements.png?start=P15D&width=250&height=80 />",{
-                                   width: 500 
-                                });
-				//popup needs to be sized to the image of the graph
-=======
 				var marker = new L.Marker.Label([lat, lon],{ className: station_name, icon: new waterIcon({ labelText: "<b>" + result[i].timeseries[0].currentMeasurement.value + "</b>"})}).addTo(map);
 				marker.bindPopup("<b>"+station_name+"</b><br> Water : " + result[i].water.shortname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
 				
->>>>>>> fae3bf4f7ce32c4f23d12d806dafe970882624e5
 					
         }
 		
@@ -236,4 +215,3 @@ $.ajax({
         });
 		
 }
-
