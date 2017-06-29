@@ -1,6 +1,7 @@
-
+(function poll (){
 var URL = "http://pegelonline.wsv.de/webservices/rest-api/v2/stations.json?latitude=51.42&longitude=8.01&radius=175";
-$.ajax({
+setTimeout (function(){ // function for polling 
+        $.ajax({
         url: URL,
         method: "GET",
         dataType: "json",
@@ -11,13 +12,15 @@ $.ajax({
         }, 
         error: function(xhr, textStatus, errorThrown){ 
             alert("Unable to fetch Server data")               	 	
-        }
-        });
-		
+        },
+        complete: poll});
+},300000, console.log("polling again")
+        ); // polls after 5 min in millisec again
+        })();		
 
 function addWater(data){
 	
-	for (i in data){
+            for (i in data){
 		var station_name = data[i].shortname;
 		var lat = data[i].latitude;
 		var lon = data[i].longitude;
@@ -130,17 +133,14 @@ function addWater(data){
 				marker.bindPopup("<b>"+station_name+"</b><br> Water : " + result.water.shortname+ "<br> development: <img src= https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/"+station_name+"/W/measurements.png?start=P15D&width=250&height=80 />",{
                                    width: 500 
                                 });
-                                
-                                complete: setTimeout(function() 
-                                    {addWater()}, 5000);
-                                timeout: 50
-				//popup needs to be sized to the image of the graph
+                          				//popup needs to be sized to the image of the graph
 				console.log("polled");	
         }, 
         error: function(xhr, textStatus, errorThrown){ 
             alert("Unable to fetch Server data")               	 	
         }
-        });
+        }, 
+        );
 		
 	}
 }
