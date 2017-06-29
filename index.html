@@ -1,381 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- Lock viewport to prevent scaling -->
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <meta name="description" content="Calcite Maps Demo - Esri-Leaflet">
-  <meta name="author" content="">
-  <link rel="icon" href="https://www.esri.com/favicon.ico">
-  <title>Calcite Maps - Esri-Leaflet</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Lock viewport to prevent scaling -->
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <meta name="description" content="Calcite Maps Demo - Esri-Leaflet">
+        <meta name="author" content="">
+        <link rel="icon" href="https://www.esri.com/favicon.ico">
+        <title>Calcite Maps - Esri-Leaflet</title>
 
-  <!-- Calcite Maps Bootstrap -->
-  <link rel="stylesheet" href="dist/css/calcite-maps-bootstrap.min-v0.3.css">
+        <!-- Calcite Maps Bootstrap -->
+        <link rel="stylesheet" href="dist/css/calcite-maps-bootstrap.min-v0.3.css">
 
-  <!-- Calcite Maps -->
-  <link rel="stylesheet" href="dist/css/calcite-maps-esri-leaflet.min-v0.3.css">
-  <link rel="stylesheet" href="dist/fonts/calcite/calcite-ui.css">
+        <!-- Calcite Maps -->
+        <link rel="stylesheet" href="dist/css/calcite-maps-esri-leaflet.min-v0.3.css">
+        <link rel="stylesheet" href="dist/fonts/calcite/calcite-ui.css">
 
-  <!-- Load Leaflet from CDN-->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
-  <script src="dist/leaflet.easyPrint.js"></script>
+        <!-- Load Leaflet from CDN-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+        <script src="dist/leaflet.easyPrint.js"></script>
 
-  <!-- Load Esri Leaflet from CDN -->
-  <script src="https://unpkg.com/esri-leaflet@2.0.7"></script>
+        <!-- Load Esri Leaflet from CDN -->
+        <script src="https://unpkg.com/esri-leaflet@2.0.7"></script>
 
-  <!-- Load Esri Leaflet Geocoder from CDN -->
-  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.3/dist/esri-leaflet-geocoder.css">
-  <link rel="stylesheet" href="dist/leaflet.iconlabel.css">
-  <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.3"></script>
-  
-  <!-- Load Esri StreamLayer-->
-    <script src="dist/js/esri-leaflet-stream/esri-leaflet-stream.min.js"></script>
-	<script src="dist/leaflet.iconlabel.js"></script>
-	
-  <!-- Load Draw Plugins -->
-  <script src="src/Leaflet.draw.js"></script>
-    <script src="src/Leaflet.Draw.Event.js"></script>
-    <link rel="stylesheet" href="../../src/leaflet.draw.css"/>
+        <!-- Load Esri Leaflet Geocoder from CDN -->
+        <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.3/dist/esri-leaflet-geocoder.css">
+        <link rel="stylesheet" href="dist/leaflet.iconlabel.css">
+        <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.3"></script>
 
-    <script src="src/Toolbar.js"></script>
-    <script src="src/Tooltip.js"></script>
+        <!-- Load Esri StreamLayer-->
+        <script src="dist/js/esri-leaflet-stream/esri-leaflet-stream.min.js"></script>
+        <script src="dist/leaflet.iconlabel.js"></script>
 
-    <script src="src/ext/GeometryUtil.js"></script>
-    <script src="src/ext/LatLngUtil.js"></script>
-    <script src="src/ext/LineUtil.Intersect.js"></script>
-    <script src="src/ext/Polygon.Intersect.js"></script>
-    <script src="src/ext/Polyline.Intersect.js"></script>
-    <script src="src/ext/TouchEvents.js"></script>
+        <!-- Load Draw Plugins -->
+        <script src="src/Leaflet.draw.js"></script>
+        <script src="src/Leaflet.Draw.Event.js"></script>
+        <link rel="stylesheet" href="../../src/leaflet.draw.css"/>
 
-    <script src="src/draw/DrawToolbar.js"></script>
-    <script src="src/draw/handler/Draw.Feature.js"></script>
-    <script src="src/draw/handler/Draw.SimpleShape.js"></script>
-    <script src="src/draw/handler/Draw.Polyline.js"></script>
-    <script src="src/draw/handler/Draw.Circle.js"></script>
-    <script src="src/draw/handler/Draw.Marker.js"></script>
-    <script src="src/draw/handler/Draw.Polygon.js"></script>
-    <script src="src/draw/handler/Draw.Rectangle.js"></script>
+        <script src="src/Toolbar.js"></script>
+        <script src="src/Tooltip.js"></script>
 
+        <script src="src/ext/GeometryUtil.js"></script>
+        <script src="src/ext/LatLngUtil.js"></script>
+        <script src="src/ext/LineUtil.Intersect.js"></script>
+        <script src="src/ext/Polygon.Intersect.js"></script>
+        <script src="src/ext/Polyline.Intersect.js"></script>
+        <script src="src/ext/TouchEvents.js"></script>
 
-    <script src="src/edit/EditToolbar.js"></script>
-    <script src="src/edit/handler/EditToolbar.Edit.js"></script>
-    <script src="src/edit/handler/EditToolbar.Delete.js"></script>
-
-    <script src="src/Control.Draw.js"></script>
-
-    <script src="src/edit/handler/Edit.Poly.js"></script>
-    <script src="src/edit/handler/Edit.SimpleShape.js"></script>
-    <script src="src/edit/handler/Edit.Circle.js"></script>
-    <script src="src/edit/handler/Edit.Rectangle.js"></script>
-    <script src="src/edit/handler/Edit.Marker.js"></script>
-	
-	<!--range slider -->
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.20/themes/base/jquery-ui.css" type="text/css" media="all" />
-
-	<!-- chart -->
-<script src="src/canvasjs.min.js"></script>
+        <script src="src/draw/DrawToolbar.js"></script>
+        <script src="src/draw/handler/Draw.Feature.js"></script>
+        <script src="src/draw/handler/Draw.SimpleShape.js"></script>
+        <script src="src/draw/handler/Draw.Polyline.js"></script>
+        <script src="src/draw/handler/Draw.Circle.js"></script>
+        <script src="src/draw/handler/Draw.Marker.js"></script>
+        <script src="src/draw/handler/Draw.Polygon.js"></script>
+        <script src="src/draw/handler/Draw.Rectangle.js"></script>
 
 
+        <script src="src/edit/EditToolbar.js"></script>
+        <script src="src/edit/handler/EditToolbar.Edit.js"></script>
+        <script src="src/edit/handler/EditToolbar.Delete.js"></script>
 
-  <style>
-  
-  input[type=range] {
-  height: 25px;
-  -webkit-appearance: none;
-  margin: 10px 0;
-  width: 100%;
-}
-input[type=range]:focus {
-  outline: none;
-}
-input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 5px;
-  cursor: pointer;
-  animate: 0.2s;
-  box-shadow: 1px 1px 1px #000000;
-  background: #8A4DA8;
-  border-radius: 50px;
-  border: 1px solid #000000;
-}
-input[type=range]::-webkit-slider-thumb {
-  box-shadow: 1px 1px 1px #000000;
-  border: 1px solid #000000;
-  height: 17px;
-  width: 5px;
-  border-radius: 5px;
-  background: #FFFFFF;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -7px;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #8A4DA8;
-}
-input[type=range]::-moz-range-track {
-  width: 100%;
-  height: 5px;
-  cursor: pointer;
-  animate: 0.2s;
-  box-shadow: 1px 1px 1px #000000;
-  background: #8A4DA8;
-  border-radius: 50px;
-  border: 1px solid #000000;
-}
-input[type=range]::-moz-range-thumb {
-  box-shadow: 1px 1px 1px #000000;
-  border: 1px solid #000000;
-  height: 17px;
-  width: 5px;
-  border-radius: 5px;
-  background: #FFFFFF;
-  cursor: pointer;
-}
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 5px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-input[type=range]::-ms-fill-lower {
-  background: #8A4DA8;
-  border: 1px solid #000000;
-  border-radius: 100px;
-  box-shadow: 1px 1px 1px #000000;
-}
-input[type=range]::-ms-fill-upper {
-  background: #8A4DA8;
-  border: 1px solid #000000;
-  border-radius: 100px;
-  box-shadow: 1px 1px 1px #000000;
-}
-input[type=range]::-ms-thumb {
-  margin-top: 1px;
-  box-shadow: 1px 1px 1px #000000;
-  border: 1px solid #000000;
-  height: 17px;
-  width: 5px;
-  border-radius: 5px;
-  background: #FFFFFF;
-  cursor: pointer;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: #8A4DA8;
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: #8A4DA8;
-}
+        <script src="src/Control.Draw.js"></script>
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
-    .calcite-nav-bottom .calcite-map .leaflet-control-zoom {
-      margin-top: 28px;
-    }
+        <script src="src/edit/handler/Edit.Poly.js"></script>
+        <script src="src/edit/handler/Edit.SimpleShape.js"></script>
+        <script src="src/edit/handler/Edit.Circle.js"></script>
+        <script src="src/edit/handler/Edit.Rectangle.js"></script>
+        <script src="src/edit/handler/Edit.Marker.js"></script>
 
-    .calcite-navbar-search {
-      margin-top: 0;
-      margin-right: 5px;
-      padding: 5px 0;
-    }
+        <!--range slider -->
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.20/themes/base/jquery-ui.css" type="text/css" media="all" />
 
-    .calcite-nav-bottom .panel-body .geocoder-control-suggestions.leaflet-bar {
-      top: 25px;
-      bottom: auto;
-    }
+        <!-- chart -->
+        <script src="src/canvasjs.min.js"></script>
 
-    .calcite-maps .esri-truncated-attribution {
-      max-width: 100% !important;
-      width: 100%;
-    }
 
-    .leaflet-touch .leaflet-bar {
-      border: none;
-    }
-	
-  </style>
 
-</head>
-<body class="calcite-maps calcite-nav-top">
+        <style>
 
-  
-  <!-- Navbar -->
+            input[type=range] {
+                height: 25px;
+                -webkit-appearance: none;
+                margin: 10px 0;
+                width: 100%;
+            }
+            input[type=range]:focus {
+                outline: none;
+            }
+            input[type=range]::-webkit-slider-runnable-track {
+                width: 100%;
+                height: 5px;
+                cursor: pointer;
+                animate: 0.2s;
+                box-shadow: 1px 1px 1px #000000;
+                background: #8A4DA8;
+                border-radius: 50px;
+                border: 1px solid #000000;
+            }
+            input[type=range]::-webkit-slider-thumb {
+                box-shadow: 1px 1px 1px #000000;
+                border: 1px solid #000000;
+                height: 17px;
+                width: 5px;
+                border-radius: 5px;
+                background: #FFFFFF;
+                cursor: pointer;
+                -webkit-appearance: none;
+                margin-top: -7px;
+            }
+            input[type=range]:focus::-webkit-slider-runnable-track {
+                background: #8A4DA8;
+            }
+            input[type=range]::-moz-range-track {
+                width: 100%;
+                height: 5px;
+                cursor: pointer;
+                animate: 0.2s;
+                box-shadow: 1px 1px 1px #000000;
+                background: #8A4DA8;
+                border-radius: 50px;
+                border: 1px solid #000000;
+            }
+            input[type=range]::-moz-range-thumb {
+                box-shadow: 1px 1px 1px #000000;
+                border: 1px solid #000000;
+                height: 17px;
+                width: 5px;
+                border-radius: 5px;
+                background: #FFFFFF;
+                cursor: pointer;
+            }
+            input[type=range]::-ms-track {
+                width: 100%;
+                height: 5px;
+                cursor: pointer;
+                animate: 0.2s;
+                background: transparent;
+                border-color: transparent;
+                color: transparent;
+            }
+            input[type=range]::-ms-fill-lower {
+                background: #8A4DA8;
+                border: 1px solid #000000;
+                border-radius: 100px;
+                box-shadow: 1px 1px 1px #000000;
+            }
+            input[type=range]::-ms-fill-upper {
+                background: #8A4DA8;
+                border: 1px solid #000000;
+                border-radius: 100px;
+                box-shadow: 1px 1px 1px #000000;
+            }
+            input[type=range]::-ms-thumb {
+                margin-top: 1px;
+                box-shadow: 1px 1px 1px #000000;
+                border: 1px solid #000000;
+                height: 17px;
+                width: 5px;
+                border-radius: 5px;
+                background: #FFFFFF;
+                cursor: pointer;
+            }
+            input[type=range]:focus::-ms-fill-lower {
+                background: #8A4DA8;
+            }
+            input[type=range]:focus::-ms-fill-upper {
+                background: #8A4DA8;
+            }
 
-  <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark calcite-bgcolor-dark-purple">
-     <!-- Menu -->
-    <div class="dropdown calcite-dropdown calcite-bg-custom calcite-text-light" role="presentation">
-      <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
-        <div class="calcite-dropdown-toggle">
-          <span class="sr-only">Toggle dropdown menu</span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+            html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
+            .calcite-nav-bottom .calcite-map .leaflet-control-zoom {
+                margin-top: 28px;
+            }
+
+            .calcite-navbar-search {
+                margin-top: 0;
+                margin-right: 5px;
+                padding: 5px 0;
+            }
+
+            .calcite-nav-bottom .panel-body .geocoder-control-suggestions.leaflet-bar {
+                top: 25px;
+                bottom: auto;
+            }
+
+            .calcite-maps .esri-truncated-attribution {
+                max-width: 100% !important;
+                width: 100%;
+            }
+
+            .leaflet-touch .leaflet-bar {
+                border: none;
+            }
+            #map {
+                position: absolute;
+                top: 50px;
+                left: 0;
+            }
+
+            .slider-step-text {
+                display:inline-block;
+                width: 0.75%;
+                text-align:center;
+                margin-right: 2.4%; 
+                font-size:8px
+            }
+
+        </style>
+
+    </head>
+    <body class="calcite-maps calcite-nav-top">
+
+
+        <!-- Navbar -->
+
+        <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark calcite-bgcolor-dark-purple">
+            <!-- Menu -->
+            <div class="dropdown calcite-dropdown calcite-bg-custom calcite-text-light" role="presentation">
+                <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+                    <div class="calcite-dropdown-toggle">
+                        <span class="sr-only">Toggle dropdown menu</span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu calcite-bgcolor-dark-purple">
+                    <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
+                    <li><a class="visible-xs" role="button" data-target="#panelSearch" aria-haspopup="true"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+                    <li><a role="button" data-target="#panelBasemaps" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>
+                    <li><a role="button" id="calciteToggleNavbar" aria-haspopup="true"><span class="glyphicon glyphicon-fullscreen"></span> Full Map</a></li>
+                </ul>
+            </div>
+            <!-- Title -->
+            <div class="calcite-title calcite-overflow-hidden">
+                <span class="calcite-title-main">Copernicus Emergency Services</span>
+                <span class="calcite-title-divider hidden-xs"></span>
+                <span class="calcite-title-sub hidden-xs">An application for relief workers during flood</span> 
+            </div>
+            <!-- Nav -->
+            <ul class="calcite-nav nav navbar-nav">                    
+                <li><div class="calcite-navbar-search hidden-xs"><div id="geocode"></div></div></li>
+            </ul>
+        </nav><!--/.navbar -->
+
+        <!-- Map Container  -->
+
+        <div class="calcite-map" >                
+            <div id="map" class="calcite-map-absolute"></div>    
+        </div><!-- /.container -->
+
+        <!-- Panel -->
+
+        <div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light panel-group calcite-bgcolor-dark-purple" role="tablist" aria-multiselectable="true">
+
+            <!-- Info Panel -->
+
+            <div id="panelInfo" class="panel collapse">
+                <div id="headingInfo" class="panel-heading" role="tab">
+                    <div class="panel-title">
+                        <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseInfo" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="panel-label">Info</span></a> 
+                        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelInfo"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
+                    </div>
+                </div>
+                <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
+                    <div class="panel-body">            
+                        <p>The main styles used in this app are:</p>
+                        Body
+                        <li>calcite-nav-bottom</li>
+                        <li>calcite-layout-large-title</li>
+                        <br>
+                        Nav
+                        <li>calcite-bgcolor-dark-green</li>
+                        <li>calcite-text-light</li>
+                        <br>
+                        Panels
+                        <li>calcite-panels-left</li>
+                        <li>calcite-bgcolor-dark-green</li>
+                        <li>calcite-bg-custom</li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Panel -->
+            <div id="panelSearch" class="panel collapse hidden-sm hidden-md hidden-lg"> 
+                <div id="headingSearch" class="panel-heading" role="tab">
+                    <div class="panel-title">
+                        <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseSearch"  aria-expanded="false" aria-controls="collapseSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span class="panel-label">Search</span></a> 
+                        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSearch"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>        
+                    </div>
+                </div>
+                <div id="collapseSearch" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSearch">
+                    <div class="panel-body calcite-body-expander">    
+                        <div id="geocodeMobile"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basemaps Panel -->
+
+            <div id="panelBasemaps" class="panel collapse">
+                <div id="headingBasemaps" class="panel-heading" role="tab">
+                    <div class="panel-title">
+                        <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps" aria-expanded="false"   aria-controls="collapseBasemaps"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Basemaps</span></a> 
+                        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
+                    </div>
+                </div>
+                <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemaps">
+                    <div class="panel-body">
+                        <select id="selectStandardBasemap" class="form-control">
+                            <option value="Imagery">Satellite</option>
+                            <option value="Topographic">Topographic</option>
+                            <option value="DarkGray">Dark Gray</option>
+                            <option selected value="OpenStreetMap">Open Street Map</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div> 
+        <div class='leaflet-control-container'>
+            <div class="leaflet-top leaflet-right" style="top:275px;">
+                <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="weather_icon" title="Click to know the weather" src= 'images/partly_cloudy_day_filled1600.png' height='35' width='30' onclick='getWeather()'></img></div>
+            </div>
         </div>
-      </a>
-      <ul class="dropdown-menu calcite-bgcolor-dark-purple">
-        <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
-        <li><a class="visible-xs" role="button" data-target="#panelSearch" aria-haspopup="true"><span class="glyphicon glyphicon-search"></span> Search</a></li>
-        <li><a role="button" data-target="#panelBasemaps" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>
-        <li><a role="button" id="calciteToggleNavbar" aria-haspopup="true"><span class="glyphicon glyphicon-fullscreen"></span> Full Map</a></li>
-      </ul>
-    </div>
-    <!-- Title -->
-    <div class="calcite-title calcite-overflow-hidden">
-      <span class="calcite-title-main">Copernicus Emergency Services</span>
-      <span class="calcite-title-divider hidden-xs"></span>
-      <span class="calcite-title-sub hidden-xs">An application for relief workers during flood</span> 
-    </div>
-     <!-- Nav -->
-    <ul class="calcite-nav nav navbar-nav">                    
-      <li><div class="calcite-navbar-search hidden-xs"><div id="geocode"></div></div></li>
-    </ul>
-  </nav><!--/.navbar -->
 
-  <!-- Map Container  -->
+        <!-- <div id = 'slider'  style=" margin-top : 570px ; z-index:1000000 ; position: relative ;">
+         <form style = "float:left;display:inline ;">
+         <input style = "width : 400px" type='range' min='0' max='4' step='1' value='0' id='rangeSlider' />
+         </form>
+         <button type="button" id="start" onclick = "start()">start</button>
+         <button type="button" id="stop">stop</button>
+         </div> -->
 
-  <div class="calcite-map" >                
-    <div id="map" class="calcite-map-absolute" style="height:90%"></div>    
-  </div><!-- /.container -->
 
-  <!-- Panel -->
-
-  <div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light panel-group calcite-bgcolor-dark-purple" role="tablist" aria-multiselectable="true">
-  
-    <!-- Info Panel -->
-
-    <div id="panelInfo" class="panel collapse">
-      <div id="headingInfo" class="panel-heading" role="tab">
-        <div class="panel-title">
-          <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseInfo" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="panel-label">Info</span></a> 
-          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelInfo"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%;">
+            <div id="slider" style="width: 100%;">
+                <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='0' id='rangeSlider' onchange = "selectedTime()" /></div>
+            <div id="steps" class="steps" style="width: 100%; margin-left: 8px;">
+            </div>
         </div>
-      </div>
-      <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
-        <div class="panel-body">            
-          <p>The main styles used in this app are:</p>
-          Body
-          <li>calcite-nav-bottom</li>
-          <li>calcite-layout-large-title</li>
-          <br>
-          Nav
-          <li>calcite-bgcolor-dark-green</li>
-          <li>calcite-text-light</li>
-          <br>
-          Panels
-          <li>calcite-panels-left</li>
-          <li>calcite-bgcolor-dark-green</li>
-          <li>calcite-bg-custom</li>
-        </div>
-      </div>
-    </div>
 
-    <!-- Search Panel -->
 
-    <div id="panelSearch" class="panel collapse hidden-sm hidden-md hidden-lg"> 
-      <div id="headingSearch" class="panel-heading" role="tab">
-        <div class="panel-title">
-          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseSearch"  aria-expanded="false" aria-controls="collapseSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span class="panel-label">Search</span></a> 
-          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSearch"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>        
-        </div>
-      </div>
-      <div id="collapseSearch" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSearch">
-        <div class="panel-body calcite-body-expander">    
-            <div id="geocodeMobile"></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Basemaps Panel -->
 
-    <div id="panelBasemaps" class="panel collapse">
-      <div id="headingBasemaps" class="panel-heading" role="tab">
-        <div class="panel-title">
-          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps" aria-expanded="false"   aria-controls="collapseBasemaps"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Basemaps</span></a> 
-          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
-        </div>
-      </div>
-      <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemaps">
-        <div class="panel-body">
-          <select id="selectStandardBasemap" class="form-control">
-            <option value="Imagery">Satellite</option>
-            <option value="Topographic">Topographic</option>
-            <option value="DarkGray">Dark Gray</option>
-            <option selected value="OpenStreetMap">Open Street Map</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    
-  </div> 
-  <div class='leaflet-control-container'>
-  <div class="leaflet-top leaflet-right" style="top:300px">
-  <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="weather_icon" title="Click to know the weather" src= 'images/partly_cloudy_day_filled1600.png' height='35' width='30' onclick='getWeather()'></img></div>
-  </div>
-  </div>
-  
- <!-- <div id = 'slider'  style=" margin-top : 570px ; z-index:1000000 ; position: relative ;">
-  <form style = "float:left;display:inline ;">
-  <input style = "width : 400px" type='range' min='0' max='4' step='1' value='0' id='rangeSlider' />
-  </form>
-  <button type="button" id="start" onclick = "start()">start</button>
-  <button type="button" id="stop">stop</button>
-  </div> -->
-  
-      
-  <div style="width:1100px;display:block; margin:150px ;">
-            <div id="slider" style="margin-top : 40vw ; z-index:1000000 ; width:1050px; position:relative" >
-			<input id = "range" style = "width : 1100px" type='range' min='0' max='30' step='1' value='0' id='rangeSlider' onchange = "selectedTime()" /></div>
-            <div id = "steps" class="steps">
-			</div>		
-	</div>
-                
-  
- 
-  
-  <!-- /.calcite-panels -->
-  
-    
-  <!-- ====== -->
-  <!-- jQuery --> 
-  <!-- ====== -->
+        <!-- /.calcite-panels -->
 
-  <!--script src="https://esri.github.io/calcite-bootstrap/scripts/vendor.js"></script-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- Include all plugins or individual files as needed -->
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/jQuery.js"></script>
 
- 
-  <!-- Bootstrap core JavaScript
-  ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <!-- jQuery (for Bootstrap's JavaScript plugins). NOTE: You can also use pure Dojo. See examples. -->
-  <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
-  <!-- Include all  plugins or individual files as needed -->
-  <!--script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script-->
+        <!-- ====== -->
+        <!-- jQuery -->
+        <!-- ====== -->
 
-  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-  <!--script src="../../assets/js/ie10-viewport-bug-workaround.js"></script-->
-  
-  <!--script src="https://esri.github.io/calcite-bootstrap/scripts/vendor.js"></script-->
-  <!--script src="https://esri.github.io/calcite-bootstrap/scripts/plugins.js"></script-->
-  <script src="dist/js/jquery/calcitemaps-v0.3.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/time.js"></script>
-  <script src="js/weatherdata.js"></script>
-  <script src="js/waterlevel.js"></script>
-  <script src="js/marker.js"></script>
-  
+        <script src="js/jQuery.js"></script>
+        <!--script src="https://esri.github.io/calcite-bootstrap/scripts/vendor.js"></script-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all plugins or individual files as needed -->
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-</body>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <!-- jQuery (for Bootstrap's JavaScript plugins). NOTE: You can also use pure Dojo. See examples. -->
+        <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
+        <!-- Include all  plugins or individual files as needed -->
+        <!--script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script-->
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <!--script src="../../assets/js/ie10-viewport-bug-workaround.js"></script-->
+
+        <!--script src="https://esri.github.io/calcite-bootstrap/scripts/vendor.js"></script-->
+        <!--script src="https://esri.github.io/calcite-bootstrap/scripts/plugins.js"></script-->
+        <script src="dist/js/jquery/calcitemaps-v0.3.js"></script>
+        <script src="js/map.js"></script>
+        <script src="js/time.js"></script>
+        <script src="js/weatherdata.js"></script>
+        <script src="js/waterlevel.js"></script>
+        <script src="js/marker.js"></script>
+        <script>
+                    $(window).resize(function () {
+                        var mapheight = $(window).height() - 110;
+                        $("#map").css("height", mapheight);
+                    });
+                    var mapheight = $(window).height() - 110;
+                    $("#map").css("height", mapheight);
+        </script>
+
+
+    </body>
 </html>
 
 
