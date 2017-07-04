@@ -67,31 +67,30 @@
 			position: 'topright'
 		}).addTo(map);
 
-//adding Feature layer for Workers
+    //adding Feature layer for Workers
 
-var workers = L.esri.featureLayer({
-  url:'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0'
-}).addTo(map);
+    var workers = L.esri.featureLayer({
+      url:'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0'
+    }).addTo(map);
 
-//adding Feature layer for Inaccessible Roads
-var inaccessibleRoads = L.esri.featureLayer({
-  url:'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/inaccessibleRoads01/FeatureServer/0'
-}).addTo(map);
+    //adding Feature layer for Inaccessible Roads
+    var inaccessibleRoads = L.esri.featureLayer({
+      url:'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/inaccessibleRoads01/FeatureServer/0'
+    }).addTo(map);
 
-/*map.on(L.Draw.Event,CREATED; function (e)){
-  var feature = {
-    type : 'Feature',
-    geometry : {
-      type : 'Point',
-      coordinates : [7.574620, 51.982685],
-    },
-    properties : {
-      created by : 'alicja',
-      description : 'asjdojas'
-    }
-  };
+    /*map.on(L.Draw.Event,CREATED; function (e)){
+      var feature = {
+        type : 'Feature',
+        geometry : {
+          type : 'Point',
+          coordinates : [7.574620, 51.982685],
+        },
+        properties : {
+          created by : 'alicja',
+          description : 'asjdojas'
+        }
+      };
 
-  inaccessibleRoads.addFeature(feature);
-}*/
-
-console.log("added FeatureLayers");
+      inaccessibleRoads.addFeature(feature);
+    }*/
+    
