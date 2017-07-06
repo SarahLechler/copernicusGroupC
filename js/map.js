@@ -68,11 +68,9 @@
 			position: 'topright'
 		}).addTo(map);
         
-        
-    //adding StreamLayer    
-	var buses = L.esri.streamFeatureLayer({
-		url: 'https://geoeventsample3.esri.com:6443/arcgis/rest/services/LABus/StreamServer'
-	}).addTo(map);
-console.log("added streamlayer");
-
+// add image Layer
+    L.esri.imageMapLayer({
+      url: 'https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer',
+      attribution: 'United States Geological Survey (USGS), National Aeronautics and Space Administration (NASA)'
+    }).addTo(map);
  
