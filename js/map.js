@@ -68,7 +68,7 @@
 		}).addTo(map);
 
         
-// add image Layer
+// add imageLayer --> MosaikDataSet/Sattelite data
     L.esri.imageMapLayer({
       url: 'https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer',
       attribution: 'United States Geological Survey (USGS), National Aeronautics and Space Administration (NASA)'
@@ -80,11 +80,20 @@
     var workers = L.esri.featureLayer({
       url:'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0'
     }).addTo(map);
+    
+    workers.bindPopup( function (layer){
+    return L.Util.template('<p>Name: {Name}<br>Description: {Descriptoon_Task}</p>', layer.feature.properties);
+  });
 
     //adding Feature layer for Inaccessible Roads
     var inaccessibleRoads = L.esri.featureLayer({
       url:'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/inaccessibleRoads01/FeatureServer/0'
     }).addTo(map);
+    
+    
+    inaccessibleRoads.bindPopup( function (layer){
+    return L.Util.template('<p>Name: {Name}<br>Description: {Descriptoon_Task}</p>', layer.feature.properties);
+  });
 
     /*map.on(L.Draw.Event,CREATED; function (e)){
       var feature = {
