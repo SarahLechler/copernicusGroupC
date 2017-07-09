@@ -227,10 +227,10 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu calcite-bgcolor-dark-purple">
+					<li><a class="hidden-md hidden-lg" href="#panelInfo" aria-controls="panelInfo" role="tab" data-toggle="tab"> Info</a></li>
                     <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
                     <li><a class="visible-xs" role="button" data-target="#panelSearch" aria-haspopup="true"><span class="glyphicon glyphicon-search"></span> Search</a></li>
                     <li><a role="button" data-target="#panelBasemaps" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>
-                    <li><a role="button" id="calciteToggleNavbar" aria-haspopup="true"><span class="glyphicon glyphicon-fullscreen"></span> Full Map</a></li>
                 </ul>
             </div>
             <!-- Title -->
@@ -251,7 +251,29 @@
             <div id="map" class="calcite-map-absolute"></div>    
         </div><!-- /.container -->
 
-        <!-- Panel -->
+		<div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light calcite-bgcolor-dark-purple panel-group">
+			
+			<div id="panelBasemaps" class="panel collapse in">
+				<div id="headingBasemaps" class="panel-heading" role="tab">
+					<div class="panel-title">
+						<a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps"
+						   aria-expanded="false" aria-controls="collapseBasemaps"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Basemaps</span></a>
+					</div>
+				</div>
+				<div id="collapseBasemaps" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingBasemaps">
+					<div class="panel-body">
+						<select id="selectStandardBasemap" class="form-control">
+                            <option value="Imagery">Satellite</option>
+                            <option value="Topographic">Topographic</option>
+                            <option value="DarkGray">Dark Gray</option>
+                            <option selected value="OpenStreetMap">Open Street Map</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Panel -->
 
         <div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light panel-group calcite-bgcolor-dark-purple" role="tablist" aria-multiselectable="true">
 
@@ -261,7 +283,6 @@
                 <div id="headingInfo" class="panel-heading" role="tab">
                     <div class="panel-title">
                         <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseInfo" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="panel-label">Info</span></a> 
-                        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelInfo"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
                     </div>
                 </div>
                 <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
@@ -319,7 +340,7 @@
                 </div>
             </div>
 
-        </div> 
+        </div>
         <div class='leaflet-control-container'>
             <div class="leaflet-top leaflet-right" style="top:275px;">
                 <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="weather_icon" title="Click to know the weather" src= 'images/partly_cloudy_day_filled1600.png' height='35' width='30' onclick='getWeather()'></img></div>
@@ -385,12 +406,12 @@
         <script src="js/waterlevel.js"></script>
         <script src="js/marker.js"></script>
         <script>
-                    $(window).resize(function () {
-                        var mapheight = $(window).height() - 110;
-                        $("#map").css("height", mapheight);
-                    });
-                    var mapheight = $(window).height() - 110;
-                    $("#map").css("height", mapheight);
+					$(window).resize(function () {
+						var mapheight = $(window).height() - 110;
+						$("#map").css("height", mapheight);
+					});
+					var mapheight = $(window).height() - 110;
+					$("#map").css("height", mapheight);
         </script>
 
 
