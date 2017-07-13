@@ -212,13 +212,72 @@
             .leaflet-bar-part{
                 border-radius: 4px;
             }
+			
+			.modal {
+    display: none; /* Hidden by default */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 100px;
+    height: 50%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn {
+  background: #a14db8;
+  background-image: -webkit-linear-gradient(top, #a14db8, #a14db8);
+  background-image: -moz-linear-gradient(top, #a14db8, #a14db8);
+  background-image: -ms-linear-gradient(top, #a14db8, #a14db8);
+  background-image: -o-linear-gradient(top, #a14db8, #a14db8);
+  background-image: linear-gradient(to bottom, #a14db8, #a14db8);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 12px;
+  font-family: Arial;
+  color: #f2e9f2;
+  font-size: 12px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
             
         </style>
 
     </head>
     <body class="calcite-maps calcite-nav-top">
 
-
+         <div id="myModal" class ="modal" style = "position: absolute; left: 200px; width: 50%;">
+  <!-- Modal content -->
+			<div id = "modal_content" class="modal-content">
+			<span class="close">&times;</span>
+			<div id = "road_worker">
+			</div>
+		</div>
+		</div>
         <!-- Navbar -->
 
         <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark calcite-bgcolor-dark-purple">
@@ -421,6 +480,21 @@
 					var mapheight = $(window).height() - 110;
 					$("#map").css("height", mapheight);
         </script>
+		
+		<script>
+	
+		function form_worker(){
+		    
+		    document.getElementById('road_worker').innerHTML = '' ;
+			$("<div id = 'form'><form>Entered_By:<br><input id = 'author' type='text' ><br>Number of Workers:<br><input id = 'number' type='text' ><br>Description:<br><input id = 'worker_desc' type='text'></form><br><button class = 'btn' id = 'submit' onclick = 'addFeature_worker()'>submit</button></div>").appendTo('#road_worker');
+			
+		}
+		function form_road(){
+			document.getElementById('road_worker').innerHTML = '' ;
+			$("<div id = 'form'><form>Entered_By:<br><input id = 'author' type='text' ><br>Description:<br><input id = 'road_desc' type='text'></form><br><button class = 'btn' id = 'submit' onclick = 'addFeature_road()'>submit</button></div>").appendTo('#road_worker');
+			
+		}
+		</script>
 
 
     </body>
