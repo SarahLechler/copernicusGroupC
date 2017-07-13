@@ -85,12 +85,12 @@ L.control.zoom({
 
 //var searchControl = L.esri.Geocoding.Controls.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: false}).addTo(map);
 var searchControl = L.esri.Geocoding.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: true}).addTo(map);
-
-searchControl.on('results', function (data) {
-    //var searchControl = L.esri.Geocoding.Controls.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: false}).addTo(map);
-    var searchControl = L.esri.Geocoding.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: true}).addTo(map);
-
-});
+//
+//searchControl.on('results', function (data) {
+//    //var searchControl = L.esri.Geocoding.Controls.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: false}).addTo(map);
+//    var searchControl = L.esri.Geocoding.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: true}).addTo(map);
+//
+//});
 
 L.easyPrint({
     title: 'Click to print the map',
@@ -101,6 +101,11 @@ L.easyPrint({
 
 //adding Feature layer for Workers
 
+ //add imageLayer --> MosaikDataSet/Sattelite data
+//L.esri.imageMapLayer({
+//    url: 'https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer',
+//    attribution: 'United States Geological Survey (USGS), National Aeronautics and Space Administration (NASA)'
+//}).addTo(map);
 
 
 var workers = L.esri.featureLayer({

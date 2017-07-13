@@ -206,6 +206,13 @@
                 margin-right: 2.4%; 
                 font-size:8px
             }
+            #weather_icon{
+                background-color: #ffffff;
+            }
+            .leaflet-bar-part{
+                border-radius: 4px;
+            }
+            
         </style>
 
     </head>
@@ -325,9 +332,10 @@
                 <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="weather_icon" title="Click to know the weather" src= 'images/partly_cloudy_day_filled1600.png' height='35' width='30' onclick='getWeather()'></img></div>
             </div>
         </div>
+        <!-- precipitation button-->
         <div class='leaflet-control-container'>
             <div class="leaflet-top leaflet-right" style="top:325px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="weather_icon" title="Click to know the precipitation" src= 'images/partly_cloudy_day_filled1600.png' height='35' width='30' onclick='getPrecipitation()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="weather_icon" title="Click to know the precipitation" src= 'images/btn_precipitation.png' height='35' width='30' onclick='getPrecipitation()'></img></div>
             </div>
         </div>
 
@@ -342,7 +350,7 @@
 
         <div style="position: absolute; bottom: 0; left: 0; width: 100%;">
             <div id="slider" style="width: 100%;">
-                <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='0' id='rangeSlider' onchange = "selectedTime()" /></div>
+                <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' onSlide="test125()"  ondrag="test124()" onchange = "selectedTime()"  onended="selectedTimeEnd()" /></div>
             <div id="steps" class="steps" style="width: 100%; margin-left: 8px;">
             </div>
         </div>
