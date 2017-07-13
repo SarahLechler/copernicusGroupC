@@ -97,19 +97,22 @@ L.easyPrint({
     position: 'topright'
 }).addTo(map);
 
-//adding Feature layer for Workers
+
+
+
+
+ //add imageLayer --> MosaikDataSet/Sattelite data 
+var processedDataLayer = L.esri.imageMapLayer({
+    url: 'https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer', ////https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer
+    attribution: 'WMS-Service for Copernicus Satellite Data with detected waterbodies',
+    from: Date.now()-259200,
+    to: Date.now()+259200
+            
+}).addTo(map);
 
 //adding Feature layer for Workers
-
- //add imageLayer --> MosaikDataSet/Sattelite data
-//L.esri.imageMapLayer({
-//    url: 'https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer',
-//    attribution: 'United States Geological Survey (USGS), National Aeronautics and Space Administration (NASA)'
-//}).addTo(map);
-
-
 var workers = L.esri.featureLayer({
-    url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0'
+    url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0', 
 }).addTo(map);
 
 workers.bindPopup(function (layer) {
