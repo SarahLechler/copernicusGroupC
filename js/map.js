@@ -10,28 +10,24 @@
 // ============
 
 var map = L.map('map', {zoomControl: false, zoomAnimation: false,
-    //minZoom: 7, maxBounds:[[50.31, 5.77], [52.62, 9.46]]
+    minZoom: 7, maxBounds:[[50, 5.77], [52.62, 9.46]]
 }).setView([51.422080, 8.022025], 8),
         layer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map),
         // layerLabels = L.esri.basemapLayer('xxxLabels').addTo(map);
         layerLabels = null,
         worldTransportation = L.esri.basemapLayer('ImageryTransportation'),
-        precip_layer = L.tileLayer("http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=f76f082faa2e7e033b8eced98e9132ae");
+        precip_layer = L.tileLayer("http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=f76f082faa2e7e033b8eced98e9132ae"
+);
 
 
-console.log("#1");
-if (map.hasLayer(precip_layer)) {
-    console.log("#2");
-    map.remove(precip_layer);
-    console.log("#3");
-    map.addLayer(precip_layer);
-} else {
-    console.log("#4");
-    map.addLayer(precip_layer);
-    console.log("#5");
-}
+//if (map.hasLayer(precip_layer)) {
+//    map.remove(precip_layer);
+//    map.addLayer(precip_layer);
+//} else {
+//    map.addLayer(precip_layer);
+//}
 
-var show_precip = true;
+var show_precip = false;
 
 function getPrecipitation() {
     show_precip = !show_precip;
