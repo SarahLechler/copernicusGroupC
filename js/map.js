@@ -16,18 +16,22 @@ var map = L.map('map', {zoomControl: false, zoomAnimation: false,
         // layerLabels = L.esri.basemapLayer('xxxLabels').addTo(map);
         layerLabels = null,
         worldTransportation = L.esri.basemapLayer('ImageryTransportation'),
-        precip_layer = L.tileLayer("http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=f76f082faa2e7e033b8eced98e9132ae"
-);
+        precip_layer = L.tileLayer("http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=f76f082faa2e7e033b8eced98e9132ae");
 
 
-//if (map.hasLayer(precip_layer)) {
-//    map.remove(precip_layer);
-//    map.addLayer(precip_layer);
-//} else {
-//    map.addLayer(precip_layer);
-//}
+console.log("#1");
+if (map.hasLayer(precip_layer)) {
+    console.log("#2");
+    map.remove(precip_layer);
+    console.log("#3");
+    map.addLayer(precip_layer);
+} else {
+    console.log("#4");
+    map.addLayer(precip_layer);
+    console.log("#5");
+}
 
-var show_precip = false;
+var show_precip = true;
 
 function getPrecipitation() {
     show_precip = !show_precip;

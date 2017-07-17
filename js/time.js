@@ -1,8 +1,8 @@
 function selectedTime() {
-    console.log("selectedTime");
     var val = document.getElementById('range').value;
     console.log(unique_date[val]);
     console.log(val);
+
     return unique_date[val];
 }
 
@@ -50,4 +50,3 @@ function updateGaugingStations(val) {
         }
     }
     // End <-- Gauging stations -->
-}
