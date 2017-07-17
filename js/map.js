@@ -10,7 +10,7 @@
 // ============
 
 var map = L.map('map', {zoomControl: false, zoomAnimation: false,
-    //minZoom: 7, maxBounds:[[50.31, 5.77], [52.62, 9.46]]
+    minZoom: 7, maxBounds:[[50, 5.77], [53.00, 9.46]]
 }).setView([51.422080, 8.022025], 8),
         layer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map),
         // layerLabels = L.esri.basemapLayer('xxxLabels').addTo(map);
@@ -43,6 +43,12 @@ function getPrecipitation() {
     map.addLayer(layer);
     if (show_precip)
         map.addLayer(precip_layer);
+    var precip_button = document.getElementById('precipitation_icon');
+    if (show_precip){
+        precip_button.className = 'precip_pressed';
+    } else {
+        precip_button.className = 'precip_unpressed';
+    }
 }
 ;
 
