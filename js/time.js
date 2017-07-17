@@ -8,7 +8,12 @@ function selectedTime() {
 
 function selectingTime() {
     var val = document.getElementById('range').value;
-    // val
+    updateGaugingStations(val);
+    return unique_date[val];
+}
+
+function updateGaugingStations(val) {
+    // Start <-- Gauging stations -->
     for (var key in allPegelData) {
         // skip loop if the property is from prototype
         if (!allPegelData.hasOwnProperty(key))
@@ -16,17 +21,33 @@ function selectingTime() {
         var obj = allPegelData[key];
         if (!obj.marker)
             continue;
-        obj.marker.setStyle(
-                {
-                    color: '#0000FF',
-                    weight: 2,
-                    fill: true,
-                    fillColor: '#' + getColor(obj.min, obj.max, obj[val]) + "FF",
-                    fillOpacity: 1,
-                    radius: 10,
-                    opacity: 1
-                }
-        );
+        if ((obj.min != undefined) && (obj.max != undefined) && (obj[val] != undefined)) {
+            obj.marker.setStyle(
+                    {
+                        color: '#0000FF',
+                        weight: 2,
+                        fill: true,
+                        fillColor: '#' + getColor(obj.min, obj.max, obj[val]) + "FF",
+                        fillOpacity: 1,
+                        radius: 10,
+                        opacity: 1,
+                        className: obj.stationname
+                    }
+            );
+        } else {
+            obj.marker.setStyle(
+                    {
+                        color: '#0000FF',
+                        weight: 2,
+                        fill: true,
+                        fillColor: '#c1c1c1',
+                        fillOpacity: 1,
+                        radius: 10,
+                        opacity: 1,
+                        className: obj.stationname
+                    }
+            );
+        }
     }
-    return unique_date[val];
+    // End <-- Gauging stations -->
 }

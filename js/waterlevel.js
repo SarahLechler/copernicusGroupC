@@ -27,13 +27,15 @@ var pegelData = [];
  */
 function getColor(min, max, current) {
     var range = max - min;
-    var scaledMin = min - range;
-    var scaledMax = max + range;
+    var scaledMin = min - range / 4;
+    var scaledMax = max + range / 4;
     var scaledRange = scaledMax - scaledMin;
     var perc = Math.round((current - scaledMin) / (scaledRange) * 255);
     perc = 255 - perc;
     var hex = perc.toString(16);
     var val = hex.length === 1 ? "0" + hex : hex;
+    if (hex < "00")
+        return "0000";
     return val + "" + val;
 }
 
@@ -84,6 +86,8 @@ function getDayData(stationname, plusDay, lat, lon) {
                         if (res[0])
                             if (res[0].value)
                                 res["value"] = res[0].value;
+                            else
+                                console.log(res);
                         res["day"] = plusDay;
                         if (allDaysExist(stationname)) { // if all days are obtained, create marker:
                             var min = allPegelData[stationname][0];
@@ -97,18 +101,33 @@ function getDayData(stationname, plusDay, lat, lon) {
                             }
                             allPegelData[stationname].min = min;
                             allPegelData[stationname].max = max;
-
-                            var marker = new L.CircleMarker(
-                                    [lat, lon],
-                                    {
-                                        color: '#0000FF',
-                                        weight: 2,
-                                        fill: true,
-                                        fillColor: '#' + getColor(allPegelData[stationname].min, allPegelData[stationname].max, res[0].value) + "FF",
-                                        fillOpacity: 1,
-                                        radius: 10,
-                                        opacity: 1
-                                    }).addTo(map);
+                            if ((res[0]) && (res[0].value)) {
+                                var marker = new L.CircleMarker(
+                                        [lat, lon],
+                                        {
+                                            color: '#0000FF',
+                                            weight: 2,
+                                            fill: true,
+                                            fillColor: '#' + getColor(allPegelData[stationname].min, allPegelData[stationname].max, res[0].value) + "FF",
+                                            fillOpacity: 1,
+                                            radius: 10,
+                                            opacity: 1,
+                                            className: stationname
+                                        }).addTo(map);
+                            } else {
+                                var marker = new L.CircleMarker(
+                                        [lat, lon],
+                                        {
+                                            color: '#0000FF',
+                                            weight: 2,
+                                            fill: true,
+                                            fillColor: '#c1c1c1',
+                                            fillOpacity: 1,
+                                            radius: 10,
+                                            opacity: 1,
+                                            className: stationname
+                                        }).addTo(map);
+                            }
                             marker.bindPopup("<b>" + stationname + "</b><br> Water : " + stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
                             allPegelData[stationname].marker = marker;
                         }
@@ -133,6 +152,7 @@ function getStationData(stationname, lat, lon) {
                         function (res) {
                             if (res[0])
                                 if (res[0].value) {
+                                    allPegelData['' + stationname].stationname = stationname;
                                     allPegelData['' + stationname].sum += res[0].value;
                                     allPegelData['' + stationname][res.day] = res[0].value;
                                     allPegelData['' + stationname].avg = allPegelData['' + stationname].sum / 31;
@@ -142,113 +162,113 @@ function getStationData(stationname, lat, lon) {
 }
 ;
 
-function addWater(result) {
-    for (var i in result) {
-        var station_name = result[i].shortname;
-        var lat = result[i].latitude;
-        var lon = result[i].longitude;
-        if (lat != null && lon != null) {
-            if ((result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'normal'
-                    || result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'low')
-                    && result[i].timeseries[0].currentMeasurement.trend == '1') {
-                var waterIcon = L.Icon.Label.extend({
-                    options: {
-                        iconUrl: 'images/low_positive.png',
-                        shadowUrl: null,
-                        iconSize: new L.Point(24, 24),
-                        iconAnchor: new L.Point(0, 1),
-                        labelAnchor: new L.Point(26, 0),
-                        wrapperAnchor: new L.Point(12, 13),
-                    }
-                });
-            } else if ((result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'normal'
-                    || result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'low')
-                    && (result[i].timeseries[0].currentMeasurement.trend == '-1'
-                            || result[i].timeseries[0].currentMeasurement.trend == '0')) {
-                var waterIcon = L.Icon.Label.extend({
-                    options: {
-                        iconUrl: 'images/low_negative.png',
-                        shadowUrl: null,
-                        iconSize: new L.Point(24, 24),
-                        iconAnchor: new L.Point(0, 1),
-                        labelAnchor: new L.Point(26, 0),
-                        wrapperAnchor: new L.Point(12, 13),
-                    }
-                });
-            } else if (result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'high' && result[i].timeseries[0].currentMeasurement.trend == '1') {
-                var waterIcon = L.Icon.Label.extend({
-                    options: {
-                        iconUrl: 'images/high_positive.png',
-                        shadowUrl: null,
-                        iconSize: new L.Point(24, 24),
-                        iconAnchor: new L.Point(0, 1),
-                        labelAnchor: new L.Point(26, 0),
-                        wrapperAnchor: new L.Point(12, 13),
-                    }
-                });
-            } else if (result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'high' && (result[i].timeseries[0].currentMeasurement.trend == '-1' || result[i].timeseries[0].currentMeasurement.trend == '0')) {
-                var waterIcon = L.Icon.Label.extend({
-                    options: {
-                        iconUrl: 'images/high_negative.png',
-                        shadowUrl: null,
-                        iconSize: new L.Point(24, 24),
-                        iconAnchor: new L.Point(0, 1),
-                        labelAnchor: new L.Point(26, 0),
-                        wrapperAnchor: new L.Point(12, 13),
-                    }
-                });
-            } else if (result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'high' && result[i].timeseries[0].currentMeasurement.trend == '-999') {
-                var waterIcon = L.Icon.Label.extend({
-                    options: {
-                        iconUrl: 'images/high.png',
-                        shadowUrl: null,
-                        iconSize: new L.Point(24, 24),
-                        iconAnchor: new L.Point(0, 1),
-                        labelAnchor: new L.Point(26, 0),
-                        wrapperAnchor: new L.Point(12, 13),
-                    }
-                });
-            } else if ((result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'low' || result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'normal') && result[i].timeseries[0].currentMeasurement.trend == '-999') {
-                var waterIcon = L.Icon.Label.extend({
-                    options: {
-                        iconUrl: 'images/low.png',
-                        shadowUrl: null,
-                        iconSize: new L.Point(24, 24),
-                        iconAnchor: new L.Point(0, 1),
-                        labelAnchor: new L.Point(26, 0),
-                        wrapperAnchor: new L.Point(12, 13),
-                    }
-                });
-            } else if (result[i].timeseries[0].currentMeasurement.trend == '-1' || result[i].timeseries[0].currentMeasurement.trend == '0') {
-                var waterIcon = L.Icon.Label.extend({
-                    options: {
-                        iconUrl: 'images/neutral_negative.png',
-                        shadowUrl: null,
-                        iconSize: new L.Point(24, 24),
-                        iconAnchor: new L.Point(0, 1),
-                        labelAnchor: new L.Point(26, 0),
-                        wrapperAnchor: new L.Point(12, 13),
-                    }
-                });
-            } else {
-                var waterIcon = L.Icon.Label.extend({
-                    options: {
-                        iconUrl: 'images/neutral_positive.png',
-                        shadowUrl: null,
-                        iconSize: new L.Point(24, 24),
-                        iconAnchor: new L.Point(0, 1),
-                        labelAnchor: new L.Point(26, 0),
-                        wrapperAnchor: new L.Point(12, 13),
-                    }
-                });
-            }
-            var marker = new L.Marker.Label([lat, lon], {className: station_name, icon: new waterIcon({labelText: "<b>" + result[i].timeseries[0].currentMeasurement.value + "</b>"})}).addTo(map);
-            marker.bindPopup("<b>" + station_name + "</b><br> Water : " + result[i].water.shortname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
-
-        }
-
-    }
-}
+//function addWater(result) {
+//    for (var i in result) {
+//        var station_name = result[i].shortname;
+//        var lat = result[i].latitude;
+//        var lon = result[i].longitude;
+//        if (lat != null && lon != null) {
+//            if ((result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'normal'
+//                    || result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'low')
+//                    && result[i].timeseries[0].currentMeasurement.trend == '1') {
+//                var waterIcon = L.Icon.Label.extend({
+//                    options: {
+//                        iconUrl: 'images/low_positive.png',
+//                        shadowUrl: null,
+//                        iconSize: new L.Point(24, 24),
+//                        iconAnchor: new L.Point(0, 1),
+//                        labelAnchor: new L.Point(26, 0),
+//                        wrapperAnchor: new L.Point(12, 13),
+//                    }
+//                });
+//            } else if ((result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'normal'
+//                    || result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'low')
+//                    && (result[i].timeseries[0].currentMeasurement.trend == '-1'
+//                            || result[i].timeseries[0].currentMeasurement.trend == '0')) {
+//                var waterIcon = L.Icon.Label.extend({
+//                    options: {
+//                        iconUrl: 'images/low_negative.png',
+//                        shadowUrl: null,
+//                        iconSize: new L.Point(24, 24),
+//                        iconAnchor: new L.Point(0, 1),
+//                        labelAnchor: new L.Point(26, 0),
+//                        wrapperAnchor: new L.Point(12, 13),
+//                    }
+//                });
+//            } else if (result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'high' && result[i].timeseries[0].currentMeasurement.trend == '1') {
+//                var waterIcon = L.Icon.Label.extend({
+//                    options: {
+//                        iconUrl: 'images/high_positive.png',
+//                        shadowUrl: null,
+//                        iconSize: new L.Point(24, 24),
+//                        iconAnchor: new L.Point(0, 1),
+//                        labelAnchor: new L.Point(26, 0),
+//                        wrapperAnchor: new L.Point(12, 13),
+//                    }
+//                });
+//            } else if (result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'high' && (result[i].timeseries[0].currentMeasurement.trend == '-1' || result[i].timeseries[0].currentMeasurement.trend == '0')) {
+//                var waterIcon = L.Icon.Label.extend({
+//                    options: {
+//                        iconUrl: 'images/high_negative.png',
+//                        shadowUrl: null,
+//                        iconSize: new L.Point(24, 24),
+//                        iconAnchor: new L.Point(0, 1),
+//                        labelAnchor: new L.Point(26, 0),
+//                        wrapperAnchor: new L.Point(12, 13),
+//                    }
+//                });
+//            } else if (result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'high' && result[i].timeseries[0].currentMeasurement.trend == '-999') {
+//                var waterIcon = L.Icon.Label.extend({
+//                    options: {
+//                        iconUrl: 'images/high.png',
+//                        shadowUrl: null,
+//                        iconSize: new L.Point(24, 24),
+//                        iconAnchor: new L.Point(0, 1),
+//                        labelAnchor: new L.Point(26, 0),
+//                        wrapperAnchor: new L.Point(12, 13),
+//                    }
+//                });
+//            } else if ((result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'low' || result[i].timeseries[0].currentMeasurement.stateMnwMhw == 'normal') && result[i].timeseries[0].currentMeasurement.trend == '-999') {
+//                var waterIcon = L.Icon.Label.extend({
+//                    options: {
+//                        iconUrl: 'images/low.png',
+//                        shadowUrl: null,
+//                        iconSize: new L.Point(24, 24),
+//                        iconAnchor: new L.Point(0, 1),
+//                        labelAnchor: new L.Point(26, 0),
+//                        wrapperAnchor: new L.Point(12, 13),
+//                    }
+//                });
+//            } else if (result[i].timeseries[0].currentMeasurement.trend == '-1' || result[i].timeseries[0].currentMeasurement.trend == '0') {
+//                var waterIcon = L.Icon.Label.extend({
+//                    options: {
+//                        iconUrl: 'images/neutral_negative.png',
+//                        shadowUrl: null,
+//                        iconSize: new L.Point(24, 24),
+//                        iconAnchor: new L.Point(0, 1),
+//                        labelAnchor: new L.Point(26, 0),
+//                        wrapperAnchor: new L.Point(12, 13),
+//                    }
+//                });
+//            } else {
+//                var waterIcon = L.Icon.Label.extend({
+//                    options: {
+//                        iconUrl: 'images/neutral_positive.png',
+//                        shadowUrl: null,
+//                        iconSize: new L.Point(24, 24),
+//                        iconAnchor: new L.Point(0, 1),
+//                        labelAnchor: new L.Point(26, 0),
+//                        wrapperAnchor: new L.Point(12, 13),
+//                    }
+//                });
+//            }
+//            var marker = new L.Marker.Label([lat, lon], {className: station_name, icon: new waterIcon({labelText: "<b>" + result[i].timeseries[0].currentMeasurement.value + "</b>"})}).addTo(map);
+//            marker.bindPopup("<b>" + station_name + "</b><br> Water : " + result[i].water.shortname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
+//
+//        }
+//
+//    }
+//}
 
 var date = [];
 var unique_date = [];
@@ -290,12 +310,14 @@ function date_for_slider(unique_date) {
 }
 
 map.on('popupopen', function (e) {
+    console.log(e);
     getChart(e.target._popup._source.options.className);
 });
 
 
 function getChart(station_name) {
     var datapoints = [];
+    console.log("trying to obtain chart data for station:" + station_name)
     var URL = "https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/" + station_name + "/W/measurements.json?start=P30D";
     $.ajax({
         url: URL,
@@ -303,8 +325,9 @@ function getChart(station_name) {
         dataType: "json",
         async: false,
         success: function (result) {
+            console.log(result);
             var date_slider = selectedTime();
-            for (i in result) {
+            for (var i in result) {
                 if (date_slider == (result[i].timestamp).substr(0, 10)) {
                     datapoints.push({label: result[i].timestamp.substr(0, 10), y: result[i].value, toolTipContent: result[i].timestamp + " : " + result[i].value});
                 }
@@ -330,6 +353,7 @@ function getChart(station_name) {
             chart.render();
         },
         error: function (xhr, textStatus, errorThrown) {
+            console.log("error obtaining chart data");
         }
     });
 
@@ -349,6 +373,7 @@ $.ajax({
         var current = 0;
         for (var current in result) {
             var currStationData = {
+                stationname: "",
                 latitude: undefined,
                 longitude: undefined,
                 sum: 0,
