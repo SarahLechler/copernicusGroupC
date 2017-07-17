@@ -6,54 +6,55 @@
 
 //http://api.openweathermap.org/data/2.5/forecast?q={muenster}&appid=3e4e9e28f3ee43f6058e966b7f2be8c6
 
-var temp=0;
+var temp = 0;
 var markers = new L.FeatureGroup();
-function getWeather(){
-    if(temp==0){
-var URL = "http://api.openweathermap.org/data/2.5/box/city?bbox=5.77,50.31,9.46,52.62,9&APPID=3e4e9e28f3ee43f6058e966b7f2be8c6";
-$.ajax({
-        url: URL,
-        method: "GET",
-        dataType: "json",
-        async:false,
-        success: function(result){
-			console.log(result);
-			addToMap(result);
-        }, 
-        error: function(xhr, textStatus, errorThrown){ 
-            alert("Unable to fetch Server data")               	 	
-        }
+function getWeather() {
+    var weather_button = document.getElementById('weather_icon');
+    if (temp === 0) {
+        var URL = "http://api.openweathermap.org/data/2.5/box/city?bbox=5.77,50.31,9.46,52.62,9&APPID=3e4e9e28f3ee43f6058e966b7f2be8c6";
+        $.ajax({
+            url: URL,
+            method: "GET",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                console.log(result);
+                addToMap(result);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert("Unable to fetch Server data")
+            }
         });
-		
 
-function addToMap(data){
-	
-  var count = Object.keys(data.list).length;
-  
-  for (i in data.list){
-	 var lat =  data.list[i].coord.Lat;
-	 var lon =  data.list[i].coord.Lon;
-	 var myIcon = L.icon({
-     iconUrl: 'http://openweathermap.org/img/w/'+ data.list[i].weather[0].icon + '.png'
-    });
-	 var marker = L.marker([lat, lon], {icon: myIcon});
-	 if ((data.list[i].rain)!= null){
-	 marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description +"</center></b>Rain : " + Object.values(data.list[i].rain)+ "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : "+ data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>");
-	 }
-	 else{
-	 marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description +"</center></b>Rain : " + data.list[i].rain+ "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : "+ data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>"); 
-	 }
-	 markers.addLayer(marker);
-  }
-  map.addLayer(markers);
-}
 
-temp = 1;
-console.log(temp);
-}
-else{
-	map.removeLayer(markers);
-	temp=0;
-	console.log(temp);
-}
+        function addToMap(data) {
+
+            var count = Object.keys(data.list).length;
+
+            for (var i in data.list) {
+                var lat = data.list[i].coord.Lat;
+                var lon = data.list[i].coord.Lon;
+                var myIcon = L.icon({
+                    iconUrl: 'http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png'
+                });
+                var marker = L.marker([lat, lon], {icon: myIcon});
+                if ((data.list[i].rain) !== null) {
+                    marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description + "</center></b>Rain : " + Object.values(data.list[i].rain) + "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : " + data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>");
+                } else {
+                    marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description + "</center></b>Rain : " + data.list[i].rain + "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : " + data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>");
+                }
+                markers.addLayer(marker);
+            }
+            map.addLayer(markers);
+            weather_button.className = 'weather_pressed';
+        }
+
+        temp = 1;
+        console.log(temp);
+    } else {
+        map.removeLayer(markers);
+        weather_button.className = 'weather_unpressed';
+        temp = 0;
+        console.log(temp);
+    }
 }

@@ -205,9 +205,6 @@
                 margin-right: 2.4%;
                 font-size:8px;
             }
-            #weather_icon{
-                background-color: #ffffff;
-            }
             .leaflet-bar-part{
                 border-radius: 4px;
             }
@@ -215,6 +212,32 @@
                 z-index: 200;
                 top: -20px!important;
             }
+
+            .precip_pressed{
+                background-color: steelblue !important;
+                border-radius: 4px;
+            }
+            .precip_unpressed{
+                background-color: #ffffff !important;
+                border-radius: 4px;
+            }
+            .weather_pressed{
+                background-color: steelblue !important;
+                border-radius: 4px;
+            }
+            .weather_unpressed{
+                background-color: #ffffff !important;
+                border-radius: 4px;
+            }
+            .satellite_pressed{
+                background-color: steelblue !important;
+                border-radius: 4px;
+            }
+            .satellite_unpressed{
+                background-color: #ffffff !important;
+                border-radius: 4px;
+            }
+
 
             .modal {
                 display: none; /* Hidden by default */
@@ -267,6 +290,7 @@
                 padding: 10px 20px 10px 20px;
                 text-decoration: none;
             }
+
 
         </style>
 
@@ -424,13 +448,13 @@
         </div>
         <div class='leaflet-control-container'>
             <div class="leaflet-top leaflet-right" style="top:275px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="weather_icon" title="Click to know the weather" src= 'images/partly_cloudy_day_filled1600.png' height='35' width='30' onclick='getWeather()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class="weather_unpressed leaflet-bar-part" id="weather_icon" title="Click to show the weather" src= 'images/partly_cloudy_day_filled1600.png' height='35' width='30' onclick='getWeather()'></img></div>
             </div>
         </div>
         <!-- precipitation button-->
         <div class='leaflet-control-container'>
             <div class="leaflet-top leaflet-right" style="top:325px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="weather_icon" title="Click to know the precipitation" src= 'images/btn_precipitation.png' height='35' width='30' onclick='getPrecipitation()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class="precip_unpressed leaflet-bar-part" id="precipitation_icon" title="Click to show the precipitation" src= 'images/btn_precipitation.png' height='35' width='30' onclick='getPrecipitation()'></img></div>
             </div>
         </div>
 
@@ -504,6 +528,12 @@
                     $("#map").css("height", mapheight);
 
 
+                    $(window).resize(function () {
+                        var mapheight = $(window).height() - 110;
+                        $("#map").css("height", mapheight);
+                    });
+                    var mapheight = $(window).height() - 110;
+                    $("#map").css("height", mapheight);
                     $(window).resize(function () {
                         var mapheight = $(window).height() - 110;
                         $("#map").css("height", mapheight);

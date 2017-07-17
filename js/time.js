@@ -2,11 +2,7 @@ function selectedTime() {
     var val = document.getElementById('range').value;
     console.log(unique_date[val]);
     console.log(val);
-
-    var dateYMD = new Date(unique_date[val]);
-    var dateMS = Date.parse(dateYMD) //time in millisec since  January 1st 1970 00:00:00 UTC
-    changeSatelliteImage();
-    return unique_date[val];
+   return unique_date[val];
 };
 
 var timeslider = document.getElementById('range');
@@ -36,7 +32,12 @@ function test125() {
 
 function selectingTime() {
     var val = document.getElementById('range').value;
-    // val
+    updateGaugingStations(val);
+    return unique_date[val];
+}
+
+function updateGaugingStations(val) {
+    // Start <-- Gauging stations -->
     for (var key in allPegelData) {
         // skip loop if the property is from prototype
         if (!allPegelData.hasOwnProperty(key))
@@ -44,17 +45,33 @@ function selectingTime() {
         var obj = allPegelData[key];
         if (!obj.marker)
             continue;
-        obj.marker.setStyle(
-                {
-                    color: '#0000FF',
-                    weight: 2,
-                    fill: true,
-                    fillColor: '#' + getColor(obj.min, obj.max, obj[val]) + "FF",
-                    fillOpacity: 1,
-                    radius: 10,
-                    opacity: 1
-                }
-        );
+        if ((obj.min != undefined) && (obj.max != undefined) && (obj[val] != undefined)) {
+            obj.marker.setStyle(
+                    {
+                        color: '#0000FF',
+                        weight: 2,
+                        fill: true,
+                        fillColor: '#' + getColor(obj.min, obj.max, obj[val]) + "FF",
+                        fillOpacity: 1,
+                        radius: 10,
+                        opacity: 1,
+                        className: obj.stationname
+                    }
+            );
+        } else {
+            obj.marker.setStyle(
+                    {
+                        color: '#0000FF',
+                        weight: 2,
+                        fill: true,
+                        fillColor: '#c1c1c1',
+                        fillOpacity: 1,
+                        radius: 10,
+                        opacity: 1,
+                        className: obj.stationname
+                    }
+            );
+        }
     }
     return unique_date[val];
 }
@@ -70,4 +87,7 @@ function test124(){
 function test125(){
     console.log("onSlide");
 }
+
+
+    // End <-- Gauging stations -->
 
