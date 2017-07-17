@@ -297,7 +297,7 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu calcite-bgcolor-dark-purple">
-                    <li><a class="hidden-md hidden-lg" href="#panelInfo" aria-controls="panelInfo" role="tab" data-toggle="tab"> Info</a></li>
+					<li><a class="hidden-md hidden-lg" href="#panelInfo" aria-controls="panelInfo" role="tab" data-toggle="tab"> Info</a></li>
                     <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
                     <li><a class="visible-xs" role="button" data-target="#panelSearch" aria-haspopup="true"><span class="glyphicon glyphicon-search"></span> Search</a></li>
                     <li><a role="button" data-target="#panelBasemaps" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>
@@ -337,13 +337,13 @@
                             <option value="Topographic">Topographic</option>
                             <option value="DarkGray">Dark Gray</option>
                             <option selected value="OpenStreetMap">Open Street Map</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <!-- Panel -->
+		<!-- Panel -->
 
         <div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light panel-group calcite-bgcolor-dark-purple" role="tablist" aria-multiselectable="true">
 
@@ -438,30 +438,16 @@
          <button type="button" id="stop">stop</button>
          </div> -->
 
-        <!--
-                <div style="position: absolute; bottom: 0; left: 0; width: 100%;">
-                    <div id="slider" style="width: 100%;">
-                        <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' onchange = "selectedTime()" /></div>
-                    <div id="steps" class="steps" style="width: 100%; margin-left: 8px;">
-                    </div>
-                </div>-->
 
         <div style="position: absolute; bottom: 0; left: 0; width: 100%;">
             <div id="slider" style="width: 100%;">
-                <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" 
-                       id="range"
-                       type="range"
-                       min="0"                    
-                       max="30"                  
-                       step="1"                   
-                       value="30"
-                       onchange='selectedTime()'
-                       oninput='selectingTime()'
-                       >
-            </div>
+                <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' onSlide="test125()"  ondrag="test124()" onchange = "selectedTime()"  onended="selectedTimeEnd()" /></div>
             <div id="steps" class="steps" style="width: 100%; margin-left: 8px;">
             </div>
         </div>
+
+
+
 
         <!-- /.calcite-panels -->
 
@@ -498,12 +484,12 @@
         <script src="js/waterlevel.js"></script>
         <script src="js/marker.js"></script>
         <script>
-                           $(window).resize(function () {
-                               var mapheight = $(window).height() - 110;
-                               $("#map").css("height", mapheight);
-                           });
-                           var mapheight = $(window).height() - 110;
-                           $("#map").css("height", mapheight);
+					$(window).resize(function () {
+						var mapheight = $(window).height() - 110;
+						$("#map").css("height", mapheight);
+					});
+					var mapheight = $(window).height() - 110;
+					$("#map").css("height", mapheight);
         </script>
 
 		<script>
