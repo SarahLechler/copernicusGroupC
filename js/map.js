@@ -102,7 +102,7 @@ L.easyPrint({
 
 
  //add imageLayer --> MosaikDataSet/Sattelite data 
-var processedDataLayer = L.esri.imageMapLayer({
+var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
     url: 'https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer', ////https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer
     attribution: 'WMS-Service for Copernicus Satellite Data with detected waterbodies',
     from: Date.now()-259200,

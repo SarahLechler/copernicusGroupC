@@ -8,10 +8,14 @@ function selectedTime() {
     return unique_date[val];
 }
 
-function changeSatelliteImage(dateMS) {
-    console.log(dateMS); //DateAdd(startDate, 7, 'days'); to set timerange on EsriFunctions
+var range = document.getElementById('range');
+range.addEventListener ('change', changeSatelliteImage());
+
+function changeSatelliteImage() {
+    var changedDate = new Date (document.getElementById('range').value);
+    console.log(changedDate); //DateAdd(startDate, 7, 'days'); to set timerange on EsriFunctions
     debugger;
-    this.processedDataLayer.setTimeRange(dateMS - 259200, dateMS + 259200).addTo(map) //enter times here ("on drag");
+    this.processedDataLayer.setTimeRange(changedDate - 259200, changedDate + 259200); //enter times here ("on drag");
     console.log("redrawingLayer");
 }
 
