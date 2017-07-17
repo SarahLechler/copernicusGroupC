@@ -203,7 +203,7 @@
                 display:inline-block;
                 width: 0.75%;
                 text-align:center;
-                margin-right: 2.4%; 
+                margin-right: 2.4%;
                 font-size:8px;
             }
             #weather_icon{
@@ -216,7 +216,7 @@
 				z-index: 200;
 				top: -20px!important;
 			}
-			
+
 			.modal {
     display: none; /* Hidden by default */
     padding-top: 100px; /* Location of the box */
@@ -268,7 +268,7 @@
   padding: 10px 20px 10px 20px;
   text-decoration: none;
 }
-            
+
         </style>
 
     </head>
@@ -307,22 +307,22 @@
             <div class="calcite-title calcite-overflow-hidden">
                 <span class="calcite-title-main">Copernicus Emergency Services</span>
                 <span class="calcite-title-divider hidden-xs"></span>
-                <span class="calcite-title-sub hidden-xs">An application for relief workers during flood</span> 
+                <span class="calcite-title-sub hidden-xs">An application for relief workers during flood</span>
             </div>
             <!-- Nav -->
-            <ul class="calcite-nav nav navbar-nav">                    
+            <ul class="calcite-nav nav navbar-nav">
                 <li><div class="calcite-navbar-search hidden-xs"><div id="geocode"></div></div></li>
             </ul>
         </nav><!--/.navbar -->
 
         <!-- Map Container  -->
 
-        <div class="calcite-map" >                
-            <div id="map" class="calcite-map-absolute"></div>    
+        <div class="calcite-map" >
+            <div id="map" class="calcite-map-absolute"></div>
         </div><!-- /.container -->
 
 		<div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light calcite-bgcolor-dark-purple panel-group">
-			
+
 			<div id="panelBasemaps" class="panel collapse in">
 				<div id="headingBasemaps" class="panel-heading" role="tab">
 					<div class="panel-title">
@@ -352,38 +352,45 @@
             <div id="panelInfo" class="panel collapse">
                 <div id="headingInfo" class="panel-heading" role="tab">
                     <div class="panel-title">
-                        <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseInfo" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="panel-label">Info</span></a> 
+                        <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseInfo" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="panel-label">Info</span></a>
                     </div>
                 </div>
                 <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
-                    <div class="panel-body">            
-                        <p>The main styles used in this app are:</p>
-                        Body
-                        <li>calcite-nav-bottom</li>
-                        <li>calcite-layout-large-title</li>
-                        <br>
-                        Nav
-                        <li>calcite-bgcolor-dark-green</li>
-                        <li>calcite-text-light</li>
-                        <br>
-                        Panels
-                        <li>calcite-panels-left</li>
-                        <li>calcite-bgcolor-dark-green</li>
-                        <li>calcite-bg-custom</li>
+                    <div class="panel-body">
+                        <p>Welcome to the Copernicus Emergency Service!</p>
+
+                        <p>The WebApp is a managing tool for flood relief workers which was implemented as part of the Copernicus StudyProject at the Institute for Geoinformatics at the University of Münster. The purpose of the masters study project was getting familiar with the concepts as well as the technologies which are important for Copernicus.</p>
+
+                        <p>The main challenges of the project were:</p>
+                        <ul>
+                        <li>processing large amounts of data using Sentinel 1 images and in-situ data from PEGELONLINE  and OpenWeatherMap</li>
+                        <li>Using of cloud services, in this case Amazon Web Service</li>
+                        <li> Developing a web application, which was created in particular as a big screen application for flood relief managers using Esri-Leaflet</li>
+                        </ul>
+
+                        <p>The project was carried out for the region North Rhine-Westphalia, however it creates a framework which can be easily applied to other regions as well.</p>
+
+                        <p>The WebApp allows the user to explore the most recent processed Sentinel 1 imagery, the current water level of gauging stations and data from weather stations as well as the current precipitation layer.
+                          Furthermore the user has access to past data, which can be explored by using the timeslider.
+                          In order to interact with the WebApp the user can place markers of workers and add information about them for keeping track of the working areas during a flood event. The same can be done for inaccessible roads and placed markers make it easier to avoid routes which are not passable. </p>
+
+                        <p>The code of the project can be accessed via github https://github.com/SarahLechler/copernicusGroupC </p>
+
+                        <p> Institute for Geoinformatics <br> Heisenbergstraße 2 </br> 48149 Münster </p>
                     </div>
                 </div>
             </div>
 
             <!-- Search Panel -->
-            <div id="panelSearch" class="panel collapse hidden-sm hidden-md hidden-lg"> 
+            <div id="panelSearch" class="panel collapse hidden-sm hidden-md hidden-lg">
                 <div id="headingSearch" class="panel-heading" role="tab">
                     <div class="panel-title">
-                        <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseSearch"  aria-expanded="false" aria-controls="collapseSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span class="panel-label">Search</span></a> 
-                        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSearch"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>        
+                        <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseSearch"  aria-expanded="false" aria-controls="collapseSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span class="panel-label">Search</span></a>
+                        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSearch"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
                     </div>
                 </div>
                 <div id="collapseSearch" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSearch">
-                    <div class="panel-body calcite-body-expander">    
+                    <div class="panel-body calcite-body-expander">
                         <div id="geocodeMobile"></div>
                     </div>
                 </div>
@@ -394,8 +401,8 @@
             <div id="panelBasemaps" class="panel collapse">
                 <div id="headingBasemaps" class="panel-heading" role="tab">
                     <div class="panel-title">
-                        <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps" aria-expanded="false"   aria-controls="collapseBasemaps"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Basemaps</span></a> 
-                        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
+                        <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps" aria-expanded="false"   aria-controls="collapseBasemaps"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Basemaps</span></a>
+                        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
                     </div>
                 </div>
                 <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemaps">
@@ -484,19 +491,19 @@
 					var mapheight = $(window).height() - 110;
 					$("#map").css("height", mapheight);
         </script>
-		
+
 		<script>
-	
+
 		function form_worker(){
-		    
+
 		    document.getElementById('road_worker').innerHTML = '' ;
 			$("<div id = 'form'><form>Entered_By:<br><input id = 'author' type='text' ><br>Number of Workers:<br><input id = 'number' type='text' ><br>Description:<br><input id = 'worker_desc' type='text'></form><br><button class = 'btn' id = 'submit' onclick = 'addFeature_worker()'>submit</button></div>").appendTo('#road_worker');
-			
+
 		}
 		function form_road(){
 			document.getElementById('road_worker').innerHTML = '' ;
 			$("<div id = 'form'><form>Entered_By:<br><input id = 'author' type='text' ><br>Description:<br><input id = 'road_desc' type='text'></form><br><button class = 'btn' id = 'submit' onclick = 'addFeature_road()'>submit</button></div>").appendTo('#road_worker');
-			
+
 		}
 		</script>
 
