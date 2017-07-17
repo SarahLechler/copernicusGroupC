@@ -1,3 +1,6 @@
+//https://www.pegelonline.wsv.de/webservices/gis/aktuell/wfs?service=wfs&version=1.1.0&request=GetFeature&typeName=gk:waterlevels&outputFormat=json&BBOX=50.31,5.77,52.62,9.46
+
+
 var URL = "http://pegelonline.wsv.de/webservices/rest-api/v2/stations.json?latitude=51.42&longitude=8.01&radius=175&includeTimeseries=true&includeCurrentMeasurement=true";
 $.ajax({
     url: URL,
