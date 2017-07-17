@@ -21,7 +21,7 @@ function updateGaugingStations(val) {
         var obj = allPegelData[key];
         if (!obj.marker)
             continue;
-        if ((obj.min != undefined) && (obj.max != undefined) && (obj[val] != undefined)) {
+        if ((obj.min !== undefined) && (obj.max !== undefined) && (obj[val] !== undefined)) {
             obj.marker.setStyle(
                     {
                         color: '#0000FF',
@@ -50,3 +50,4 @@ function updateGaugingStations(val) {
         }
     }
     // End <-- Gauging stations -->
+}

@@ -456,7 +456,7 @@
 
         <div style="position: absolute; bottom: 0; left: 0; width: 100%;">
             <div id="slider" style="width: 100%;">
-                <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' onSlide="test125()"  ondrag="test124()" onchange = "selectedTime()"  onended="selectedTimeEnd()" /></div>
+                <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' onchange = "selectedTime()"  oninput="selectingTime()"/></div>
             <div id="steps" class="steps" style="width: 100%; margin-left: 8px;">
             </div>
         </div>
