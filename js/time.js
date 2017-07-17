@@ -50,3 +50,4 @@ function updateGaugingStations(val) {
         }
     }
     // End <-- Gauging stations -->
+}
