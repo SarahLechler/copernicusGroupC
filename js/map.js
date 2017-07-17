@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -98,11 +99,24 @@ L.easyPrint({
 //adding Feature layer for Workers
 
  //add imageLayer --> MosaikDataSet/Sattelite data
-//L.esri.imageMapLayer({
-//    url: 'https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer',
-//    attribution: 'United States Geological Survey (USGS), National Aeronautics and Space Administration (NASA)'
-//}).addTo(map);
-
+var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
+    url: 'https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer',
+    attribution: 'Sentinel1 Data after water detection process',
+    from: Date.now(),
+    to: Date.now()
+});
+var satellite = false;
+function getSatelliteImagee(){
+    satellite = !satellite;
+    console.log("precipitation activate!");
+    if (layer)
+        map.removeLayer(layer);
+    if (processedDataLayer)
+        map.removeLayer(processedDataLayer);
+    map.addLayer(layer);
+    if (satellite)
+        map.addLayer(processedDataLayer);
+}
 
 var workers = L.esri.featureLayer({
     url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0'
