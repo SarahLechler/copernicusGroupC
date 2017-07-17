@@ -10,28 +10,24 @@
 // ============
 
 var map = L.map('map', {zoomControl: false, zoomAnimation: false,
-    //minZoom: 7, maxBounds:[[50.31, 5.77], [52.62, 9.46]]
+    minZoom: 7, maxBounds:[[50, 5.77], [52.62, 9.46]]
 }).setView([51.422080, 8.022025], 8),
         layer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map),
         // layerLabels = L.esri.basemapLayer('xxxLabels').addTo(map);
         layerLabels = null,
         worldTransportation = L.esri.basemapLayer('ImageryTransportation'),
-        precip_layer = L.tileLayer("http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=f76f082faa2e7e033b8eced98e9132ae");
+        precip_layer = L.tileLayer("http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=f76f082faa2e7e033b8eced98e9132ae"
+);
 
 
-console.log("#1");
-if (map.hasLayer(precip_layer)) {
-    console.log("#2");
-    map.remove(precip_layer);
-    console.log("#3");
-    map.addLayer(precip_layer);
-} else {
-    console.log("#4");
-    map.addLayer(precip_layer);
-    console.log("#5");
-}
+//if (map.hasLayer(precip_layer)) {
+//    map.remove(precip_layer);
+//    map.addLayer(precip_layer);
+//} else {
+//    map.addLayer(precip_layer);
+//}
 
-var show_precip = true;
+var show_precip = false;
 
 function getPrecipitation() {
     show_precip = !show_precip;
@@ -97,22 +93,19 @@ L.easyPrint({
     position: 'topright'
 }).addTo(map);
 
-
-
-
-
- //add imageLayer --> MosaikDataSet/Sattelite data 
-var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
-    url: 'https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer', ////https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer
-    attribution: 'WMS-Service for Copernicus Satellite Data with detected waterbodies',
-    from: Date.now()-259200,
-    to: Date.now()+259200
-            
-}).addTo(map);
+//adding Feature layer for Workers
 
 //adding Feature layer for Workers
+
+ //add imageLayer --> MosaikDataSet/Sattelite data
+//L.esri.imageMapLayer({
+//    url: 'https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer',
+//    attribution: 'United States Geological Survey (USGS), National Aeronautics and Space Administration (NASA)'
+//}).addTo(map);
+
+
 var workers = L.esri.featureLayer({
-    url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0', 
+    url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0'
 }).addTo(map);
 
 workers.bindPopup(function (layer) {
@@ -127,3 +120,4 @@ var inaccessibleRoads = L.esri.featureLayer({
 inaccessibleRoads.bindPopup(function (layer) {
     return L.Util.template('<p>Name: {Name}<br>Description: {Descriptoon_Task}</p>', layer.feature.properties);
 });
+
