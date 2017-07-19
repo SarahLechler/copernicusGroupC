@@ -7,29 +7,29 @@
  */
 
 
-// ============
-// Esri-Leaflet 
-// ============
-
 var map = L.map('map', {zoomControl: false, zoomAnimation: false,
-    minZoom: 7, maxBounds:[[50, 5.77], [52.62, 9.46]]
+    minZoom: 7, maxBounds: [[50, 5.77], [53.00, 9.46]]
 }).setView([51.422080, 8.022025], 8),
         layer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map),
         // layerLabels = L.esri.basemapLayer('xxxLabels').addTo(map);
         layerLabels = null,
         worldTransportation = L.esri.basemapLayer('ImageryTransportation'),
-        precip_layer = L.tileLayer("http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=f76f082faa2e7e033b8eced98e9132ae"
-);
+        precip_layer = L.tileLayer("http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=f76f082faa2e7e033b8eced98e9132ae");
 
 
-//if (map.hasLayer(precip_layer)) {
-//    map.remove(precip_layer);
-//    map.addLayer(precip_layer);
-//} else {
-//    map.addLayer(precip_layer);
-//}
+console.log("#1");
+if (map.hasLayer(precip_layer)) {
+    console.log("#2");
+    map.remove(precip_layer);
+    console.log("#3");
+    map.addLayer(precip_layer);
+} else {
+    console.log("#4");
+    map.addLayer(precip_layer);
+    console.log("#5");
+}
 
-var show_precip = false;
+var show_precip = true;
 
 function getPrecipitation() {
     show_precip = !show_precip;
@@ -41,6 +41,12 @@ function getPrecipitation() {
     map.addLayer(layer);
     if (show_precip)
         map.addLayer(precip_layer);
+    var precip_button = document.getElementById('precipitation_icon');
+    if (show_precip) {
+        precip_button.className = 'precip_pressed';
+    } else {
+        precip_button.className = 'precip_unpressed';
+    }
 }
 ;
 
@@ -94,12 +100,11 @@ L.easyPrint({
     title: 'Click to print the map',
     position: 'topright'
 }).addTo(map);
-
 //adding Feature layer for Workers
 
 //adding Feature layer for Workers
 
- //add imageLayer --> MosaikDataSet/Sattelite data
+//add imageLayer --> MosaikDataSet/Sattelite data
 var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
     url: 'https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer',
     attribution: 'Sentinel1 Data after water detection process',
@@ -107,7 +112,7 @@ var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
     to: Date.now()
 });
 var satellite = false;
-function getSatelliteImagee(){
+function getSatelliteImagee() {
     satellite = !satellite;
     console.log("precipitation activate!");
     if (layer)
@@ -117,6 +122,12 @@ function getSatelliteImagee(){
     map.addLayer(layer);
     if (satellite)
         map.addLayer(processedDataLayer);
+    
+        if (satellite) {
+        satellite_button.className = 'satellite_pressed';
+    } else {
+        satellite_button.className = 'satellite_unpressed';
+    }
 }
 
 var workers = L.esri.featureLayer({
