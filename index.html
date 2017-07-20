@@ -31,7 +31,6 @@
         <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.3"></script>
         <script src="https://unpkg.com/esri-leaflet-renderers@2.0.6"></script>
 
-
         <script src="dist/leaflet.iconlabel.js"></script>
 
         <!-- Load Draw Plugins -->
@@ -238,7 +237,6 @@
                 border-radius: 4px;
             }
 
-
             .modal {
                 display: none; /* Hidden by default */
                 padding-top: 100px; /* Location of the box */
@@ -441,6 +439,12 @@
             </div>
 
         </div>
+        <!-- satellite button-->
+        <div class='leaflet-control-container'>
+    <div class="leaflet-top leaflet-right" style="top:225px;">
+        <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="satellite_button" title="Click to display the satellite image" src= 'images/satellite.png' height='35' width='30' onclick='getSatelliteImagee()'></img></div>
+    </div>
+</div>
         <div class='leaflet-control-container'>
             <div class="leaflet-top leaflet-right" style="top:225px;">
                 <div class=" leaflet-bar leaflet-control" ><img  class=" leaflet-bar-part" id="satellite_button" title="Click to display the satellite image" src= 'images/satellite.png' height='35' width='30' onclick='getSatelliteImagee()'></img></div>
