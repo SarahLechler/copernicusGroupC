@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 
 // ============
 // Esri-Leaflet
 // ============
-
 var map = L.map('map', {zoomControl: false, zoomAnimation: false,
     minZoom: 7, maxBounds: [[50, 5.77], [53.00, 9.46]]
 }).setView([51.422080, 8.022025], 8),
@@ -90,13 +84,13 @@ L.easyPrint({
     position: 'topright'
 }).addTo(map);
 
+
 //add imageLayer --> MosaikDataSet/Sattelite data
-var x = 2;
-var URL = "https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer/"; //+ x;
+var URL = "https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer/"; 
 
 console.log(URL);
 var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
-    url: URL, //'http://www.copernicushub.eu/arcgis/services/TestMosaicDataset_TimeEnabled/ImageServer/WMSServer?Request=GETCapabilities',
+    url: URL, 
     attribution: 'Sentinel1 Data after water detection process',
     noData: 'LowPS',
     noDataInterpretation: null
@@ -140,6 +134,8 @@ workers.bindPopup(function (layer) {
 var inaccessibleRoads = L.esri.featureLayer({
     url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/inaccessibleRoads01/FeatureServer/0'
 }).addTo(map);
+=======
+//adding Feature layer for Workers
 
 inaccessibleRoads.bindPopup(function (layer) {
     return L.Util.template('<p>Name: {Name}<br>Description: {Descriptoon_Task}</p>', layer.feature.properties);
