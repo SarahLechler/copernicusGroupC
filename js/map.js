@@ -96,7 +96,7 @@ var URL = "https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/Imag
 
 console.log(URL);
 var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
-    url: 'http://www.copernicushub.eu/arcgis/services/TestMosaicDataset_TimeEnabled/ImageServer/WMSServer?Request=GETCapabilities',
+    url: URL, //'http://www.copernicushub.eu/arcgis/services/TestMosaicDataset_TimeEnabled/ImageServer/WMSServer?Request=GETCapabilities',
     attribution: 'Sentinel1 Data after water detection process',
     noData: 'LowPS',
     noDataInterpretation: null
