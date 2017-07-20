@@ -134,7 +134,6 @@ workers.bindPopup(function (layer) {
 var inaccessibleRoads = L.esri.featureLayer({
     url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/inaccessibleRoads01/FeatureServer/0'
 }).addTo(map);
-=======
 //adding Feature layer for Workers
 
 inaccessibleRoads.bindPopup(function (layer) {
