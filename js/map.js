@@ -1,3 +1,5 @@
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,12 +7,8 @@
  */
 
 
-// ============
-// Esri-Leaflet 
-// ============
-
 var map = L.map('map', {zoomControl: false, zoomAnimation: false,
-    minZoom: 7, maxBounds:[[50, 5.77], [53.00, 9.46]]
+    minZoom: 7, maxBounds: [[50, 5.77], [53.00, 9.46]]
 }).setView([51.422080, 8.022025], 8),
         layer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map),
         // layerLabels = L.esri.basemapLayer('xxxLabels').addTo(map);
@@ -31,7 +29,7 @@ function getPrecipitation() {
     if (show_precip)
         map.addLayer(precip_layer);
     var precip_button = document.getElementById('precipitation_icon');
-    if (show_precip){
+    if (show_precip) {
         precip_button.className = 'precip_pressed';
     } else {
         precip_button.className = 'precip_unpressed';
@@ -89,13 +87,51 @@ L.easyPrint({
     title: 'Click to print the map',
     position: 'topright'
 }).addTo(map);
-
 //adding Feature layer for Workers
 
 //adding Feature layer for Workers
 
- //add imageLayer --> MosaikDataSet/Sattelite data
-//L.esri.imageMapLayer({
-//    url: 'https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer',
-//    attribution: 'United States Geological Survey (USGS), National Aeronautics and Space Administration (NASA)'
-//}).addTo(map);
+//add imageLayer --> MosaikDataSet/Sattelite data
+var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
+    url: 'https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer',
+    attribution: 'Sentinel1 Data after water detection process',
+    from: Date.now(),
+    to: Date.now()
+});
+var satellite = false;
+function getSatelliteImagee() {
+    satellite = !satellite;
+    console.log("precipitation activate!");
+    if (layer)
+        map.removeLayer(layer);
+    if (processedDataLayer)
+        map.removeLayer(processedDataLayer);
+    map.addLayer(layer);
+    if (satellite)
+        map.addLayer(processedDataLayer);
+    
+        if (satellite) {
+        satellite_button.className = 'satellite_pressed';
+    } else {
+        satellite_button.className = 'satellite_unpressed';
+    }
+}
+
+var workers = L.esri.featureLayer({
+    url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0'
+}).addTo(map);
+
+workers.bindPopup(function (layer) {
+    return L.Util.template('<p>Name: {Name}<br>Description: {Descriptoon_Task}</p>', layer.feature.properties);
+});
+
+//adding Feature layer for Inaccessible Roads
+var inaccessibleRoads = L.esri.featureLayer({
+    url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/inaccessibleRoads01/FeatureServer/0'
+}).addTo(map);
+
+inaccessibleRoads.bindPopup(function (layer) {
+    return L.Util.template('<p>Name: {Name}<br>Description: {Descriptoon_Task}</p>', layer.feature.properties);
+});
+
+

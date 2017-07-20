@@ -2,9 +2,33 @@ function selectedTime() {
     var val = document.getElementById('range').value;
     console.log(unique_date[val]);
     console.log(val);
+   return unique_date[val];
+};
 
-    return unique_date[val];
+var timeslider = document.getElementById('range');
+timeslider.addEventListener ('change', changeSatelliteImage());
+
+function changeSatelliteImage(e) {
+    var changedDate = new Date (unique_date[timeslider.value]);
+    console.log(changedDate- 259200); //DateAdd(startDate, 7, 'days'); to set timerange on EsriFunctions
+    debugger;
+    this.processedDataLayer.setTimeRange(changedDate - 259200, changedDate + 259200); //enter times here ("on drag");
+    console.log("redrawingLayer");
+    e.preventDefault();
 }
+
+
+
+function selectedTimeEnd() {
+    console.log("onended");
+}
+
+
+
+function test125() {
+    console.log("onSlide");
+}
+
 
 function selectingTime() {
     var val = document.getElementById('range').value;
@@ -49,5 +73,24 @@ function updateGaugingStations(val) {
             );
         }
     }
-    // End <-- Gauging stations -->
+
+    return unique_date[val];
 }
+
+
+function selectedTimeEnd() {
+    console.log("onended");
+}
+
+function test124(){
+    console.log("ondrag");
+}
+function test125(){
+    console.log("onSlide");
+}
+
+
+    // End <-- Gauging stations -->
+
+
+    // End <-- Gauging stations -->
