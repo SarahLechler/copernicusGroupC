@@ -125,6 +125,18 @@ function addWater(result) {
 
 // save all pegel data:
 var pegelData = [];
+var chartExists = false;
+
+
+function checkChartStatus(){
+	if (chartExists === false){
+	}
+	else{
+		var currentPopup = document.getElementsByClassName("leaflet-popup-content");
+		getChart(currentPopup["0"].children["0"].innerHTML);
+		}
+	}
+
 
 /**
  * gets the hex color components for R and G of RGB.
@@ -424,6 +436,10 @@ map.on('popupopen', function (e) {
     getChart(e.target._popup._source.options.className);
 });
 
+map.on('popupclose', function(){
+	chartExists = false;
+});
+
 
 function getChart(station_name) {
     var datapoints = [];
@@ -466,7 +482,7 @@ function getChart(station_name) {
             console.log("error obtaining chart data");
         }
     });
-
+	chartExists = true;
 }
 
 
