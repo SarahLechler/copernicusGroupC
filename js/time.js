@@ -16,7 +16,7 @@ function selectingTime() {
 function changeSatelliteImage(val) {
     var changedDate = new Date (unique_date[val]);
     console.log(changedDate- 259200); //DateAdd(startDate, 7, 'days'); to set timerange on EsriFunctions
-    debugger;
+    //debugger;
     this.processedDataLayer.setTimeRange(changedDate - 259200, changedDate + 259200); //enter times here ("on drag");
     console.log("redrawingLayer");
 }
