@@ -6,6 +6,19 @@ var precipitationBox = "none";  // hide on default
 var gaugingStationBox = "";     // show on default
 
 /**
+ * checks if it's dark outside.
+ * @returns {true if 5AM > daytime  or daytime >= 10PM}
+ */
+isNight = function () {
+    var d = new Date(); // current time
+    var hours = d.getHours();
+
+    return (hours < 5)
+            || (hours >= 10);
+};
+
+
+/**
  * Displays a legend
  * @returns {undefined}
  */
@@ -21,37 +34,28 @@ loadLegend = function () {
         valuesTable += '<b>Satellite:</b><br>';
         valuesTable += '<span><img class="legendIcon" src="images/lgd_satellite.png"></img>';
         valuesTable += 'Waterbodies from the processed satellite images.</span>';
-        valuesTable += '</span><br></div>';
 
+        valuesTable += '</span><br></div>';
         valuesTable += '<div id="weatherBox" style="display: ' + weatherBox + '"><span>';
         valuesTable += '<b>Weather:</b><br>';
-        valuesTable += '<table><tr><td><img class="legendIcon" src="images/01d.png"></img> Clear sky.</td>';
-        valuesTable += '    <td><img class="legendIcon" src="images/02d.png">Few clouds.</td>';
+        if (isNight()) {
+            valuesTable += '<table><tr><td><img class="legendIcon" src="images/01dn.png"></img> Clear sky.</td>';
+            valuesTable += '    <td><img class="legendIcon" src="images/02dn.png">Few clouds.</td>';
+        } else {
+            valuesTable += '<table><tr><td><img class="legendIcon" src="images/01d.png"></img> Clear sky.</td>';
+            valuesTable += '    <td><img class="legendIcon" src="images/02d.png">Few clouds.</td>';
+        }
         valuesTable += '    <td><img class="legendIcon" src="images/03d.png">Scattered clouds.</td></tr>';
-//        valuesTable += '<span id="weatherSpan"><img class="legendIcon" src="images/01d.png"></img>';
-//        valuesTable += 'Clear sky.</span>';
-//        valuesTable += '<span id="weatherSpan"><img class="legendIcon" src="images/02d.png"></img>';
-//        valuesTable += 'Few clouds.</span>';
-//        valuesTable += '<span id="weatherSpan"><img class="legendIcon" src="images/03d.png"></img>';
-//        valuesTable += 'Scattered clouds.</span><br>';
-        valuesTable += '<tr><td><img class="legendIcon" src="images/04d.png"></img> Broken clouds.</td>';
         valuesTable += '    <td><img class="legendIcon" src="images/05d.png">Shower rain.</td>';
-        valuesTable += '    <td><img class="legendIcon" src="images/06d.png">Rain.</td></tr>';
-//        valuesTable += '<span><img class="legendIcon" src="images/04d.png"></img>';
-//        valuesTable += 'Broken clouds.</span>';
-//        valuesTable += '<span><img class="legendIcon" src="images/05d.png"></img>';
-//        valuesTable += 'Shower rain.</span>';
-//        valuesTable += '<span><img class="legendIcon" src="images/06d.png"></img>';
-//        valuesTable += 'Rain.</span><br>';
+        if (isNight()) {
+            valuesTable += '    <td><img class="legendIcon" src="images/06dn.png">Rain.</td></tr>';
+        } else {
+            valuesTable += '    <td><img class="legendIcon" src="images/06d.png">Rain.</td></tr>';
+
+        }
         valuesTable += '<tr><td><img class="legendIcon" src="images/07d.png"></img>Thunderstorm.</td>';
         valuesTable += '    <td><img class="legendIcon" src="images/08d.png">Snow.</td>';
         valuesTable += '    <td><img class="legendIcon" src="images/09d.png">Mist.</td></tr></table>';
-//        valuesTable += '<span><img class="legendIcon" src="images/07d.png"></img>';
-//        valuesTable += 'Thunderstorm.</span>';
-//        valuesTable += '<span><img class="legendIcon" src="images/08d.png"></img>';
-//        valuesTable += 'Snow.</span>';
-//        valuesTable += '<span><img class="legendIcon" src="images/09d.png"></img>';
-//        valuesTable += 'Mist.</span>';
         valuesTable += '</span><br></div>';
 
         valuesTable += '<div id="precipitationBox" style="display: ' + precipitationBox + '"><span>';
