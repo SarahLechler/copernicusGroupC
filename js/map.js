@@ -24,7 +24,7 @@ function getPrecipitation() {
     map.addLayer(layer);
     if (show_precip)
         map.addLayer(precip_layer);
-    var precip_button = document.getElementById('precipitation_icon');
+    var precip_button = document.getElementById('precip_button');
     if (show_precip) {
         precip_button.className = 'precip_pressed';
     } else {
@@ -113,7 +113,8 @@ function getSatelliteImagee() {
     map.addLayer(layer);
     if (satellite)
         map.addLayer(processedDataLayer);
-
+    
+    var satellite_button = document.getElementById('satellite_button');
     if (satellite) {
         satellite_button.className = 'satellite_pressed';
     } else {
