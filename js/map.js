@@ -96,14 +96,14 @@ var URL = "https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/Imag
 
 console.log(URL);
 var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
-    url: URL, //'http://www.copernicushub.eu/arcgis/services/TestMosaicDataset_TimeEnabled/ImageServer/WMSServer?Request=GETCapabilities',
+    url: 'https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer', //URL, //'http://www.copernicushub.eu/arcgis/services/TestMosaicDataset_TimeEnabled/ImageServer/WMSServer?Request=GETCapabilities',
     attribution: 'Sentinel1 Data after water detection process',
     noData: 'LowPS',
     noDataInterpretation: null
 });
 
-var processedDataLayerTest = L.tileLayer.wms("http://www.copernicushub.eu/arcgis/services/TestMosaicDataset_TimeEnabled/ImageServer/WMSServer?", {
-    format: 'image/png',
+var processedDataLayerTest = L.tileLayer.wms("http://www.copernicushub.eu/arcgis/services/TESTTIME/ImageServer/WMSServer?", {
+    format: 'tiff',
     transparent: true,
     attribution: "Weather data © 2012 IEM Nexrad"
 });
