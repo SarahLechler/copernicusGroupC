@@ -6,14 +6,13 @@ var pegelData = [];
 var chartExists = false;
 
 
-function checkChartStatus(){
-	if (chartExists === false){
-	}
-	else{
-		var currentPopup = document.getElementsByClassName("leaflet-popup-content");
-		getChart(currentPopup["0"].children["0"].innerHTML);
-		}
-	}
+function checkChartStatus() {
+    if (chartExists === false) {
+    } else {
+        var currentPopup = document.getElementsByClassName("leaflet-popup-content");
+        getChart(currentPopup["0"].children["0"].innerHTML);
+    }
+};
 
 
 /**
@@ -35,7 +34,7 @@ function getColor(min, max, current) {
     if (hex < "00")
         return "0000";
     return val + "" + val;
-}
+};
 
 function allDaysExist(stationname) {
     for (var i = 0; i < 30; i++) {
@@ -43,8 +42,7 @@ function allDaysExist(stationname) {
             return false;
     }
     return true;
-}
-;
+};
 
 function getDayData(stationname, plusDay, lat, lon) {
     var now = new Date();
@@ -314,8 +312,8 @@ map.on('popupopen', function (e) {
     getChart(e.target._popup._source.options.className);
 });
 
-map.on('popupclose', function(){
-	chartExists = false;
+map.on('popupclose', function () {
+    chartExists = false;
 });
 
 
@@ -360,7 +358,7 @@ function getChart(station_name) {
             console.log("error obtaining chart data");
         }
     });
-	chartExists = true;
+    chartExists = true;
 }
 
 

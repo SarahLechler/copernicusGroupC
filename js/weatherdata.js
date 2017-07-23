@@ -9,7 +9,7 @@
 var temp = 0;
 var markers = new L.FeatureGroup();
 function getWeather() {
-    var weather_button = document.getElementById('weather_icon');
+    var weather_button = document.getElementById('weather_button');
     if (temp === 0) {
         var URL = "http://api.openweathermap.org/data/2.5/box/city?bbox=5.77,50.31,9.46,52.62,9&APPID=3e4e9e28f3ee43f6058e966b7f2be8c6";
         $.ajax({
@@ -26,9 +26,7 @@ function getWeather() {
             }
         });
 
-
         function addToMap(data) {
-
             var count = Object.keys(data.list).length;
 
             for (var i in data.list) {
