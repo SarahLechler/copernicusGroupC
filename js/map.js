@@ -12,24 +12,24 @@ var map = L.map('map', {zoomControl: false, zoomAnimation: false,
         worldTransportation = L.esri.basemapLayer('ImageryTransportation'),
         precip_layer = L.tileLayer("http://{s}.tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=f76f082faa2e7e033b8eced98e9132ae");
 
-var show_precip = false;
+var precip_pressed = false;
 
 function getPrecipitation() {
-    show_precip = !show_precip;
-    console.log("precipitation activate!");
+    precip_pressed = !precip_pressed;
     if (layer)
         map.removeLayer(layer);
     if (precip_layer)
         map.removeLayer(precip_layer);
     map.addLayer(layer);
-    if (show_precip)
+    if (precip_pressed)
         map.addLayer(precip_layer);
     var precip_button = document.getElementById('precip_button');
-    if (show_precip) {
+    if (precip_pressed) {
         precip_button.className = 'precip_pressed';
     } else {
         precip_button.className = 'precip_unpressed';
     }
+    updateLegend();
 }
 ;
 
@@ -61,7 +61,7 @@ function setBasemap(basemap) {
         // remove world transportation if Imagery basemap is not selected
         map.removeLayer(worldTransportation);
     }
-    if (show_precip) {
+    if (precip_pressed) {
         map.addLayer(precip_layer);
     }
 }
@@ -102,24 +102,24 @@ var processedDataLayerTest = L.tileLayer.wms("http://www.copernicushub.eu/arcgis
     attribution: "Weather data © 2012 IEM Nexrad"
 });
 
-var satellite = false;
+var satellite_pressed = false;
 function getSatelliteImagee() {
-    satellite = !satellite;
-    console.log("satellite activate!");
+    satellite_pressed = !satellite_pressed;
     if (layer)
         map.removeLayer(layer);
     if (processedDataLayer)
         map.removeLayer(processedDataLayer);
     map.addLayer(layer);
-    if (satellite)
+    if (satellite_pressed)
         map.addLayer(processedDataLayer);
     
     var satellite_button = document.getElementById('satellite_button');
-    if (satellite) {
+    if (satellite_pressed) {
         satellite_button.className = 'satellite_pressed';
     } else {
         satellite_button.className = 'satellite_unpressed';
     }
+    updateLegend();
 }
 ;
 
