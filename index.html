@@ -236,6 +236,14 @@
                 background-color: #ffffff !important;
                 border-radius: 4px;
             }
+            .water_pressed{
+                background-color: steelblue !important;
+                border-radius: 4px;
+            }
+            .water_unpressed{
+                background-color: #ffffff !important;
+                border-radius: 4px;
+            }
 
             .modal {
                 display: none; /* Hidden by default */
@@ -288,6 +296,47 @@
                 padding: 10px 20px 10px 20px;
                 text-decoration: none;
             }
+
+            /** map legend */
+
+            .legend-description {
+                padding: 1.6vw 0.8vw 1.6vw 1.6vw;
+                background-color: #FFFFFF;
+                max-width: 40.5em;
+                max-height: 50em;
+                height: auto;
+                line-height: 1.75em;
+                color: #555;
+                margin-right: 0.8vw;
+                opacity: 0.9;
+                box-shadow: 0 0 1.5vw rgba(0,0,0,0.2);
+                border-radius: 0.5em;
+                margin-bottom: 22px !important;
+            }
+            .layer-description-title {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .layer-description-container {
+                padding-top: 10px;
+                max-height: 14.5em;
+                overflow-y: auto;
+            }
+            .leaflet-bottom .leaflet-left {
+                height: auto;
+                max-height: 50em;
+            }
+            .layer-description-container {
+                max-height: 50em;
+                height: auto;
+            }
+            .legendIcon  {
+                height: 36px; 
+                width: 36px; 
+                margin-left: 8px;
+            }
+            .table { table-layout: fixed; }
 
 
         </style>
@@ -457,6 +506,12 @@
                 <div class=" leaflet-bar leaflet-control" ><img  class="precip_unpressed leaflet-bar-part" id="precip_button" title="Click to display the precipitation" src= 'images/btn_precipitation.png' height='35' width='30' onclick='getPrecipitation()'></img></div>
             </div>
         </div>
+        <!-- gauging station button-->
+        <div class='leaflet-control-container'>
+            <div class="leaflet-top leaflet-right" style="top:375px;">
+                <div class=" leaflet-bar leaflet-control" ><img  class="water_pressed leaflet-bar-part" id="water_button" title="Click to display the water level on gauging stations" src= 'images/btn_water.png' height='35' width='30' onclick='getWater()'></img></div>
+            </div>
+        </div>
 
         <!-- <div id = 'slider'  style=" margin-top : 570px ; z-index:1000000 ; position: relative ;">
          <form style = "float:left;display:inline ;">
@@ -510,6 +565,7 @@
         <script src="js/weatherdata.js"></script>
         <script src="js/waterlevel.js"></script>
         <script src="js/marker.js"></script>
+        <script src="js/legend.js"></script>
         <script>
 
 

@@ -5,15 +5,14 @@
 var pegelData = [];
 var chartExists = false;
 
-
 function checkChartStatus() {
     if (chartExists === false) {
     } else {
         var currentPopup = document.getElementsByClassName("leaflet-popup-content");
         getChart(currentPopup["0"].children["0"].innerHTML);
     }
-};
-
+}
+;
 
 /**
  * gets the hex color components for R and G of RGB.
@@ -34,7 +33,8 @@ function getColor(min, max, current) {
     if (hex < "00")
         return "0000";
     return val + "" + val;
-};
+}
+;
 
 function allDaysExist(stationname) {
     for (var i = 0; i < 30; i++) {
@@ -42,7 +42,8 @@ function allDaysExist(stationname) {
             return false;
     }
     return true;
-};
+}
+;
 
 function getDayData(stationname, plusDay, lat, lon) {
     var now = new Date();
@@ -361,6 +362,18 @@ function getChart(station_name) {
     chartExists = true;
 }
 
+var water_pressed = true;
+function getWater() {
+    water_pressed = !water_pressed;
+    var water_button = document.getElementById('water_button');
+    if (water_pressed) {
+        water_button.className = 'water_pressed';
+    } else {
+        water_button.className = 'water_unpressed';
+    }
+    updateLegend();
+}
+;
 
 
 $.ajax({
@@ -389,7 +402,7 @@ $.ajax({
             if (result[current].longitude)
                 currStationData.longitude = result[current].longitude;
             allPegelData['' + result[current].shortname] = currStationData;
-            getStationData(result[current].shortname, currStationData.latitude, currStationData.longitude);
+            //getStationData(result[current].shortname, currStationData.latitude, currStationData.longitude);
 //                    for (i in result) {
 //                        if (date_slider == (result[i].timestamp).substr(0, 10)) {
 //                            datapoints.push({label: result[i].timestamp.substr(0, 10), y: result[i].value, toolTipContent: result[i].timestamp + " : " + result[i].value});

@@ -6,11 +6,11 @@
 
 //http://api.openweathermap.org/data/2.5/forecast?q={muenster}&appid=3e4e9e28f3ee43f6058e966b7f2be8c6
 
-var temp = 0;
 var markers = new L.FeatureGroup();
+var weather_pressed = false;
 function getWeather() {
     var weather_button = document.getElementById('weather_button');
-    if (temp === 0) {
+    if (!weather_pressed) {
         var URL = "http://api.openweathermap.org/data/2.5/box/city?bbox=5.77,50.31,9.46,52.62,9&APPID=3e4e9e28f3ee43f6058e966b7f2be8c6";
         $.ajax({
             url: URL,
@@ -46,13 +46,11 @@ function getWeather() {
             map.addLayer(markers);
             weather_button.className = 'weather_pressed';
         }
-
-        temp = 1;
-        console.log(temp);
+        weather_pressed = true;
     } else {
         map.removeLayer(markers);
         weather_button.className = 'weather_unpressed';
-        temp = 0;
-        console.log(temp);
+        weather_pressed = false;
     }
+    updateLegend();
 }
