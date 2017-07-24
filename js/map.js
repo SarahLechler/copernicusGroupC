@@ -83,7 +83,8 @@ var searchControl = L.esri.Geocoding.geosearch({expanded: true, collapseAfterRes
 
 L.easyPrint({
     title: 'Click to print the map',
-    position: 'topright'
+    position: 'topright',
+    elementsToHide: "hideInPrint"
 }).addTo(map);
 
 

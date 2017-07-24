@@ -83,7 +83,6 @@
 
 
 
-
     </head>
     <body class="calcite-maps calcite-nav-top">
         <div id="mySidenav" class="sidenav" >
@@ -224,7 +223,7 @@
 
             <!-- Basemaps Panel -->
 
-            <div id="panelBasemaps" class="panel collapse">
+            <div id="panelBasemaps" class="panel collapse hideInPrint">
                 <div id="headingBasemaps" class="panel-heading" role="tab">
                     <div class="panel-title">
                         <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps" aria-expanded="false"   aria-controls="collapseBasemaps"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Basemaps</span></a>
@@ -245,25 +244,25 @@
 
         </div>
         <!-- satellite button-->
-        <div class='leaflet-control-container'>
+        <div class='leaflet-control-container hideInPrint'>
             <div class="leaflet-top leaflet-right" style="top:225px;">
                 <div class=" leaflet-bar leaflet-control" ><img  class="satellite_unpressed leaflet-bar-part" id="satellite_button" title="Click to display the satellite image" src= 'images/satellite.png' height='35' width='30' onclick='getSatelliteImagee()'></img></div>
             </div>
         </div>
         <!-- weather button-->
-        <div class='leaflet-control-container'>
+        <div class='leaflet-control-container hideInPrint'>
             <div class="leaflet-top leaflet-right" style="top:275px;">
                 <div class=" leaflet-bar leaflet-control" ><img  class="weather_unpressed leaflet-bar-part" id="weather_button" title="Click to display the weather" src= 'images/weather.png' height='35' width='30' onclick='getWeather()'></img></div>
             </div>
         </div>
         <!-- precipitation button-->
-        <div class='leaflet-control-container'>
+        <div class='leaflet-control-container hideInPrint'>
             <div class="leaflet-top leaflet-right" style="top:325px;">
                 <div class=" leaflet-bar leaflet-control" ><img  class="precip_unpressed leaflet-bar-part" id="precip_button" title="Click to display the precipitation" src= 'images/precipitation.png' height='35' width='30' onclick='getPrecipitation()'></img></div>
             </div>
         </div>
         <!-- gauging station button-->
-        <div class='leaflet-control-container'>
+        <div class='leaflet-control-container hideInPrint'>
             <div class="leaflet-top leaflet-right" style="top:375px;">
                 <div class=" leaflet-bar leaflet-control" ><img  class="water_pressed leaflet-bar-part" id="water_button" title="Click to display the water level on gauging stations" src= 'images/waterdrop_white.png' height='35' width='30' onclick='getWater()'></img></div>
             </div>
@@ -282,7 +281,7 @@
          <button type="button" id="stop">stop</button>
          </div> -->
 
-        <div style="position: absolute; bottom: 0; left: 0; width: 100%;">
+        <div class="hideInPrint" style="position: absolute; bottom: 0; left: 0; width: 100%;">
             <div id="slider" style="width: 100%;">
                 <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' oninput="selectingTime();checkChartStatus();"/></div>
             <div id="steps" class="steps" style="width: 100%; margin-left: 8px;"></div>
