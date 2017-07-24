@@ -146,7 +146,22 @@
                 background-color: #ffffff !important;
                 border-radius: 4px;
             }
-
+	    .satellite_pressed{
+               background-color: steelblue !important;
+               border-radius: 4px;
+           }
+           .satellite_unpressed{
+               background-color: #ffffff !important;
+               border-radius: 4px;
+           }
+           .water_pressed{
+               background-color: steelblue !important;
+               border-radius: 4px;
+           }
+           .water_unpressed{
+               background-color: #ffffff !important;
+               border-radius: 4px;
+           }
             .modal {
                 display: none; /* Hidden by default */
                 padding-top: 100px; /* Location of the box */
