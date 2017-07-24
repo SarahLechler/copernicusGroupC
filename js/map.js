@@ -81,7 +81,8 @@ var searchControl = L.esri.Geocoding.geosearch({expanded: true, collapseAfterRes
 
 L.easyPrint({
     title: 'Click to print the map',
-    position: 'topright'
+    position: 'topright',
+    elementsToHide: "hideInPrint"
 }).addTo(map);
 
 
@@ -116,8 +117,10 @@ function getSatelliteImagee() {
     var satellite_button = document.getElementById('satellite_button');
     if (satellite_pressed) {
         satellite_button.className = 'satellite_pressed';
+        satellite_button.src = "images/satellite_white.png";  
     } else {
         satellite_button.className = 'satellite_unpressed';
+        satellite_button.src = "images/satellite.png";  
     }
     updateLegend();
 }
