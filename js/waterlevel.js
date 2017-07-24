@@ -368,8 +368,10 @@ function getWater() {
     var water_button = document.getElementById('water_button');
     if (water_pressed) {
         water_button.className = 'water_pressed';
+        water_button.src = "images/waterdrop_white.png";
     } else {
         water_button.className = 'water_unpressed';
+        water_button.src = "images/waterdrop.png";
     }
     updateLegend();
 }
