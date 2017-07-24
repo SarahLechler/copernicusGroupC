@@ -99,12 +99,6 @@ var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
     noDataInterpretation: null
 });
 
-var processedDataLayerTest = L.tileLayer.wms("http://www.copernicushub.eu/arcgis/services/TestMosaicDataset_TimeEnabled/ImageServer/WMSServer?", {
-    format: 'image/png',
-    transparent: true,
-    attribution: "Weather data © 2012 IEM Nexrad"
-});
-
 var satellite_pressed = false;
 function getSatelliteImagee() {
     satellite_pressed = !satellite_pressed;
