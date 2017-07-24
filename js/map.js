@@ -26,8 +26,10 @@ function getPrecipitation() {
     var precip_button = document.getElementById('precip_button');
     if (precip_pressed) {
         precip_button.className = 'precip_pressed';
+        precip_button.src = "images/precipitation_white.png";
     } else {
         precip_button.className = 'precip_unpressed';
+        precip_button.src = "images/precipitation.png";
     }
     updateLegend();
 }
@@ -113,11 +115,13 @@ function getSatelliteImagee() {
     if (satellite_pressed)
         map.addLayer(processedDataLayer);
     
-    var satellite_button = document.getElementById('satellite_button');
+    var satellite_button = document.getElementById('satellite_button');    
     if (satellite_pressed) {
         satellite_button.className = 'satellite_pressed';
+        satellite_button.src = "images/satellite_white.png";
     } else {
         satellite_button.className = 'satellite_unpressed';
+        satellite_button.src = "images/satellite.png";
     }
     updateLegend();
 }
