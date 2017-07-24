@@ -5,14 +5,24 @@
 var pegelData = [];
 var chartExists = false;
 
-function checkChartStatus() {
-    if (chartExists === false) {
-    } else {
-        var currentPopup = document.getElementsByClassName("leaflet-popup-content");
-        getChart(currentPopup["0"].children["0"].innerHTML);
-    }
-}
-;
+function checkChartStatus(){
+	if (chartExists === false){
+	}
+	else{
+		if (check_sidenav == false) {
+		var currentPopup = document.getElementsByClassName("leaflet-popup-content");
+		getChart(currentPopup["0"].children["0"].innerHTML);
+		}
+		else
+		{
+		multiple_chart(station_1,0);
+		multiple_chart(station_2,1);
+		multiple_chart(station_3,2);
+		}
+		
+		}
+	}
+
 
 /**
  * gets the hex color components for R and G of RGB.
@@ -45,6 +55,8 @@ function allDaysExist(stationname) {
 }
 ;
 
+
+var gauging_stations_layer = new L.FeatureGroup();
 function getDayData(stationname, plusDay, lat, lon) {
     var now = new Date();
     var startDate = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate(), 12, 0, 0);
@@ -110,7 +122,9 @@ function getDayData(stationname, plusDay, lat, lon) {
                                             radius: 10,
                                             opacity: 1,
                                             className: stationname
-                                        }).addTo(map);
+                                        });
+									   gauging_stations_layer.addLayer(marker);
+									   marker.bindPopup("<b>" + stationname + "</b><br> Water : " + stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
                             } else {
                                 var marker = new L.CircleMarker(
                                         [lat, lon],
@@ -123,11 +137,14 @@ function getDayData(stationname, plusDay, lat, lon) {
                                             radius: 10,
                                             opacity: 1,
                                             className: stationname
-                                        }).addTo(map);
+                                        });
+									   gauging_stations_layer.addLayer(marker);
+									   marker.bindPopup("<b>" + stationname + "</b><br> Water : " + stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
                             }
-                            marker.bindPopup("<b>" + stationname + "</b><br> Water : " + stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
+                            
                             allPegelData[stationname].marker = marker;
                         }
+						map.addLayer(gauging_stations_layer);
                         return res;
                     },
                     function (error) {
@@ -308,13 +325,31 @@ function date_for_slider(unique_date) {
 
 }
 
+var station_1 ;
+var station_2 ;
+var station_3 ;
 map.on('popupopen', function (e) {
     console.log(e);
+	console.log(count_gauging_station);
     getChart(e.target._popup._source.options.className);
+	if (count_gauging_station < 3){
+		if(count_gauging_station == 0)
+			station_1 = e.target._popup._source.options.className;
+		if (count_gauging_station == 1)
+			station_2 = e.target._popup._source.options.className;
+		if (count_gauging_station == 2)
+			station_3 = e.target._popup._source.options.className;
+	multiple_chart(e.target._popup._source.options.className,count_gauging_station);
+	count_gauging_station = count_gauging_station + 1;
+	}
 });
 
-map.on('popupclose', function () {
-    chartExists = false;
+map.on('popupclose', function(){
+	if (check_sidenav == true)
+			chartExists = true;
+	else
+			chartExists = false;
+	
 });
 
 
@@ -332,7 +367,8 @@ function getChart(station_name) {
             var date_slider = selectedTime();
             for (var i in result) {
                 if (date_slider == (result[i].timestamp).substr(0, 10)) {
-                    datapoints.push({label: result[i].timestamp.substr(0, 10), y: result[i].value, toolTipContent: result[i].timestamp + " : " + result[i].value});
+					var timeLabel = result[i].timestamp.substring(11,16);
+                    datapoints.push({label: timeLabel, y: result[i].value, toolTipContent: result[i].timestamp + " : " + result[i].value});
                 }
 
             }
@@ -368,8 +404,10 @@ function getWater() {
     var water_button = document.getElementById('water_button');
     if (water_pressed) {
         water_button.className = 'water_pressed';
+        water_button.src = "images/waterdrop_white.png";
     } else {
         water_button.className = 'water_unpressed';
+        water_button.src = "images/waterdrop.png";
     }
     updateLegend();
 }
@@ -402,7 +440,7 @@ $.ajax({
             if (result[current].longitude)
                 currStationData.longitude = result[current].longitude;
             allPegelData['' + result[current].shortname] = currStationData;
-            //getStationData(result[current].shortname, currStationData.latitude, currStationData.longitude);
+            getStationData(result[current].shortname, currStationData.latitude, currStationData.longitude);
 //                    for (i in result) {
 //                        if (date_slider == (result[i].timestamp).substr(0, 10)) {
 //                            datapoints.push({label: result[i].timestamp.substr(0, 10), y: result[i].value, toolTipContent: result[i].timestamp + " : " + result[i].value});
