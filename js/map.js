@@ -106,9 +106,13 @@ function getSatelliteImagee() {
         map.removeLayer(layer);
     if (processedDataLayer)
         map.removeLayer(processedDataLayer);
+    if (precip_layer)
+        map.removeLayer(precip_layer);
     map.addLayer(layer);
     if (satellite_pressed)
         map.addLayer(processedDataLayer);
+    if (precip_pressed)
+        map.addLayer(precip_layer);
     
     var satellite_button = document.getElementById('satellite_button');    
     if (satellite_pressed) {

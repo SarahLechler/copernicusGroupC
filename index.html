@@ -75,23 +75,23 @@
 
         <!-- chart -->
         <script src="src/canvasjs.min.js"></script>
-		
-		<!--D3 -->
-		<script src="https://d3js.org/d3.v4.min.js"></script>
-		
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!--D3 -->
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="css/style.css">
 
 
 
     </head>
     <body class="calcite-maps calcite-nav-top">
         <div id="mySidenav" class="sidenav" >
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<div id = "chart_0" style='height: 170px; width: 300px;'></div>
-			<div id = "chart_1" style='height: 170px; width: 300px;'></div>
-			<div id = "chart_2" style='height: 170px; width: 300px;'></div>
-		</div>
-		
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div id = "chart_0" style='height: 170px; width: 300px;'></div>
+            <div id = "chart_1" style='height: 170px; width: 300px;'></div>
+            <div id = "chart_2" style='height: 170px; width: 300px;'></div>
+        </div>
+
         <div id="myModal" class ="modal" style = "position: absolute; left: 200px; width: 50%;">
             <!-- Modal content -->
             <div id = "modal_content" class="modal-content">
@@ -195,7 +195,7 @@
                         <p>The code of the project can be accessed via github https://github.com/SarahLechler/copernicusGroupC </p>
 
                         <p> Institute for Geoinformatics <br> Heisenbergstraße 2 </br> 48149 Münster </p>
-                        
+
                         <p> Spectial thanks to:</p>
                         <ul>
                             <li> <a href="https://www.pegelonline.wsv.de/gast/start" style="color:white;">PEGELONLIE</a> </li>
@@ -267,7 +267,7 @@
                 <div class=" leaflet-bar leaflet-control" ><img  class="water_pressed leaflet-bar-part" id="water_button" title="Click to display the water level on gauging stations" src= 'images/waterdrop_white.png' height='35' width='30' onclick='getWater()'></img></div>
             </div>
         </div>
-		 <div class='leaflet-control-container'>
+        <div class='leaflet-control-container'>
             <div class="leaflet-top leaflet-right" style="top:425px;">
                 <div class=" leaflet-bar leaflet-control" ><img  class="precip_unpressed leaflet-bar-part" id="multi_gauging_icon" title="Click to see water levels of multiple gauging station" src= 'images/multi_station.svg' height='35' width='30' onclick='openNav()'></img></div>
             </div>
@@ -281,12 +281,14 @@
          <button type="button" id="stop">stop</button>
          </div> -->
 
-        <div class="hideInPrint" style="position: absolute; bottom: 0; left: 0; width: 100%;">
-            <div id="slider" style="width: 100%;">
-                <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' oninput="selectingTime();checkChartStatus();"/></div>
-            <div id="steps" class="steps" style="width: 100%; margin-left: 8px;"></div>
+        <div style="width: 100%;">
+            <img src = "images/play.png" style = " height : 30px ; width : 30px; z-index:1000000 ; display:inline-block; position: absolute; bottom: 15px; left: 2px; cursor:pointer" id = "play" >play</img>
+            <div class="hideInPrint" style="position: absolute; bottom: 0; left: 35px; width: 90%;">
+                <div id="slider" style="width: 100%;">
+                    <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' oninput="selectingTime();checkChartStatus();"/></div>
+                <div id="steps" class="steps" style="width: 100%; margin-left: 8px;"></div>
+            </div>
         </div>
-		<img src = "images/play.png" style = " height : 30px ; width : 30px; z-index:1000000 ; margin-top:560px ;margin-left:1230px; margin-bottom:10px; display:inline-block; position: absolute; cursor:pointer" id = "play" >play</img>
 
 
 
@@ -326,7 +328,7 @@
         <script src="js/waterlevel.js"></script>
         <script src="js/marker.js"></script>
         <script src="js/legend.js"></script>
-		<script src ="js/multiple_gauging_stations.js"></script>
+        <script src ="js/multiple_gauging_stations.js"></script>
         <script>
 
 
@@ -362,31 +364,33 @@
         <script>
 
             var myTimer;
-			var play_pause = 0;
-			
-			d3.select("#play").on("click", function() {
-			if (play_pause == 0){
-			$("#play").attr("src","images/pause.png");
-			clearInterval (myTimer);
-			myTimer = setInterval (function() {
-			var b= d3.select("#range");
-			var t = (+b.property("value") + 1) % (+b.property("max") + 1);
-			if (t == 0) { t = +b.property("min"); }
-			b.property("value", t);
-			checkChartStatus();
-			selectingTime();
-			}, 1000);
-			play_pause = 1;}
-			else {
-			clearInterval(myTimer);
-			play_pause = 0;
-			$("#play").attr("src","images/play.png");
-			}
-			});
-		    
-			var check_sidenav;
-			
-			
+            var play_pause = 0;
+
+            d3.select("#play").on("click", function () {
+                if (play_pause == 0) {
+                    $("#play").attr("src", "images/pause.png");
+                    clearInterval(myTimer);
+                    myTimer = setInterval(function () {
+                        var b = d3.select("#range");
+                        var t = (+b.property("value") + 1) % (+b.property("max") + 1);
+                        if (t == 0) {
+                            t = +b.property("min");
+                        }
+                        b.property("value", t);
+                        checkChartStatus();
+                        selectingTime();
+                    }, 1000);
+                    play_pause = 1;
+                } else {
+                    clearInterval(myTimer);
+                    play_pause = 0;
+                    $("#play").attr("src", "images/play.png");
+                }
+            });
+
+            var check_sidenav;
+
+
             function form_worker() {
 
                 document.getElementById('road_worker').innerHTML = '';
@@ -398,28 +402,28 @@
                 $("<div id = 'form'><form>Entered_By:<br><input id = 'author' type='text' ><br>Description:<br><input id = 'road_desc' type='text'></form><br><button class = 'btn' id = 'submit' onclick = 'addFeature_road()'>submit</button></div>").appendTo('#road_worker');
 
             }
-			
-			var count_gauging_station = 0;
-			function openNav() {
-			    count_gauging_station = 0;
-				document.getElementById("mySidenav").style.width = "350px";
-				document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-				check_sidenav = true;
-			}
-            
-			function closeNav() {
-				document.getElementById("mySidenav").style.width = "0";
-				document.body.style.backgroundColor = "white";
-				check_sidenav = false;
-				count_gauging_station = 0;
-				document.getElementById("chart_0").innerHTML = "";
-				document.getElementById("chart_1").innerHTML = "";
-				document.getElementById("chart_2").innerHTML = "";
-				station_1 = "";
-				station_2 = "";
-				station_3 = "";
-				
-			}
+
+            var count_gauging_station = 0;
+            function openNav() {
+                count_gauging_station = 0;
+                document.getElementById("mySidenav").style.width = "350px";
+                document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+                check_sidenav = true;
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.body.style.backgroundColor = "white";
+                check_sidenav = false;
+                count_gauging_station = 0;
+                document.getElementById("chart_0").innerHTML = "";
+                document.getElementById("chart_1").innerHTML = "";
+                document.getElementById("chart_2").innerHTML = "";
+                station_1 = "";
+                station_2 = "";
+                station_3 = "";
+
+            }
         </script>
 
 

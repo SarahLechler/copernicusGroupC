@@ -292,7 +292,7 @@ window.onload = function () {
         url: URL,
         method: "GET",
         dataType: "json",
-        async: false,
+        async: true,
         success: function (result) {
             for (i in result) {
                 date.push((result[i].timestamp).split('T', 11));
@@ -440,7 +440,7 @@ $.ajax({
             if (result[current].longitude)
                 currStationData.longitude = result[current].longitude;
             allPegelData['' + result[current].shortname] = currStationData;
-            //getStationData(result[current].shortname, currStationData.latitude, currStationData.longitude);
+            getStationData(result[current].shortname, currStationData.latitude, currStationData.longitude);
 //                    for (i in result) {
 //                        if (date_slider == (result[i].timestamp).substr(0, 10)) {
 //                            datapoints.push({label: result[i].timestamp.substr(0, 10), y: result[i].value, toolTipContent: result[i].timestamp + " : " + result[i].value});
