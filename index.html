@@ -92,7 +92,7 @@
                 cursor: pointer;
                 animate: 0.2s;
                 box-shadow: 1px 1px 1px #000000;
-                background: #8A4DA9;
+                background: darkblue;
                 border-radius: 50px;
                 border: 1px solid #000000;
             }
@@ -108,7 +108,7 @@
                 margin-top: -7px;
             }
             input[type=range]:focus::-webkit-slider-runnable-track {
-                background: #8A4DA8;
+                background: darkblue;
             }
             input[type=range]::-moz-range-track {
                 width: 100%;
@@ -116,7 +116,7 @@
                 cursor: pointer;
                 animate: 0.2s;
                 box-shadow: 1px 1px 1px #000000;
-                background: #8A4DA8;
+                background: darkblue;
                 border-radius: 50px;
                 border: 1px solid #000000;
             }
@@ -139,13 +139,13 @@
                 color: transparent;
             }
             input[type=range]::-ms-fill-lower {
-                background: #8A4DA8;
+                background: darkblue;
                 border: 1px solid #000000;
                 border-radius: 100px;
                 box-shadow: 1px 1px 1px #000000;
             }
             input[type=range]::-ms-fill-upper {
-                background: #8A4DA8;
+                background: darkblue;
                 border: 1px solid #000000;
                 border-radius: 100px;
                 box-shadow: 1px 1px 1px #000000;
@@ -161,10 +161,10 @@
                 cursor: pointer;
             }
             input[type=range]:focus::-ms-fill-lower {
-                background: #8A4DA8;
+                background: darkblue;
             }
             input[type=range]:focus::-ms-fill-upper {
-                background: #8A4DA8;
+                background: darkblue;
             }
             html, body {
                 margin: 0;
@@ -352,7 +352,7 @@
         </div>
         <!-- Navbar -->
 
-        <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark calcite-bgcolor-dark-purple">
+        <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark calcite-bgcolor-dark-blue">
             <!-- Menu -->
             <div class="dropdown calcite-dropdown calcite-bg-custom calcite-text-light" role="presentation">
                 <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
@@ -364,7 +364,7 @@
                         <span></span>
                     </div>
                 </a>
-                <ul class="dropdown-menu calcite-bgcolor-dark-purple">
+                <ul class="dropdown-menu calcite-bgcolor-dark-blue">
                     <li><a class="hidden-md hidden-lg" href="#panelInfo" aria-controls="panelInfo" role="tab" data-toggle="tab"> Info</a></li>
                     <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
                     <li><a class="visible-xs" role="button" data-target="#panelSearch" aria-haspopup="true"><span class="glyphicon glyphicon-search"></span> Search</a></li>
@@ -389,7 +389,7 @@
             <div id="map" class="calcite-map-absolute"></div>
         </div><!-- /.container -->
 
-        <div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light calcite-bgcolor-dark-purple panel-group">
+        <div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light calcite-bgcolor-dark-blue panel-group">
 
             <div id="panelBasemaps" class="panel collapse in">
                 <div id="headingBasemaps" class="panel-heading" role="tab">
@@ -413,7 +413,7 @@
 
         <!-- Panel -->
 
-        <div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light panel-group calcite-bgcolor-dark-purple" role="tablist" aria-multiselectable="true">
+        <div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light panel-group calcite-bgcolor-dark-blue" role="tablist" aria-multiselectable="true">
 
             <!-- Info Panel -->
 
@@ -445,6 +445,13 @@
                         <p>The code of the project can be accessed via github https://github.com/SarahLechler/copernicusGroupC </p>
 
                         <p> Institute for Geoinformatics <br> Heisenbergstraße 2 </br> 48149 Münster </p>
+                        
+                        <p> Spectial thanks to:</p>
+                        <ul>
+                            <li> <a href="https://www.pegelonline.wsv.de/gast/start" style="color:white;">PEGELONLIE</a> </li>
+                            <li> <a href="https://openweathermap.org/api" style="color:white;">OpenWeatherMap</a> </li>
+                            <li> <a href="https://iconmonstr.com/" style="color:white;">iconmonstr</a> </li>
+                        </ul>    
                     </div>
                 </div>
             </div>
@@ -495,19 +502,19 @@
         <!-- weather button-->
         <div class='leaflet-control-container hideInPrint'>
             <div class="leaflet-top leaflet-right" style="top:275px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class="weather_unpressed leaflet-bar-part" id="weather_button" title="Click to display the weather" src= 'images/partly_cloudy_day_filled1600.png' height='35' width='30' onclick='getWeather()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class="weather_unpressed leaflet-bar-part" id="weather_button" title="Click to display the weather" src= 'images/weather.png' height='35' width='30' onclick='getWeather()'></img></div>
             </div>
         </div>
         <!-- precipitation button-->
         <div class='leaflet-control-container hideInPrint'>
             <div class="leaflet-top leaflet-right" style="top:325px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class="precip_unpressed leaflet-bar-part" id="precip_button" title="Click to display the precipitation" src= 'images/btn_precipitation.png' height='35' width='30' onclick='getPrecipitation()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class="precip_unpressed leaflet-bar-part" id="precip_button" title="Click to display the precipitation" src= 'images/precipitation.png' height='35' width='30' onclick='getPrecipitation()'></img></div>
             </div>
         </div>
         <!-- gauging station button-->
         <div class='leaflet-control-container hideInPrint'>
             <div class="leaflet-top leaflet-right" style="top:375px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class="water_pressed leaflet-bar-part" id="water_button" title="Click to display the water level on gauging stations" src= 'images/btn_water.png' height='35' width='30' onclick='getWater()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class="water_pressed leaflet-bar-part" id="water_button" title="Click to display the water level on gauging stations" src= 'images/waterdrop_white.png' height='35' width='30' onclick='getWater()'></img></div>
             </div>
         </div>
 

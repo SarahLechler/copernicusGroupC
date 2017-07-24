@@ -11,6 +11,7 @@ var weather_pressed = false;
 function getWeather() {
     var weather_button = document.getElementById('weather_button');
     if (!weather_pressed) {
+        
         var URL = "http://api.openweathermap.org/data/2.5/box/city?bbox=5.77,50.31,9.46,52.62,9&APPID=3e4e9e28f3ee43f6058e966b7f2be8c6";
         $.ajax({
             url: URL,
@@ -37,19 +38,21 @@ function getWeather() {
                 });
                 var marker = L.marker([lat, lon], {icon: myIcon});
                 if ((data.list[i].rain) !== null) {
-                    marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description + "</center></b>Rain : " + Object.values(data.list[i].rain) + "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : " + data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>");
+                    marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description + "</center></b>Rain : " + Object.values(data.list[i].rain) + "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : " + data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>", {offset: new L.Point(25, 18)});
                 } else {
-                    marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description + "</center></b>Rain : " + data.list[i].rain + "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : " + data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>");
-                }
+                    marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description + "</center></b>Rain : " + data.list[i].rain + "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : " + data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>", {offset: new L.Point(25, 18)});
+				}
                 markers.addLayer(marker);
             }
             map.addLayer(markers);
             weather_button.className = 'weather_pressed';
+            weather_button.src = "images/weather_white.png";
         }
         weather_pressed = true;
     } else {
         map.removeLayer(markers);
         weather_button.className = 'weather_unpressed';
+        weather_button.src = "images/weather.png";
         weather_pressed = false;
     }
     updateLegend();
