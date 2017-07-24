@@ -402,7 +402,7 @@ $.ajax({
             if (result[current].longitude)
                 currStationData.longitude = result[current].longitude;
             allPegelData['' + result[current].shortname] = currStationData;
-            getStationData(result[current].shortname, currStationData.latitude, currStationData.longitude);
+            //getStationData(result[current].shortname, currStationData.latitude, currStationData.longitude);
 //                    for (i in result) {
 //                        if (date_slider == (result[i].timestamp).substr(0, 10)) {
 //                            datapoints.push({label: result[i].timestamp.substr(0, 10), y: result[i].value, toolTipContent: result[i].timestamp + " : " + result[i].value});
