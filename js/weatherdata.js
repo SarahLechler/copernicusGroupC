@@ -38,10 +38,10 @@ function getWeather() {
                 });
                 var marker = L.marker([lat, lon], {icon: myIcon});
                 if ((data.list[i].rain) !== null) {
-                    marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description + "</center></b>Rain : " + Object.values(data.list[i].rain) + "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : " + data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>");
+                    marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description + "</center></b>Rain : " + Object.values(data.list[i].rain) + "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : " + data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>", {offset: new L.Point(25, 18)});
                 } else {
-                    marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description + "</center></b>Rain : " + data.list[i].rain + "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : " + data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>");
-                }
+                    marker.bindPopup("<center><p><b>" + data.list[i].name + "<br> Weather : " + data.list[i].weather[0].description + "</center></b>Rain : " + data.list[i].rain + "<br>Snow : " + data.list[i].snow + "<br> Humidity :" + data.list[i].main.humidity + "<br> Pressure : " + data.list[i].main.pressure + "<br>Temperature : " + data.list[i].main.temp + " Max: " + data.list[i].main.temp_max + " Min: " + data.list[i].main.temp_min + "</p>", {offset: new L.Point(25, 18)});
+				}
                 markers.addLayer(marker);
             }
             map.addLayer(markers);
