@@ -86,7 +86,7 @@ L.easyPrint({
 
 
 //add imageLayer --> MosaikDataSet/Sattelite data
-var URL = "https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer/"; 
+var URL = "https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer/";
 
 console.log(URL);
 var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
@@ -98,12 +98,6 @@ var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
     noDataInterpretation: null
 });
 
-var processedDataLayerTest = L.tileLayer.wms("http://www.copernicushub.eu/arcgis/services/TESTTIME/ImageServer/WMSServer?", {
-    format: 'tiff',
-    transparent: true,
-    attribution: "Weather data © 2012 IEM Nexrad"
-});
-
 var satellite = false;
 function getSatelliteImagee() {
     satellite = !satellite;
@@ -112,10 +106,10 @@ function getSatelliteImagee() {
         map.removeLayer(layer);
     if (processedDataLayer)
         map.removeLayer(processedDataLayer);
-    map.addLayer(layer);
+        map.addLayer(layer);
     if (satellite)
         map.addLayer(processedDataLayer);
-    
+
     var satellite_button = document.getElementById('satellite_button');
     if (satellite) {
         satellite_button.className = 'satellite_pressed';
