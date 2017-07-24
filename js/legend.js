@@ -14,9 +14,8 @@ isNight = function () {
     var hours = d.getHours();
 
     return (hours < 5)
-            || (hours >= 10);
+            || (hours >= 22);
 };
-
 
 /**
  * Displays a legend
@@ -40,22 +39,22 @@ loadLegend = function () {
         valuesTable += '<b>Weather:</b><br>';
         if (isNight()) {
             valuesTable += '<table><tr><td><img class="legendIcon" src="images/01dn.png"></img> Clear sky.</td>';
-            valuesTable += '    <td><img class="legendIcon" src="images/02dn.png">Few clouds.</td>';
+            valuesTable += '    <td><img class="legendIcon" src="images/02dn.png"></img> Few clouds.</td>';
         } else {
             valuesTable += '<table><tr><td><img class="legendIcon" src="images/01d.png"></img> Clear sky.</td>';
-            valuesTable += '    <td><img class="legendIcon" src="images/02d.png">Few clouds.</td>';
+            valuesTable += '    <td><img class="legendIcon" src="images/02d.png"></img> Few clouds.</td>';
         }
-        valuesTable += '    <td><img class="legendIcon" src="images/03d.png">Scattered clouds.</td></tr>';
-        valuesTable += '    <td><img class="legendIcon" src="images/05d.png">Shower rain.</td>';
+        valuesTable += '    <td><img class="legendIcon" src="images/03d.png"></img> Scattered clouds.</td></tr>';
+        valuesTable += '    <tr><td><img class="legendIcon" src="images/04d.png"></img> Broken clouds.</td>';
+        valuesTable += '<td><img class="legendIcon" src="images/05d.png"></img> Shower rain</td>';
         if (isNight()) {
-            valuesTable += '    <td><img class="legendIcon" src="images/06dn.png">Rain.</td></tr>';
+            valuesTable += '    <td><img class="legendIcon" src="images/06dn.png"></img> Rain</td></tr>';
         } else {
-            valuesTable += '    <td><img class="legendIcon" src="images/06d.png">Rain.</td></tr>';
-
+            valuesTable += '    <td><img class="legendIcon" src="images/06d.png"></img> Rain</td></tr>';
         }
-        valuesTable += '<tr><td><img class="legendIcon" src="images/07d.png"></img>Thunderstorm.</td>';
-        valuesTable += '    <td><img class="legendIcon" src="images/08d.png">Snow.</td>';
-        valuesTable += '    <td><img class="legendIcon" src="images/09d.png">Mist.</td></tr></table>';
+        valuesTable += '<tr><td><img class="legendIcon" src="images/07d.png"></img> Thunderstorm</td>';
+        valuesTable += '    <td><img class="legendIcon" src="images/08d.png"></img> Snow</td>';
+        valuesTable += '    <td><img class="legendIcon" src="images/09d.png"></img> Mist</td></tr></table>';
         valuesTable += '</span><br></div>';
 
         valuesTable += '<div id="precipitationBox" style="display: ' + precipitationBox + '"><span>';
