@@ -89,22 +89,23 @@ L.easyPrint({
 
 
 //add imageLayer --> MosaikDataSet/Sattelite data
-var URL = "https://www.copernicushub.eu/arcgis/rest/services/Processed_Data/ImageServer/"; 
 
-console.log(URL);
-var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
-    url: URL, 
+var processedDataLayer = L.esri.dynamicMapLayer({
+    url: 'https://www.copernicushub.eu/arcgis/rest/services/waterdetect/MapServer', 
     attribution: 'Sentinel1 Data after water detection process',
     noData: 'LowPS',
-    noDataInterpretation: null
-});
+    noDataInterpretation: null,
+    to: Date(2017-01-01),
+    from: Date(2017-01-02)
+   
+})
 
 var satellite_pressed = false;
 function getSatelliteImagee() {
     satellite_pressed = !satellite_pressed;
-    if (layer)
-        map.removeLayer(layer);
-    if (processedDataLayer)
+    if (layer){
+        map.removeLayer(layer);}
+    if (processedDataLayer){
         map.removeLayer(processedDataLayer);
     if (precip_layer)
         map.removeLayer(precip_layer);
@@ -113,7 +114,6 @@ function getSatelliteImagee() {
         map.addLayer(processedDataLayer);
     if (precip_pressed)
         map.addLayer(precip_layer);
-    
     var satellite_button = document.getElementById('satellite_button');    
     if (satellite_pressed) {
         satellite_button.className = 'satellite_pressed';
@@ -123,6 +123,7 @@ function getSatelliteImagee() {
         satellite_button.src = "images/satellite.png";
     }
     updateLegend();
+}
 }
 ;
 
