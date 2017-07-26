@@ -14,24 +14,8 @@ function selectingTime() {
 }
 
 function changeSatelliteImage(val) {
-    console.log(Date.now());
     var changedDate = Date.parse(new Date (unique_date[val]));
-    console.log(changedDate);
-    var timeSince = Date.now() - changedDate;
-    console.log(timeSince);
-    var daysSince = timeSince/86400;
-    console.log(daysSince);
-    if (6000<daysSince){
-        this.processedDataLayer.redraw();
-    } else if (12000<daysSince){
-        this.processedDataLayer.redraw();        
-    } else if (1800<processedDataLayer){
-        this.processedDataLayer.redraw();        
-
-    }
-    console.log(changedDate- 259200); //DateAdd(startDate, 7, 'days'); to set timerange on EsriFunctions
-    //debugger;
-    this.processedDataLayer.setTimeRange(changedDate - 259200, changedDate + 259200); //enter times here ("on drag");
+    this.processedDataLayer.setTimeRange(changedDate - 259200, changedDate + 259200);
     console.log("redrawingLayer");
 }
 
