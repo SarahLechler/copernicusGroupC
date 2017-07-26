@@ -90,26 +90,27 @@ L.easyPrint({
 
 //add imageLayer --> MosaikDataSet/Sattelite data
 
-var processedDataLayer = this.processedDataLayer = L.esri.imageMapLayer({
-    url: 'https://www.copernicushub.eu/arcgis/rest/services/true_final/MapServer', 
+var processedDataLayer = L.esri.dynamicMapLayer({
+    url: 'https://www.copernicushub.eu/arcgis/rest/services/waterdetect/MapServer', 
     attribution: 'Sentinel1 Data after water detection process',
     noData: 'LowPS',
     noDataInterpretation: null,
-    from: Date(2017-01-01),
-    to: Date(2017-0-02)
-});
+    to: Date(2017-01-01),
+    from: Date(2017-01-02)
+   
+})
 
 var satellite_pressed = false;
 function getSatelliteImagee() {
     satellite_pressed = !satellite_pressed;
-    if (layer)
-        map.removeLayer(layer);
-    if (processedDataLayer)
+    if (layer){
+        map.removeLayer(layer);}
+    if (processedDataLayer){
         map.removeLayer(processedDataLayer);
-    map.addLayer(layer);
-    if (satellite_pressed)
+    map.addLayer(layer);}
+    if (satellite_pressed){
         map.addLayer(processedDataLayer);
-    
+    }
     var satellite_button = document.getElementById('satellite_button');    
     if (satellite_pressed) {
         satellite_button.className = 'satellite_pressed';
