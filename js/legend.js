@@ -4,6 +4,7 @@ var weatherBox = "none";        // hide on default
 var satelliteBox = "none";      // hide on default
 var precipitationBox = "none";  // hide on default
 var gaugingStationBox = "";     // show on default
+var legendOpen = true;
 
 /**
  * checks if it's dark outside.
@@ -27,8 +28,12 @@ loadLegend = function () {
 
 legend.onAdd = function () {
     var div = L.DomUtil.create('CopernicusLegend', 'legend-description');
-    var valuesTable = '<span class="layer-description-title">Legend:</span> <br>';
-    valuesTable += '<div class="layer-description-container">';
+    if (legendOpen){
+        var valuesTable = '<span class="layer-description-title">Legend:<button id="legendButton" style="position: absolute; right: 10px;" onclick="manageLegend()">-</button></span><br>';
+    }
+    else
+        var valuesTable = '<span class="layer-description-title">Legend:</span> <button id="legendButton" style="float:right" onclick="manageLegend()">+</button> <br>';
+    valuesTable += '<div class="layer-description-container" id="legendContent">';
 
     valuesTable += '<div id="satelliteBox" style="display: ' + satelliteBox + '"><span>';
     valuesTable += '<b>Satellite:</b><br>';
@@ -79,6 +84,17 @@ legend.onAdd = function () {
 }
 ;
 
+manageLegend = function () {
+    if ($("#legendButton").html() === "-") {
+        $("#legendButton").html("+");
+        legendOpen = false;
+    } else {
+        $("#legendButton").html("-");
+        legendOpen = true;
+    }
+    $("#legendContent").slideToggle();
+};
+
 loadLegend();
 
 updateLegend = function () {
@@ -109,5 +125,8 @@ updateLegend = function () {
     if (legend)
         map.removeControl(legend);
     loadLegend();
+    if (legendOpen === false)
+        $("#legendContent").slideToggle(0);
+    console.log("legendOpen is " + legendOpen)
 };
 
