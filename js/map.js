@@ -32,8 +32,7 @@ function getPrecipitation() {
         precip_button.src = "images/precipitation.png";
     }
     updateLegend();
-}
-;
+};
 
 function setBasemap(basemap) {
     if (layer) {
@@ -72,14 +71,9 @@ L.control.zoom({
     position: 'topright'
 }).addTo(map);
 
-//var searchControl = L.esri.Geocoding.Controls.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: false}).addTo(map);
+
 var searchControl = L.esri.Geocoding.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: true}).addTo(map);
-//
-//searchControl.on('results', function (data) {
-//    //var searchControl = L.esri.Geocoding.Controls.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: false}).addTo(map);
-//    var searchControl = L.esri.Geocoding.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: true}).addTo(map);
-//
-//});
+
 
 L.easyPrint({
     title: 'Click to print the map',
@@ -93,12 +87,13 @@ L.easyPrint({
 var processedDataLayer = L.esri.dynamicMapLayer({
     url: 'https://www.copernicushub.eu/arcgis/rest/services/waterdetect/MapServer', 
     attribution: 'Sentinel1 Data after water detection process',
+    layers: [3],
     noData: 'LowPS',
     noDataInterpretation: null,
     to: Date(2017-01-01),
-    from: Date(2017-01-02)
+    from: Date(2017-01-01)
    
-})
+});
 
 var satellite_pressed = false;
 function getSatelliteImagee() {

@@ -12,15 +12,16 @@ function getWeather() {
     var weather_button = document.getElementById('weather_button');
     if (!weather_pressed) {
         
-        var URL = "http://api.openweathermap.org/data/2.5/box/city?bbox=5.77,50.31,9.46,52.62,9&APPID=3e4e9e28f3ee43f6058e966b7f2be8c6";
+        var URL = "http://52.59.157.69:8000//weather2017_07_25.json";
         $.ajax({
             url: URL,
             method: "GET",
             dataType: "json",
             async: false,
+            crossDomain: true,
             success: function (result) {
                 console.log(result);
-                addToMap(result);
+               // addToMap(result);
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert("Unable to fetch Server data")
