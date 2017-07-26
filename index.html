@@ -32,7 +32,8 @@
         <script src="https://unpkg.com/esri-leaflet-renderers@2.0.6"></script>
 
         <script src="dist/leaflet.iconlabel.js"></script>
-
+        <!-- Load intro.js Css-->
+        <link rel="stylesheet" href="css/introjs.css">
         <!-- Load Draw Plugins -->
         <script src="src/Leaflet.draw.js"></script>
         <script src="src/Leaflet.Draw.Event.js"></script>
@@ -75,23 +76,23 @@
 
         <!-- chart -->
         <script src="src/canvasjs.min.js"></script>
-		
-		<!--D3 -->
-		<script src="https://d3js.org/d3.v4.min.js"></script>
-		
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!--D3 -->
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="css/style.css">
 
 
 
     </head>
     <body class="calcite-maps calcite-nav-top">
-        <div id="mySidenav" class="sidenav" >
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-			<div id = "chart_0" style='height: 170px; width: 300px;'></div>
-			<div id = "chart_1" style='height: 170px; width: 300px;'></div>
-			<div id = "chart_2" style='height: 170px; width: 300px;'></div>
-		</div>
-		
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div id = "chart_0" style='height: 170px; width: 300px;'></div>
+            <div id = "chart_1" style='height: 170px; width: 300px;'></div>
+            <div id = "chart_2" style='height: 170px; width: 300px;'></div>
+        </div>
+
         <div id="myModal" class ="modal" style = "position: absolute; left: 200px; width: 50%;">
             <!-- Modal content -->
             <div id = "modal_content" class="modal-content">
@@ -105,7 +106,7 @@
         <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark calcite-bgcolor-dark-blue">
             <!-- Menu -->
             <div class="dropdown calcite-dropdown calcite-bg-custom calcite-text-light" role="presentation">
-                <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+                <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-intro='Here you can find some more Information!' data-step=1 data-position='auto'>
                     <div class="calcite-dropdown-toggle">
                         <span class="sr-only">Toggle dropdown menu</span>
                         <span></span>
@@ -115,7 +116,7 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu calcite-bgcolor-dark-blue">
-                    <li><a class="hidden-md hidden-lg" href="#panelInfo" aria-controls="panelInfo" role="tab" data-toggle="tab"> Info</a></li>
+                    <li><a role="button" data-target="#panelIntro" aria-haspopup="true" onclick="introJsStarter();"><span class="glyphicon glyphicon-blackboard"></span>Intro</a></li>
                     <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
                     <li><a class="visible-xs" role="button" data-target="#panelSearch" aria-haspopup="true"><span class="glyphicon glyphicon-search"></span> Search</a></li>
                     <li><a role="button" data-target="#panelBasemaps" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>
@@ -141,14 +142,14 @@
 
         <div class="calcite-panels calcite-panels-left calcite-bg-custom calcite-text-light calcite-bgcolor-dark-blue panel-group">
 
-            <div id="panelBasemaps" class="panel collapse in">
+            <div id="panelBasemaps" class="panel collapse in" data-intro='Choose different types of basemaps!' data-step=2 data-position='auto'>
                 <div id="headingBasemaps" class="panel-heading" role="tab">
                     <div class="panel-title">
                         <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps"
                            aria-expanded="false" aria-controls="collapseBasemaps"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Basemaps</span></a>
                     </div>
                 </div>
-                <div id="collapseBasemaps" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingBasemaps">
+                <div id="collapseBasemaps" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingBasemaps" >
                     <div class="panel-body">
                         <select id="selectStandardBasemap" class="form-control">
                             <option value="Imagery">Satellite</option>
@@ -195,9 +196,10 @@
                         <p>The code of the project can be accessed via github https://github.com/SarahLechler/copernicusGroupC </p>
 
                         <p> Institute for Geoinformatics <br> Heisenbergstraße 2 </br> 48149 Münster </p>
-                        
-                        <p> Spectial thanks to: </p>
-                        
+
+
+                        <p> Spectial thanks to:</p>
+
                         <ul>
                             <li> <a href="https://www.pegelonline.wsv.de/gast/start" style="color:white;">PEGELONLIE</a> </li>
                             <li> <a href="https://openweathermap.org/api" style="color:white;">OpenWeatherMap</a> </li>
@@ -246,33 +248,36 @@
             </div>
 
         </div>
+        
+        
         <!-- satellite button-->
-        <div class='leaflet-control-container hideInPrint'>
+        <div class='leaflet-control-container hideInPrint' >
             <div class="leaflet-top leaflet-right" style="top:225px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class="satellite_unpressed leaflet-bar-part" id="satellite_button" title="Click to display the satellite image" src= 'images/satellite.png' height='35' width='30' onclick='getSatelliteImagee()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class="satellite_unpressed leaflet-bar-part" id="satellite_button" title="Click to display the satellite image" src= 'images/satellite.png' height='35' width='30' onclick='getSatelliteImagee()' data-intro='Click here for displaying satellite datae!' data-step=3 data-position='auto'></img></div>
             </div>
         </div>
         <!-- weather button-->
-        <div class='leaflet-control-container hideInPrint'>
+        <div class='leaflet-control-container hideInPrint' >
             <div class="leaflet-top leaflet-right" style="top:275px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class="weather_unpressed leaflet-bar-part" id="weather_button" title="Click to display the weather" src= 'images/weather.png' height='35' width='30' onclick='getWeather()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class="weather_unpressed leaflet-bar-part" id="weather_button" title="Click to display the weather" src= 'images/weather.png' height='35' width='30' onclick='getWeather()' data-intro='Click here for displaying weather data!' data-step=4 data-position='auto'></img></div>
             </div>
         </div>
         <!-- precipitation button-->
-        <div class='leaflet-control-container hideInPrint'>
+        <div class='leaflet-control-container hideInPrint' >
             <div class="leaflet-top leaflet-right" style="top:325px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class="precip_unpressed leaflet-bar-part" id="precip_button" title="Click to display the precipitation" src= 'images/precipitation.png' height='35' width='30' onclick='getPrecipitation()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class="precip_unpressed leaflet-bar-part" id="precip_button" title="Click to display the precipitation" src= 'images/precipitation.png' height='35' width='30' onclick='getPrecipitation()' data-intro='Click here for displaying precipitation data!' data-step=5 data-position='auto'></img></div>
             </div>
         </div>
         <!-- gauging station button-->
-        <div class='leaflet-control-container hideInPrint'>
+        <div class='leaflet-control-container hideInPrint' >
             <div class="leaflet-top leaflet-right" style="top:375px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class="water_pressed leaflet-bar-part" id="water_button" title="Click to display the water level on gauging stations" src= 'images/waterlevel_white.png' height='35' width='30' onclick='getWater()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class="water_pressed leaflet-bar-part" id="water_button" title="Click to display the water level on gauging stations" src= 'images/waterlevel_white.png' height='35' width='30' onclick='getWater()' data-intro='Click here for displaying gauging station data!' data-step=6 data-position='auto'></img></div>
             </div>
         </div>
-		 <div class='leaflet-control-container'>
+        <!-- gauging station button-->
+        <div class='leaflet-control-container'>
             <div class="leaflet-top leaflet-right" style="top:425px;">
-                <div class=" leaflet-bar leaflet-control" ><img  class="multigraphs_unpressed leaflet-bar-part" id="multi_gauging_icon" title="Click to see water levels of multiple gauging station" src= 'images/graphs_water.png' height='35' width='30' onclick='openNav()'></img></div>
+                <div class=" leaflet-bar leaflet-control" ><img  class="multigraphs_unpressed leaflet-bar-part" id="multi_gauging_icon" title="Click to see water levels of multiple gauging station" src= 'images/graphs_water.png' height='35' width='30' onclick='openNav()'data-intro='Click here for displaying multiple gauging station graphs at the same time!' data-step=7 data-position='auto'></img></div>
             </div>
         </div>
 
@@ -284,12 +289,12 @@
          <button type="button" id="stop">stop</button>
          </div> -->
 
-        <div class="hideInPrint" style="position: absolute; bottom: 0; left: 0; width: 100%;">
+        <div class="hideInPrint" style="position: absolute; bottom: 0; left: 0; width: 100%;" data-intro='Use the slider to get information for the last 30 days!' data-step=8 data-position='auto'>
             <div id="slider" style="width: 100%;">
                 <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' oninput="selectingTime();checkChartStatus();"/></div>
             <div id="steps" class="steps" style="width: 100%; margin-left: 8px;"></div>
         </div>
-		<img src = "images/play.png" style = " height : 30px ; width : 30px; z-index:1000000 ; margin-top:560px ;margin-left:1230px; margin-bottom:10px; display:inline-block; position: absolute; cursor:pointer" id = "play" >play</img>
+        <img src = "images/play.png" style = " height : 30px ; width : 30px; z-index:1000000 ; margin-top:560px ;margin-left:1230px; margin-bottom:10px; display:inline-block; position: absolute; cursor:pointer" id = "play" >play</img>
 
 
 
@@ -329,7 +334,8 @@
         <script src="js/waterlevel.js"></script>
         <script src="js/marker.js"></script>
         <script src="js/legend.js"></script>
-		<script src ="js/multiple_gauging_stations.js"></script>
+        <script src ="js/multiple_gauging_stations.js"></script>
+        <script src ="js/intro.js"></script>
         <script>
 
 
@@ -365,31 +371,33 @@
         <script>
 
             var myTimer;
-			var play_pause = 0;
-			
-			d3.select("#play").on("click", function() {
-			if (play_pause == 0){
-			$("#play").attr("src","images/pause.png");
-			clearInterval (myTimer);
-			myTimer = setInterval (function() {
-			var b= d3.select("#range");
-			var t = (+b.property("value") + 1) % (+b.property("max") + 1);
-			if (t == 0) { t = +b.property("min"); }
-			b.property("value", t);
-			checkChartStatus();
-			selectingTime();
-			}, 1000);
-			play_pause = 1;}
-			else {
-			clearInterval(myTimer);
-			play_pause = 0;
-			$("#play").attr("src","images/play.png");
-			}
-			});
-		    
-			var check_sidenav;
-			
-			
+            var play_pause = 0;
+
+            d3.select("#play").on("click", function () {
+                if (play_pause == 0) {
+                    $("#play").attr("src", "images/pause.png");
+                    clearInterval(myTimer);
+                    myTimer = setInterval(function () {
+                        var b = d3.select("#range");
+                        var t = (+b.property("value") + 1) % (+b.property("max") + 1);
+                        if (t == 0) {
+                            t = +b.property("min");
+                        }
+                        b.property("value", t);
+                        checkChartStatus();
+                        selectingTime();
+                    }, 1000);
+                    play_pause = 1;
+                } else {
+                    clearInterval(myTimer);
+                    play_pause = 0;
+                    $("#play").attr("src", "images/play.png");
+                }
+            });
+
+            var check_sidenav;
+
+
             function form_worker() {
 
                 document.getElementById('road_worker').innerHTML = '';
@@ -401,28 +409,31 @@
                 $("<div id = 'form'><form>Entered_By:<br><input id = 'author' type='text' ><br>Description:<br><input id = 'road_desc' type='text'></form><br><button class = 'btn' id = 'submit' onclick = 'addFeature_road()'>submit</button></div>").appendTo('#road_worker');
 
             }
-			
-			var count_gauging_station = 0;
-			function openNav() {
-			    count_gauging_station = 0;
-				document.getElementById("mySidenav").style.width = "350px";
-				document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-				check_sidenav = true;                                
-			}
-            
-			function closeNav() {
-				document.getElementById("mySidenav").style.width = "0";
-				document.body.style.backgroundColor = "white";
-				check_sidenav = false;
-				count_gauging_station = 0;
-				document.getElementById("chart_0").innerHTML = "";
-				document.getElementById("chart_1").innerHTML = "";
-				document.getElementById("chart_2").innerHTML = "";
-				station_1 = "";
-				station_2 = "";
-				station_3 = "";
-				
-			}
+
+            var count_gauging_station = 0;
+            function openNav() {
+                count_gauging_station = 0;
+                document.getElementById("mySidenav").style.width = "350px";
+                document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+                check_sidenav = true;
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.body.style.backgroundColor = "white";
+                check_sidenav = false;
+                count_gauging_station = 0;
+                document.getElementById("chart_0").innerHTML = "";
+                document.getElementById("chart_1").innerHTML = "";
+                document.getElementById("chart_2").innerHTML = "";
+                station_1 = "";
+                station_2 = "";
+                station_3 = "";
+
+            }
+            function introJsStarter(){
+                introJs().setOption("showStepNumbers", false).start();
+            }
         </script>
 
 
