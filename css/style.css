@@ -131,7 +131,7 @@
                 top: -20px!important;
             }
             .precip_pressed{
-                background-color: steelblue !important;
+                background-color: #196fa6 !important;
                 border-radius: 4px;
             }
             .precip_unpressed{
@@ -139,7 +139,7 @@
                 border-radius: 4px;
             }
             .weather_pressed{
-                background-color: steelblue !important;
+                background-color: #196fa6 !important;
                 border-radius: 4px;
             }
             .weather_unpressed{
@@ -147,7 +147,7 @@
                 border-radius: 4px;
             }
 	    .satellite_pressed{
-               background-color: steelblue !important;
+               background-color: #196fa6 !important;
                border-radius: 4px;
            }
            .satellite_unpressed{
@@ -155,12 +155,20 @@
                border-radius: 4px;
            }
            .water_pressed{
-               background-color: steelblue !important;
+               background-color: #196fa6 !important;
                border-radius: 4px;
            }
            .water_unpressed{
                background-color: #ffffff !important;
                border-radius: 4px;
+           }
+           .multigraphs_pressed{
+               background-color: #196fa6 !important;
+               border-radius: 4px;               
+           }
+           .multigraphs_unpressed{
+               background-color: #ffffff !important;
+               border-radius: 4px;               
            }
             .modal {
                 display: none; /* Hidden by default */
