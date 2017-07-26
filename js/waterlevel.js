@@ -60,8 +60,13 @@ function getColor(min, max, avg, current) {
 //        green = 178;
 //        blue = 178;
 //    }
-    red = Math.round((current-min)/(max-min)*210)
-    green = 210-Math.round((current-min)/(max-min)*210)
+    if (current < avg) {
+        red = Math.round((current - min) / (max - min) * 210);
+        green = 210;
+    } else {
+        red = 210;
+        green = 210 - Math.round((current - min) / (max - min) * 210);
+    }
 
     if (red < 0 || green < 0 || blue < 0)
         console.log("fehler weil: " + red + "," + green + "," + blue);
@@ -145,20 +150,22 @@ function getDayData(stationname, plusDay, lat, lon) {
                                 var waterIcon = L.MakiMarkers.icon({
                                     icon: "water",
                                     color: "#" + getColor(allPegelData[stationname].min, allPegelData[stationname].max, allPegelData[stationname].avg, res[0].value),
-                                    size: "l"
+                                    size: "l",
+                                    stationname: stationname
                                 });
                                 var marker = new L.marker([lat, lon], {icon: waterIcon});
-                                gauging_stations_layer.addLayer(marker);
                                 marker.bindPopup("<b>" + stationname + "</b><br> Water : " + stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
+                                gauging_stations_layer.addLayer(marker);
                             } else {
                                 var waterIcon = L.MakiMarkers.icon({
                                     icon: "water",
                                     color: "#A1A1A1",
-                                    size: "l"
+                                    size: "l",
+                                    stationname: stationname
                                 });
                                 var marker = new L.marker([lat, lon], {icon: waterIcon});
-                                gauging_stations_layer.addLayer(marker);
                                 marker.bindPopup("<b>" + stationname + "</b><br> Water : " + stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
+                                gauging_stations_layer.addLayer(marker);
                             }
 
                             allPegelData[stationname].marker = marker;
@@ -345,7 +352,6 @@ function date_for_slider(unique_date) {
     for (var i in unique_date) {
         $('<span class="slider-step-text" >I<br>' + unique_date[i].substr(5, 10) + '</span>').appendTo('#steps');
     }
-
 }
 
 var station_1;
@@ -354,15 +360,15 @@ var station_3;
 map.on('popupopen', function (e) {
     console.log(e);
     console.log(count_gauging_station);
-    getChart(e.target._popup._source.options.className);
+    getChart(e.popup._source.options.icon.options.stationname);
     if (count_gauging_station < 3) {
         if (count_gauging_station == 0)
-            station_1 = e.target._popup._source.options.className;
+            station_1 = e.popup._source.options.icon.options.stationname;
         if (count_gauging_station == 1)
-            station_2 = e.target._popup._source.options.className;
+            station_2 = e.popup._source.options.icon.options.stationname;
         if (count_gauging_station == 2)
-            station_3 = e.target._popup._source.options.className;
-        multiple_chart(e.target._popup._source.options.className, count_gauging_station);
+            station_3 = e.popup._source.options.icon.options.stationname;
+        multiple_chart(e.popup._source.options.icon.options.stationname, count_gauging_station);
         count_gauging_station = count_gauging_station + 1;
     }
 });
@@ -372,6 +378,7 @@ map.on('popupclose', function () {
     else
         chartExists = false;
 });
+
 function getChart(station_name) {
     var datapoints = [];
     console.log("trying to obtain chart data for station:" + station_name)

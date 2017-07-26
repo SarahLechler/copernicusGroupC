@@ -60,12 +60,14 @@ legend.onAdd = function () {
 
     valuesTable += '<div id="precipitationBox" style="display: ' + precipitationBox + '"><span>';
     valuesTable += '<b>Precipitation:</b><br>';
-    valuesTable += '<span><img class="legendIcon" src="images/lgd_precip.png"></img>';
-    valuesTable += 'precipitation</span>';
+    valuesTable += '<span>Low<img class="legendIconGauging" src="images/lgd_precip.png"></img>';
+    valuesTable += 'High</span>';
     valuesTable += '</span><br></div>';
 
     valuesTable += '<div id="gaugingStationBox" style="display: ' + gaugingStationBox + '"><span>';
-    valuesTable += '<b>Gauging stations:</b> description of gauging stations.';
+    valuesTable += '<b>Gauging stations:</b><br>';
+    valuesTable += '<span>Min<img class="legendIconGauging" src="images/lgd_gauging.png"></img>';
+    valuesTable += 'Max</span>';
     valuesTable += '</span></div>';
 
     valuesTable += '</div>';

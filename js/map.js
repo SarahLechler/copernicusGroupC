@@ -4,7 +4,8 @@
 // Esri-Leaflet
 // ============
 var map = L.map('map', {zoomControl: false, zoomAnimation: false,
-    minZoom: 7, maxBounds: [[50, 5.77], [53.00, 9.46]]
+    minZoom: 7, //maxBounds: [[50, 5.77], [53.00, 9.46]]
+    maxBounds: [[48,5.77],[55,9.5]]
 }).setView([51.422080, 8.022025], 8),
         layer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map),
         // layerLabels = L.esri.basemapLayer('xxxLabels').addTo(map);
