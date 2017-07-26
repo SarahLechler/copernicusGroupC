@@ -43,23 +43,25 @@ function getColor(min, max, avg, current) {
     var red = 0;
     var green = 0;
     var blue = 0;
-    if (current <= avg_low) {
-        green = Math.round((current - min) / (avg_low - min) * 255);
-        blue = Math.round((avg_low - current) / (avg_low - min) * 255);
-    } else if ((current > avg_low) && (current <= avg)) {
-        red = Math.round((current - avg_low) / (avg - avg_low) * 128);
-        green = 255 - Math.round((current - avg_low) / (avg - avg_low) * 64);
-    } else if ((current > avg) && (current <= avg_high)) {
-        red = 127 + Math.round((current - avg) / (avg_high - avg) * 128);
-        green = 172 - Math.round((current - avg) / (avg_high - avg) * 64);
-    } else if (current > avg_high) {
-        red = 255;
-        green = 128 - Math.round((current - avg_high) / (max - avg_high) * 128);
-    } else {
-        red = 178;
-        green = 178;
-        blue = 178;
-    }
+//    if (current <= avg_low) {
+//        green = Math.round((current - min) / (avg_low - min) * 255);
+//        blue = Math.round((avg_low - current) / (avg_low - min) * 255);
+//    } else if ((current > avg_low) && (current <= avg)) {
+//        red = Math.round((current - avg_low) / (avg - avg_low) * 128);
+//        green = 255 - Math.round((current - avg_low) / (avg - avg_low) * 64);
+//    } else if ((current > avg) && (current <= avg_high)) {
+//        red = 127 + Math.round((current - avg) / (avg_high - avg) * 128);
+//        green = 172 - Math.round((current - avg) / (avg_high - avg) * 64);
+//    } else if (current > avg_high) {
+//        red = 255;
+//        green = 128 - Math.round((current - avg_high) / (max - avg_high) * 128);
+//    } else {
+//        red = 178;
+//        green = 178;
+//        blue = 178;
+//    }
+    red = Math.round((current-min)/(max-min)*210)
+    green = 210-Math.round((current-min)/(max-min)*210)
 
     if (red < 0 || green < 0 || blue < 0)
         console.log("fehler weil: " + red + "," + green + "," + blue);
