@@ -34,7 +34,7 @@ function updateGaugingStations(val) {
             gauging_stations_layer.removeLayer(obj.marker);
             var waterIcon = L.MakiMarkers.icon({
                 icon: "water",
-                color: "#" + getColor(obj.min, obj.max, obj[val]) + "FF",
+                color: "#" + getColor(obj.min, obj.max, obj.avg, obj[val]),
                 size: "l"
             });
             obj.marker = new L.marker([obj.latitude, obj.longitude], {icon: waterIcon});

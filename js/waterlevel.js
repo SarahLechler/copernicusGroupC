@@ -1,6 +1,5 @@
 //https://www.pegelonline.wsv.de/webservices/gis/aktuell/wfs?service=wfs&version=1.1.0&request=GetFeature&typeName=gk:waterlevels&outputFormat=json&BBOX=50.31,5.77,52.62,9.46
 
-
 // save all pegel data:
 var pegelData = [];
 var chartExists = false;
@@ -20,26 +19,61 @@ function checkChartStatus() {
     }
 }
 
-
 /**
  * gets the hex color components for R and G of RGB.
  * @param {type} min
  * @param {type} max
+ * @param {type} avg
  * @param {type} current
  * @returns {String|getColor.hex}
  */
-function getColor(min, max, current) {
+function getColor(min, max, avg, current) {
     var range = max - min;
     var scaledMin = min - range / 4;
     var scaledMax = max + range / 4;
     var scaledRange = scaledMax - scaledMin;
-    var perc = Math.round((current - scaledMin) / (scaledRange) * 255);
-    perc = 255 - perc;
-    var hex = perc.toString(16);
-    var val = hex.length === 1 ? "0" + hex : hex;
-    if (hex < "00")
-        return "0000";
-    return val + "" + val;
+    var avgRangeLow = avg - min;
+    var avgRangeHigh = max - avg;
+    var avg_low = avg - (avgRangeLow * 0.05);
+    var avg_high = avg + (avgRangeHigh * 0.05);
+
+    if (current > max)
+        max = current;
+
+    var red = 0;
+    var green = 0;
+    var blue = 0;
+    if (current <= avg_low) {
+        green = Math.round((current - min) / (avg_low - min) * 255);
+        blue = Math.round((avg_low - current) / (avg_low - min) * 255);
+    } else if ((current > avg_low) && (current <= avg)) {
+        red = Math.round((current - avg_low) / (avg - avg_low) * 128);
+        green = 255 - Math.round((current - avg_low) / (avg - avg_low) * 64);
+    } else if ((current > avg) && (current <= avg_high)) {
+        red = 127 + Math.round((current - avg) / (avg_high - avg) * 128);
+        green = 172 - Math.round((current - avg) / (avg_high - avg) * 64);
+    } else if (current > avg_high) {
+        red = 255;
+        green = 128 - Math.round((current - avg_high) / (max - avg_high) * 128);
+    } else {
+        red = 178;
+        green = 178;
+        blue = 178;
+    }
+
+    if (red < 0 || green < 0 || blue < 0)
+        console.log("fehler weil: " + red + "," + green + "," + blue);
+
+    var red_hex = red.toString(16);
+    var red_val = red_hex.length === 1 ? "0" + red_hex : red_hex;
+
+    var green_hex = green.toString(16);
+    var green_val = green_hex.length === 1 ? "0" + green_hex : green_hex;
+
+    var blue_hex = blue.toString(16);
+    var blue_val = blue_hex.length === 1 ? "0" + blue_hex : blue_hex;
+
+    return red_val + green_val + blue_val;
 }
 ;
 function allDaysExist(stationname) {
@@ -104,24 +138,11 @@ function getDayData(stationname, plusDay, lat, lon) {
                             }
                             allPegelData[stationname].min = min;
                             allPegelData[stationname].max = max;
-                            //var waterIcon = L.Icon.Label.extend({
-//                    options: {
-//                        iconUrl: 'images/neutral_positive.png',
-//                        shadowUrl: null,
-//                        iconSize: new L.Point(24, 24),
-//                        iconAnchor: new L.Point(0, 1),
-//                        labelAnchor: new L.Point(26, 0),
-//                        wrapperAnchor: new L.Point(12, 13),
-//                    }
-//                });
-//            }
-//            var marker = new L.Marker.Label([lat, lon], {className: station_name, icon: new waterIcon({labelText: "<b>" + result[i].timeseries[0].currentMeasurement.value + "</b>"})}).addTo(map);
-//            marker.bindPopup("<b>" + station_name + "</b><br> Water : " + result[i].water.shortname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
 
                             if ((res[0]) && (res[0].value)) {
                                 var waterIcon = L.MakiMarkers.icon({
                                     icon: "water",
-                                    color: "#"+getColor(allPegelData[stationname].min, allPegelData[stationname].max, res[0].value)+"FF",
+                                    color: "#" + getColor(allPegelData[stationname].min, allPegelData[stationname].max, allPegelData[stationname].avg, res[0].value),
                                     size: "l"
                                 });
                                 var marker = new L.marker([lat, lon], {icon: waterIcon});
@@ -399,10 +420,12 @@ function getWater() {
     var water_button = document.getElementById('water_button');
     if (water_pressed) {
         water_button.className = 'water_pressed';
-        water_button.src = "images/waterdrop_white.png";
+        water_button.src = "images/waterlevel_white.png";
+        map.addLayer(gauging_stations_layer);
     } else {
         water_button.className = 'water_unpressed';
-        water_button.src = "images/waterdrop.png";
+        water_button.src = "images/waterlevel.png";
+        map.removeLayer(gauging_stations_layer);
     }
     updateLegend();
 }
