@@ -1,220 +1,220 @@
-            input[type=range] {
-                height: 25px;
-                -webkit-appearance: none;
-                margin: 10px 0;
-                width: 100%;
-            }
-            input[type=range]:focus {
-                outline: none;
-            }
-            input[type=range]::-webkit-slider-runnable-track {
-                width: 100%;
-                height: 5px;
-                cursor: pointer;
-                animate: 0.2s;
-                box-shadow: 1px 1px 1px #000000;
-                background: #8A4DA8;
-                border-radius: 50px;
-                border: 1px solid #000000;
-            }
-            input[type=range]::-webkit-slider-thumb {
-                box-shadow: 1px 1px 1px #000000;
-                border: 1px solid #000000;
-                height: 17px;
-                width: 5px;
-                border-radius: 5px;
-                background: #FFFFFF;
-                cursor: pointer;
-                -webkit-appearance: none;
-                margin-top: -7px;
-            }
-            input[type=range]:focus::-webkit-slider-runnable-track {
-                background: #8A4DA8;
-            }
-            input[type=range]::-moz-range-track {
-                width: 100%;
-                height: 5px;
-                cursor: pointer;
-                animate: 0.2s;
-                box-shadow: 1px 1px 1px #000000;
-                background: #8A4DA8;
-                border-radius: 50px;
-                border: 1px solid #000000;
-            }
-            input[type=range]::-moz-range-thumb {
-                box-shadow: 1px 1px 1px #000000;
-                border: 1px solid #000000;
-                height: 17px;
-                width: 5px;
-                border-radius: 5px;
-                background: #FFFFFF;
-                cursor: pointer;
-            }
-            input[type=range]::-ms-track {
-                width: 100%;
-                height: 5px;
-                cursor: pointer;
-                animate: 0.2s;
-                background: transparent;
-                border-color: transparent;
-                color: transparent;
-            }
-            input[type=range]::-ms-fill-lower {
-                background: #8A4DA8;
-                border: 1px solid #000000;
-                border-radius: 100px;
-                box-shadow: 1px 1px 1px #000000;
-            }
-            input[type=range]::-ms-fill-upper {
-                background: #8A4DA8;
-                border: 1px solid #000000;
-                border-radius: 100px;
-                box-shadow: 1px 1px 1px #000000;
-            }
-            input[type=range]::-ms-thumb {
-                margin-top: 1px;
-                box-shadow: 1px 1px 1px #000000;
-                border: 1px solid #000000;
-                height: 17px;
-                width: 5px;
-                border-radius: 5px;
-                background: #FFFFFF;
-                cursor: pointer;
-            }
-            input[type=range]:focus::-ms-fill-lower {
-                background: #8A4DA8;
-            }
-            input[type=range]:focus::-ms-fill-upper {
-                background: #8A4DA8;
-            }
-            html, body {
-                margin: 0;
-                padding: 0;
-                height: 100%;
-            }
-            .calcite-nav-bottom .calcite-map .leaflet-control-zoom {
-                margin-top: 28px;
-            }
-            .calcite-navbar-search {
-                margin-top: 0;
-                margin-right: 5px;
-                padding: 5px 0;
-            }
-            .calcite-nav-bottom .panel-body .geocoder-control-suggestions.leaflet-bar {
-                top: 25px;
-                bottom: auto;
-            }
-            .calcite-maps .esri-truncated-attribution {
-                max-width: 100% !important;
-                width: 100%;
-            }
-            .leaflet-touch .leaflet-bar {
-                border: none;
-            }
-            #map {
-                position: absolute;
-                top: 50px;
-                left: 0;
-            }
-            .slider-step-text {
-                display:inline-block;
-                width: 0.75%;
-                text-align:center;
-                margin-right: 2.4%;
-                font-size:8px;
-            }
-            .leaflet-bar-part{
-                border-radius: 4px;
-            }
-            .canvasjs-chart-toolbar{
-                z-index: 200;
-                top: -20px!important;
-            }
-            .precip_pressed{
-                background-color: steelblue !important;
-                border-radius: 4px;
-            }
-            .precip_unpressed{
-                background-color: #ffffff !important;
-                border-radius: 4px;
-            }
-            .weather_pressed{
-                background-color: steelblue !important;
-                border-radius: 4px;
-            }
-            .weather_unpressed{
-                background-color: #ffffff !important;
-                border-radius: 4px;
-            }
-	    .satellite_pressed{
-               background-color: steelblue !important;
-               border-radius: 4px;
-           }
-           .satellite_unpressed{
-               background-color: #ffffff !important;
-               border-radius: 4px;
-           }
-           .water_pressed{
-               background-color: steelblue !important;
-               border-radius: 4px;
-           }
-           .water_unpressed{
-               background-color: #ffffff !important;
-               border-radius: 4px;
-           }
-            .modal {
-                display: none; /* Hidden by default */
-                padding-top: 100px; /* Location of the box */
-                left: 0;
-                top: 100px;
-                height: 50%; /* Full height */
-                overflow: auto; /* Enable scroll if needed */
-                background-color: rgb(0,0,0); /* Fallback color */
-                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            }
+input[type=range] {
+    height: 25px;
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 100%;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000;
+    background: #8A4DA8;
+    border-radius: 50px;
+    border: 1px solid #000000;
+}
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000000;
+    border: 1px solid #000000;
+    height: 17px;
+    width: 5px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -7px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #8A4DA8;
+}
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000;
+    background: #8A4DA8;
+    border-radius: 50px;
+    border: 1px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #000000;
+    border: 1px solid #000000;
+    height: 17px;
+    width: 5px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #8A4DA8;
+    border: 1px solid #000000;
+    border-radius: 100px;
+    box-shadow: 1px 1px 1px #000000;
+}
+input[type=range]::-ms-fill-upper {
+    background: #8A4DA8;
+    border: 1px solid #000000;
+    border-radius: 100px;
+    box-shadow: 1px 1px 1px #000000;
+}
+input[type=range]::-ms-thumb {
+    margin-top: 1px;
+    box-shadow: 1px 1px 1px #000000;
+    border: 1px solid #000000;
+    height: 17px;
+    width: 5px;
+    border-radius: 5px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #8A4DA8;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #8A4DA8;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.calcite-nav-bottom .calcite-map .leaflet-control-zoom {
+    margin-top: 28px;
+}
+.calcite-navbar-search {
+    margin-top: 0;
+    margin-right: 5px;
+    padding: 5px 0;
+}
+.calcite-nav-bottom .panel-body .geocoder-control-suggestions.leaflet-bar {
+    top: 25px;
+    bottom: auto;
+}
+.calcite-maps .esri-truncated-attribution {
+    max-width: 100% !important;
+    width: 100%;
+}
+.leaflet-touch .leaflet-bar {
+    border: none;
+}
+#map {
+    position: absolute;
+    top: 50px;
+    left: 0;
+}
+.slider-step-text {
+    display:inline-block;
+    width: 0.75%;
+    text-align:center;
+    margin-right: 2.4%;
+    font-size:8px;
+}
+.leaflet-bar-part{
+    border-radius: 4px;
+}
+.canvasjs-chart-toolbar{
+    z-index: 200;
+    top: -20px!important;
+}
+.precip_pressed{
+    background-color: steelblue !important;
+    border-radius: 4px;
+}
+.precip_unpressed{
+    background-color: #ffffff !important;
+    border-radius: 4px;
+}
+.weather_pressed{
+    background-color: steelblue !important;
+    border-radius: 4px;
+}
+.weather_unpressed{
+    background-color: #ffffff !important;
+    border-radius: 4px;
+}
+.satellite_pressed{
+    background-color: steelblue !important;
+    border-radius: 4px;
+}
+.satellite_unpressed{
+    background-color: #ffffff !important;
+    border-radius: 4px;
+}
+.water_pressed{
+    background-color: steelblue !important;
+    border-radius: 4px;
+}
+.water_unpressed{
+    background-color: #ffffff !important;
+    border-radius: 4px;
+}
+.modal {
+    display: none; /* Hidden by default */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 100px;
+    height: 50%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
 
-            /* Modal Content */
-            .modal-content {
-                background-color: #fefefe;
-                margin: auto;
-                padding: 20px;
-                border: 1px solid #888;
-                width: 80%;
-            }
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
 
-            /* The Close Button */
-            .close {
-                color: #aaaaaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-            }
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
 
-            .close:hover,
-            .close:focus {
-                color: #000;
-                text-decoration: none;
-                cursor: pointer;
-            }
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 
-            .btn {
-                background: #a14db8;
-                background-image: -webkit-linear-gradient(top, #a14db8, #a14db8);
-                background-image: -moz-linear-gradient(top, #a14db8, #a14db8);
-                background-image: -ms-linear-gradient(top, #a14db8, #a14db8);
-                background-image: -o-linear-gradient(top, #a14db8, #a14db8);
-                background-image: linear-gradient(to bottom, #a14db8, #a14db8);
-                -webkit-border-radius: 28;
-                -moz-border-radius: 28;
-                border-radius: 12px;
-                font-family: Arial;
-                color: #f2e9f2;
-                font-size: 12px;
-                padding: 10px 20px 10px 20px;
-                text-decoration: none;
-            }
-			
-			.sidenav {
+.btn {
+    background: #a14db8;
+    background-image: -webkit-linear-gradient(top, #a14db8, #a14db8);
+    background-image: -moz-linear-gradient(top, #a14db8, #a14db8);
+    background-image: -ms-linear-gradient(top, #a14db8, #a14db8);
+    background-image: -o-linear-gradient(top, #a14db8, #a14db8);
+    background-image: linear-gradient(to bottom, #a14db8, #a14db8);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 12px;
+    font-family: Arial;
+    color: #f2e9f2;
+    font-size: 12px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.sidenav {
     height: 100%;
     width: 0;
     position: fixed;
@@ -250,45 +250,46 @@
 
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }
-       
-	   
-	  .legend-description {
-                padding: 1.6vw 0.8vw 1.6vw 1.6vw;
-                background-color: #FFFFFF;
-                max-width: 40.5em;
-                max-height: 50em;
-                height: auto;
-                line-height: 1.75em;
-                color: #555;
-                margin-right: 0.8vw;
-                opacity: 0.9;
-                box-shadow: 0 0 1.5vw rgba(0,0,0,0.2);
-                border-radius: 0.5em;
-                margin-bottom: 22px !important;
-            }
-            .layer-description-title {
-                font-size: 18px;
-                font-weight: bold;
-            }
-            .layer-description-container {
-                padding-top: 10px;
-                max-height: 14.5em;
-                overflow-y: auto;
-            }
-            .leaflet-bottom .leaflet-left {
-                height: auto;
-                max-height: 50em;
-            }
-            .layer-description-container {
-                max-height: 50em;
-                height: auto;
-            }
-            .legendIcon  {
-                height: 36px; 
-                width: 36px; 
-                margin-left: 8px;
-            }
-            .table { table-layout: fixed; }
+
+
+.legend-description {
+    padding: 1.6vw 0.8vw 1.6vw 1.6vw;
+    background-color: #FFFFFF;
+    max-width: 40.5em;
+    max-height: 50em;
+    height: auto;
+    line-height: 1.75em;
+    color: #555;
+    margin-right: 0.8vw;
+    opacity: 0.9;
+    box-shadow: 0 0 1.5vw rgba(0,0,0,0.2);
+    border-radius: 0.5em;
+    margin-bottom: 22px !important;
+}
+.layer-description-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+.layer-description-container {
+    padding-top: 10px;
+    max-height: 14.5em;
+    overflow-y: auto;
+}
+.leaflet-bottom .leaflet-left {
+    height: auto;
+    max-height: 50em;
+}
+.layer-description-container {
+    max-height: 50em;
+    height: auto;
+}
+.legendIcon  {
+    height: 36px; 
+    width: 36px; 
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.table { table-layout: fixed; }

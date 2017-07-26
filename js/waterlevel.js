@@ -4,24 +4,21 @@
 // save all pegel data:
 var pegelData = [];
 var chartExists = false;
+function checkChartStatus() {
+    if (chartExists === false) {
+    } else {
+        if (check_sidenav == false) {
+            var currentPopup = document.getElementsByClassName("leaflet-popup-content");
+            getChart(currentPopup["0"].children["0"].innerHTML);
+        } else
+        {
+            multiple_chart(station_1, 0);
+            multiple_chart(station_2, 1);
+            multiple_chart(station_3, 2);
+        }
 
-function checkChartStatus(){
-	if (chartExists === false){
-	}
-	else{
-		if (check_sidenav == false) {
-		var currentPopup = document.getElementsByClassName("leaflet-popup-content");
-		getChart(currentPopup["0"].children["0"].innerHTML);
-		}
-		else
-		{
-		multiple_chart(station_1,0);
-		multiple_chart(station_2,1);
-		multiple_chart(station_3,2);
-		}
-		
-		}
-	}
+    }
+}
 
 
 /**
@@ -45,7 +42,6 @@ function getColor(min, max, current) {
     return val + "" + val;
 }
 ;
-
 function allDaysExist(stationname) {
     for (var i = 0; i < 30; i++) {
         if (!allPegelData[stationname][i])
@@ -54,7 +50,6 @@ function allDaysExist(stationname) {
     return true;
 }
 ;
-
 
 var gauging_stations_layer = new L.FeatureGroup();
 function getDayData(stationname, plusDay, lat, lon) {
@@ -71,7 +66,6 @@ function getDayData(stationname, plusDay, lat, lon) {
         day = "0" + (startDate.getDate());
     else
         day = (startDate.getDate());
-
     return $.ajax({
         url: "https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/"
                 + encodeURIComponent(stationname) + "/W/measurements.json"
@@ -110,45 +104,48 @@ function getDayData(stationname, plusDay, lat, lon) {
                             }
                             allPegelData[stationname].min = min;
                             allPegelData[stationname].max = max;
+                            //var waterIcon = L.Icon.Label.extend({
+//                    options: {
+//                        iconUrl: 'images/neutral_positive.png',
+//                        shadowUrl: null,
+//                        iconSize: new L.Point(24, 24),
+//                        iconAnchor: new L.Point(0, 1),
+//                        labelAnchor: new L.Point(26, 0),
+//                        wrapperAnchor: new L.Point(12, 13),
+//                    }
+//                });
+//            }
+//            var marker = new L.Marker.Label([lat, lon], {className: station_name, icon: new waterIcon({labelText: "<b>" + result[i].timeseries[0].currentMeasurement.value + "</b>"})}).addTo(map);
+//            marker.bindPopup("<b>" + station_name + "</b><br> Water : " + result[i].water.shortname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
+
                             if ((res[0]) && (res[0].value)) {
-                                var marker = new L.CircleMarker(
-                                        [lat, lon],
-                                        {
-                                            color: '#0000FF',
-                                            weight: 2,
-                                            fill: true,
-                                            fillColor: '#' + getColor(allPegelData[stationname].min, allPegelData[stationname].max, res[0].value) + "FF",
-                                            fillOpacity: 1,
-                                            radius: 10,
-                                            opacity: 1,
-                                            className: stationname
-                                        });
-									   gauging_stations_layer.addLayer(marker);
-									   marker.bindPopup("<b>" + stationname + "</b><br> Water : " + stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
+                                var waterIcon = L.MakiMarkers.icon({
+                                    icon: "water",
+                                    color: "#"+getColor(allPegelData[stationname].min, allPegelData[stationname].max, res[0].value)+"FF",
+                                    size: "l"
+                                });
+                                var marker = new L.marker([lat, lon], {icon: waterIcon});
+                                gauging_stations_layer.addLayer(marker);
+                                marker.bindPopup("<b>" + stationname + "</b><br> Water : " + stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
                             } else {
-                                var marker = new L.CircleMarker(
-                                        [lat, lon],
-                                        {
-                                            color: '#0000FF',
-                                            weight: 2,
-                                            fill: true,
-                                            fillColor: '#c1c1c1',
-                                            fillOpacity: 1,
-                                            radius: 10,
-                                            opacity: 1,
-                                            className: stationname
-                                        });
-									   gauging_stations_layer.addLayer(marker);
-									   marker.bindPopup("<b>" + stationname + "</b><br> Water : " + stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
+                                var waterIcon = L.MakiMarkers.icon({
+                                    icon: "water",
+                                    color: "#A1A1A1",
+                                    size: "l"
+                                });
+                                var marker = new L.marker([lat, lon], {icon: waterIcon});
+                                gauging_stations_layer.addLayer(marker);
+                                marker.bindPopup("<b>" + stationname + "</b><br> Water : " + stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
                             }
-                            
+
                             allPegelData[stationname].marker = marker;
                         }
-						map.addLayer(gauging_stations_layer);
+                        map.addLayer(gauging_stations_layer);
                         return res;
                     },
                     function (error) {
 //                        console.log(error);
+                        error["day"] = plusDay;
                         return error;
                     }
             );
@@ -157,25 +154,30 @@ function getDayData(stationname, plusDay, lat, lon) {
 var allPegelData = {
 
 };
-
 // get data from last 30 days for station with name stationname:
 function getStationData(stationname, lat, lon) {
     for (var i = 0; i < 31; i++) {
         getDayData(stationname, i, lat, lon)
                 .then(
                         function (res) {
-                            if (res[0])
+                            if (res[0]) {
                                 if (res[0].value) {
                                     allPegelData['' + stationname].stationname = stationname;
                                     allPegelData['' + stationname].sum += res[0].value;
                                     allPegelData['' + stationname][res.day] = res[0].value;
                                     allPegelData['' + stationname].avg = allPegelData['' + stationname].sum / 31;
                                 }
+                            } else {
+//                                console.log("NO DATA FOR DIS");
+                            }
+                        },
+                        function (error) {
+                            allPegelData['' + stationname][error.day] = undefined;
+                            console.log("NO DATA FOR DIS");
                         });
     }
 }
 ;
-
 //function addWater(result) {
 //    for (var i in result) {
 //        var station_name = result[i].shortname;
@@ -313,8 +315,6 @@ window.onload = function () {
 
         }
     });
-
-
 }
 
 
@@ -325,34 +325,30 @@ function date_for_slider(unique_date) {
 
 }
 
-var station_1 ;
-var station_2 ;
-var station_3 ;
+var station_1;
+var station_2;
+var station_3;
 map.on('popupopen', function (e) {
     console.log(e);
-	console.log(count_gauging_station);
+    console.log(count_gauging_station);
     getChart(e.target._popup._source.options.className);
-	if (count_gauging_station < 3){
-		if(count_gauging_station == 0)
-			station_1 = e.target._popup._source.options.className;
-		if (count_gauging_station == 1)
-			station_2 = e.target._popup._source.options.className;
-		if (count_gauging_station == 2)
-			station_3 = e.target._popup._source.options.className;
-	multiple_chart(e.target._popup._source.options.className,count_gauging_station);
-	count_gauging_station = count_gauging_station + 1;
-	}
+    if (count_gauging_station < 3) {
+        if (count_gauging_station == 0)
+            station_1 = e.target._popup._source.options.className;
+        if (count_gauging_station == 1)
+            station_2 = e.target._popup._source.options.className;
+        if (count_gauging_station == 2)
+            station_3 = e.target._popup._source.options.className;
+        multiple_chart(e.target._popup._source.options.className, count_gauging_station);
+        count_gauging_station = count_gauging_station + 1;
+    }
 });
-
-map.on('popupclose', function(){
-	if (check_sidenav == true)
-			chartExists = true;
-	else
-			chartExists = false;
-	
+map.on('popupclose', function () {
+    if (check_sidenav == true)
+        chartExists = true;
+    else
+        chartExists = false;
 });
-
-
 function getChart(station_name) {
     var datapoints = [];
     console.log("trying to obtain chart data for station:" + station_name)
@@ -367,7 +363,7 @@ function getChart(station_name) {
             var date_slider = selectedTime();
             for (var i in result) {
                 if (date_slider == (result[i].timestamp).substr(0, 10)) {
-					var timeLabel = result[i].timestamp.substring(11,16);
+                    var timeLabel = result[i].timestamp.substring(11, 16);
                     datapoints.push({label: timeLabel, y: result[i].value, toolTipContent: result[i].timestamp + " : " + result[i].value});
                 }
 
@@ -388,7 +384,6 @@ function getChart(station_name) {
                             }]
 
                     });
-
             chart.render();
         },
         error: function (xhr, textStatus, errorThrown) {
@@ -412,8 +407,6 @@ function getWater() {
     updateLegend();
 }
 ;
-
-
 $.ajax({
     url: "http://pegelonline.wsv.de/webservices/rest-api/v2/stations.json" +
             "?latitude=51.42" +
