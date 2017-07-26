@@ -33,20 +33,23 @@ function updateGaugingStations(val) {
             var waterIcon = L.MakiMarkers.icon({
                 icon: "water",
                 color: "#" + getColor(obj.min, obj.max, obj.avg, obj[val]),
-                size: "l"
+                size: "l",
+                stationname: obj.stationname
             });
             obj.marker = new L.marker([obj.latitude, obj.longitude], {icon: waterIcon});
-            gauging_stations_layer.addLayer(obj.marker);
         } else {
             gauging_stations_layer.removeLayer(obj.marker);
             var waterIcon = L.MakiMarkers.icon({
                 icon: "water",
                 color: "#A1A1A1",
-                size: "l"
+                size: "l",
+                stationname: obj.stationname
             });
             obj.marker = new L.marker([obj.latitude, obj.longitude], {icon: waterIcon});
-            gauging_stations_layer.addLayer(obj.marker);
         }
+        obj.marker.bindPopup("<b>" + obj.stationname + "</b><br> Water : " + obj.stationname + "<br><div id='chartContainer' style='height: 200px; width: 300px;'></div>");
+        gauging_stations_layer.addLayer(obj.marker);
+
     }
     // End <-- Gauging stations -->
 }

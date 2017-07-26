@@ -28,11 +28,12 @@ loadLegend = function () {
 
 legend.onAdd = function () {
     var div = L.DomUtil.create('CopernicusLegend', 'legend-description');
-	if (legendOpen)
-		var valuesTable = '<span class="layer-description-title">Legend:</span> <button id="legendButton" style="float:right" onclick="manageLegend()">-</button> <br>';
+    if (legendOpen){
+        var valuesTable = '<span class="layer-description-title">Legend:<button id="legendButton" style="position: absolute; right: 10px;" onclick="manageLegend()">-</button></span><br>';
+    }
     else
-		var valuesTable = '<span class="layer-description-title">Legend:</span> <button id="legendButton" style="float:right" onclick="manageLegend()">+</button> <br>';
-	valuesTable += '<div class="layer-description-container" id="legendContent">';
+        var valuesTable = '<span class="layer-description-title">Legend:</span> <button id="legendButton" style="float:right" onclick="manageLegend()">+</button> <br>';
+    valuesTable += '<div class="layer-description-container" id="legendContent">';
 
     valuesTable += '<div id="satelliteBox" style="display: ' + satelliteBox + '"><span>';
     valuesTable += '<b>Satellite:</b><br>';
@@ -64,12 +65,14 @@ legend.onAdd = function () {
 
     valuesTable += '<div id="precipitationBox" style="display: ' + precipitationBox + '"><span>';
     valuesTable += '<b>Precipitation:</b><br>';
-    valuesTable += '<span><img class="legendIcon" src="images/lgd_precip.png"></img>';
-    valuesTable += 'precipitation</span>';
+    valuesTable += '<span>Low<img class="legendIconGauging" src="images/lgd_precip.png"></img>';
+    valuesTable += 'High</span>';
     valuesTable += '</span><br></div>';
 
     valuesTable += '<div id="gaugingStationBox" style="display: ' + gaugingStationBox + '"><span>';
-    valuesTable += '<b>Gauging stations:</b> description of gauging stations.';
+    valuesTable += '<b>Gauging stations:</b><br>';
+    valuesTable += '<span>Min<img class="legendIconGauging" src="images/lgd_gauging.png"></img>';
+    valuesTable += 'Max</span>';
     valuesTable += '</span></div>';
 
     valuesTable += '</div>';
@@ -81,14 +84,13 @@ legend.onAdd = function () {
 }
 ;
 
-manageLegend = function(){
-    if($("#legendButton").html() === "-"){
+manageLegend = function () {
+    if ($("#legendButton").html() === "-") {
         $("#legendButton").html("+");
-		legendOpen = false;
-    }
-    else{
+        legendOpen = false;
+    } else {
         $("#legendButton").html("-");
-		legendOpen = true;
+        legendOpen = true;
     }
     $("#legendContent").slideToggle();
 };
@@ -123,8 +125,8 @@ updateLegend = function () {
     if (legend)
         map.removeControl(legend);
     loadLegend();
-	if (legendOpen === false)
-		$("#legendContent").slideToggle(0);
-	console.log("legendOpen is " + legendOpen)
+    if (legendOpen === false)
+        $("#legendContent").slideToggle(0);
+    console.log("legendOpen is " + legendOpen)
 };
 
