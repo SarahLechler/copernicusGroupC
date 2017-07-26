@@ -124,6 +124,7 @@ function getSatelliteImagee() {
     }
     updateLegend();
 }
+}
 ;
 
 var workers = L.esri.featureLayer({
