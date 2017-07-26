@@ -197,9 +197,9 @@
 
                         <p> Institute for Geoinformatics <br> Heisenbergstraße 2 </br> 48149 Münster </p>
 
-
-                        <p> Spectial thanks to:</p>
-
+              
+                        <p> Special thanks to:</p>
+              
                         <ul>
                             <li> <a href="https://www.pegelonline.wsv.de/gast/start" style="color:white;">PEGELONLIE</a> </li>
                             <li> <a href="https://openweathermap.org/api" style="color:white;">OpenWeatherMap</a> </li>
@@ -274,8 +274,8 @@
                 <div class=" leaflet-bar leaflet-control" ><img  class="water_pressed leaflet-bar-part" id="water_button" title="Click to display the water level on gauging stations" src= 'images/waterlevel_white.png' height='35' width='30' onclick='getWater()' data-intro='Click here for displaying gauging station data!' data-step=6 data-position='auto'></img></div>
             </div>
         </div>
-        <!-- gauging station button-->
-        <div class='leaflet-control-container'>
+        <!-- multiple charts on selection-->
+        <div class='leaflet-control-container hideInPrint'>
             <div class="leaflet-top leaflet-right" style="top:425px;">
                 <div class=" leaflet-bar leaflet-control" ><img  class="multigraphs_unpressed leaflet-bar-part" id="multi_gauging_icon" title="Click to see water levels of multiple gauging station" src= 'images/graphs_water.png' height='35' width='30' onclick='openNav()'data-intro='Click here for displaying multiple gauging station graphs at the same time!' data-step=7 data-position='auto'></img></div>
             </div>
@@ -289,12 +289,14 @@
          <button type="button" id="stop">stop</button>
          </div> -->
 
-        <div class="hideInPrint" style="position: absolute; bottom: 0; left: 0; width: 100%;" data-intro='Use the slider to get information for the last 30 days!' data-step=8 data-position='auto'>
-            <div id="slider" style="width: 100%;">
-                <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' oninput="selectingTime();checkChartStatus();"/></div>
-            <div id="steps" class="steps" style="width: 100%; margin-left: 8px;"></div>
+        <div class="hideInPrint" style="width: 100%;">
+            <img src = "images/play.png" style = " height : 30px ; width : 30px; z-index:1000000 ; display:inline-block; position: absolute; bottom: 15px; left: 2px; cursor:pointer" id = "play" >play</img>
+            <div style="position: absolute; bottom: 0; left: 35px; width: 90%;">
+                <div id="slider" style="width: 100%;">
+                    <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' oninput="selectingTime();checkChartStatus();"/></div>
+                <div id="steps" class="steps" style="width: 100%; margin-left: 8px;"></div>
+            </div>
         </div>
-        <img src = "images/play.png" style = " height : 30px ; width : 30px; z-index:1000000 ; margin-top:560px ;margin-left:1230px; margin-bottom:10px; display:inline-block; position: absolute; cursor:pointer" id = "play" >play</img>
 
 
 
@@ -327,6 +329,7 @@
 
         <!--script src="https://esri.github.io/calcite-bootstrap/scripts/vendor.js"></script-->
         <!--script src="https://esri.github.io/calcite-bootstrap/scripts/plugins.js"></script-->
+        <script src="js/MakiMarkers.js"></script>
         <script src="dist/js/jquery/calcitemaps-v0.3.js"></script>
         <script src="js/map.js"></script>
         <script src="js/time.js"></script>
@@ -337,8 +340,6 @@
         <script src ="js/multiple_gauging_stations.js"></script>
         <script src ="js/intro.js"></script>
         <script>
-
-
                     $(window).resize(function () {
                         var mapheight = $(window).height() - 110;
                         $("#map").css("height", mapheight);
@@ -352,7 +353,6 @@
                     });
                     var mapheight = $(window).height() - 110;
                     $("#map").css("height", mapheight);
-
 
                     $(window).resize(function () {
                         var mapheight = $(window).height() - 110;

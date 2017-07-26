@@ -45,31 +45,23 @@ function updateGaugingStations(val) {
         if (!obj.marker)
             continue;
         if ((obj.min !== undefined) && (obj.max !== undefined) && (obj[val] !== undefined)) {
-            obj.marker.setStyle(
-                    {
-                        color: '#0000FF',
-                        weight: 2,
-                        fill: true,
-                        fillColor: '#' + getColor(obj.min, obj.max, obj[val]) + "FF",
-                        fillOpacity: 1,
-                        radius: 10,
-                        opacity: 1,
-                        className: obj.stationname
-                    }
-            );
+            gauging_stations_layer.removeLayer(obj.marker);
+            var waterIcon = L.MakiMarkers.icon({
+                icon: "water",
+                color: "#" + getColor(obj.min, obj.max, obj.avg, obj[val]),
+                size: "l"
+            });
+            obj.marker = new L.marker([obj.latitude, obj.longitude], {icon: waterIcon});
+            gauging_stations_layer.addLayer(obj.marker);
         } else {
-            obj.marker.setStyle(
-                    {
-                        color: '#0000FF',
-                        weight: 2,
-                        fill: true,
-                        fillColor: '#c1c1c1',
-                        fillOpacity: 1,
-                        radius: 10,
-                        opacity: 1,
-                        className: obj.stationname
-                    }
-            );
+            gauging_stations_layer.removeLayer(obj.marker);
+            var waterIcon = L.MakiMarkers.icon({
+                icon: "water",
+                color: "#A1A1A1",
+                size: "l"
+            });
+            obj.marker = new L.marker([obj.latitude, obj.longitude], {icon: waterIcon});
+            gauging_stations_layer.addLayer(obj.marker);
         }
     }
     // End <-- Gauging stations -->
