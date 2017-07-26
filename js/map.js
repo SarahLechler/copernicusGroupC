@@ -72,6 +72,11 @@ L.control.zoom({
 }).addTo(map);
 
 
+L.control.scale({
+	position:'bottomright'
+}).addTo(map);
+
+//var searchControl = L.esri.Geocoding.Controls.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: false}).addTo(map);
 var searchControl = L.esri.Geocoding.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: true}).addTo(map);
 
 
