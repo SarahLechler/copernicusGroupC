@@ -283,16 +283,14 @@
 
 
 
-        <div class="hideInPrint" style="width: 100%;">
-            <img src = "images/play.png" style = " height : 30px ; width : 30px; z-index:1000000 ; display:inline-block; position: absolute; bottom: 15px; left: 2px; cursor:pointer" id = "play" >play</img>
-            <div style="position: absolute; bottom: 0; left: 35px; width: 90%;" data-intro='Change the slider to get information for the last 30 days' data-step=8 data-position='auto'>
+        <div class="hideInPrint" style="width: 100%;" data-intro='Change the slider to get information for the last 30 days' data-step=8 data-position='auto'>
+            <img src = "images/play.png" style = " height : 30px ; width : 30px ; display:inline-block; position: absolute; bottom: 15px; left: 2px; cursor:pointer" id = "play" >play</img>
+            <div style="position: absolute; bottom: 0; left: 35px; width: 90%;">
                 <div id="slider" style="width: 100%;">
                     <input style="margin-left: 8px; width: 95%; margin-bottom: 0px;" id = "range" type='range' min='0' max='30' step='1' value='30' oninput="selectingTime();checkChartStatus();"/></div>
                 <div id="steps" class="steps" style="width: 100%; margin-left: 8px;"></div>
             </div>
         </div>
-
-
 
 
         <!-- /.calcite-panels -->
