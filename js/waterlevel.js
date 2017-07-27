@@ -361,7 +361,7 @@ map.on('popupopen', function (e) {
     console.log(e);
     console.log(count_gauging_station);
     getChart(e.popup._source.options.icon.options.stationname);
-    if (count_gauging_station < 3) {
+    if (count_gauging_station < 3 && check_sidenav == true) {
         if (count_gauging_station == 0)
             station_1 = e.popup._source.options.icon.options.stationname;
         if (count_gauging_station == 1)

@@ -9,15 +9,27 @@ function selectedTime() {
 function selectingTime() {
     var val = document.getElementById('range').value;
     updateGaugingStations(val);
+    updateWeatherImages(val);
     changeSatelliteImage(val);
+    //disablePrecipitation(val);
     return unique_date[val];
 }
+
+function updateWeatherImages(val) {
+    if (weather_pressed){
+        // remove previous markers:
+        map.removeLayer(markers);
+        markers = new L.FeatureGroup();
+        weather_pressed = false;
+        getWeather();
+    }
+};
 
 function changeSatelliteImage(val) {
     var changedDate = Date.parse(new Date (unique_date[val]));
     this.processedDataLayer.setTimeRange(changedDate - 259200, changedDate + 259200);
     console.log("redrawingLayer");
-}
+};
 
 function updateGaugingStations(val) {
     // Start <-- Gauging stations -->
