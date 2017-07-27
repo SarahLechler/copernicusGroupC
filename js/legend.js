@@ -5,6 +5,7 @@ var satelliteBox = "none";      // hide on default
 var precipitationBox = "none";  // hide on default
 var gaugingStationBox = "";     // show on default
 var legendOpen = true;
+var workerBox ="";				//show on default
 
 /**
  * checks if it's dark outside.
@@ -74,6 +75,14 @@ legend.onAdd = function () {
     valuesTable += '<span>Min<img class="legendIconGauging" src="images/lgd_gauging.png"></img>';
     valuesTable += 'Max</span>';
     valuesTable += '</span></div>';
+	
+	valuesTable += '<div id="workerBox" style="display: ' + workerBox + '"><span>';
+    valuesTable += '<b>Workers and inaccessible roads:</b><br>';
+    valuesTable += '<span><img class="legendIcon" src="images/worker_icon.png"></img>';
+    valuesTable += 'Workers</span>';
+	valuesTable += '<span><img class="legendIcon" src="images/inaccessible_roads.png"></img>';
+    valuesTable += 'Inaccessible roads</span>';
+	valuesTable += '</span><br></div>';
 
     valuesTable += '</div>';
 
@@ -120,6 +129,12 @@ updateLegend = function () {
         gaugingStationBox = "";
     } else {
         gaugingStationBox = "none";
+    }
+	
+	if (workers_pressed) {
+        workerBox = "";
+    } else {
+        workerBox = "none";
     }
 
     if (legend)

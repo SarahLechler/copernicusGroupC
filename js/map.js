@@ -102,17 +102,17 @@ var processedDataLayer = L.esri.dynamicMapLayer({
 var satellite_pressed = false;
 function getSatelliteImagee() {
     satellite_pressed = !satellite_pressed;
-    if (layer){
-        map.removeLayer(layer);}
+//    if (layer){
+//        map.removeLayer(layer);}
     if (processedDataLayer){
         map.removeLayer(processedDataLayer);
-    if (precip_layer)
-        map.removeLayer(precip_layer);
-    map.addLayer(layer);
+//    if (precip_layer)
+//        map.removeLayer(precip_layer);
+//    map.addLayer(layer);
     if (satellite_pressed)
         map.addLayer(processedDataLayer);
-    if (precip_pressed)
-        map.addLayer(precip_layer);
+//    if (precip_pressed)
+//        map.addLayer(precip_layer);
     var satellite_button = document.getElementById('satellite_button');    
     if (satellite_pressed) {
         satellite_button.className = 'satellite_pressed';
@@ -128,7 +128,7 @@ function getSatelliteImagee() {
 
 var workers = L.esri.featureLayer({
     url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0'
-}).addTo(map);
+});
 
 workers.bindPopup(function (layer) {
     return L.Util.template('<p>Name: {Name}<br>Description: {Descriptoon_Task}</p>', layer.feature.properties);
@@ -137,10 +137,31 @@ workers.bindPopup(function (layer) {
 //adding Feature layer for Inaccessible Roads
 var inaccessibleRoads = L.esri.featureLayer({
     url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/inaccessibleRoads01/FeatureServer/0'
-}).addTo(map);
+});
 //adding Feature layer for Workers
 
 inaccessibleRoads.bindPopup(function (layer) {
     return L.Util.template('<p>Name: {Name}<br>Description: {Descriptoon_Task}</p>', layer.feature.properties);
 });
 
+var workers_pressed = true;
+function getWorkers() {
+	workers_pressed = !workers_pressed;
+	    if (workers)
+        map.removeLayer(workers);
+    if (inaccessibleRoads)
+        map.removeLayer(inaccessibleRoads);
+    if (workers_pressed){
+        map.addLayer(workers);
+		map.addLayer(inaccessibleRoads);
+	}
+    var workers_button = document.getElementById('workers_button');
+    if (workers_pressed) {
+        workers_button.className = 'workers_pressed';
+        workers_button.src = "images/worker_layer_white.png";
+    } else {
+        workers_button.className = 'workers_unpressed';
+        workers_button.src = "images/worker.png";
+    }
+    updateLegend();
+}
