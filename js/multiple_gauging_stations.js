@@ -13,7 +13,7 @@ function multiple_chart(station_name,count_gauging_station){
             var date_slider = selectedTime();
             for (var i in result) {
                 if (date_slider == (result[i].timestamp).substr(0, 10)) {
-                    datapoints.push({label: result[i].timestamp.substr(0, 10), y: result[i].value, toolTipContent: result[i].timestamp + " : " + result[i].value});
+                    datapoints.push({label: result[i].timestamp.substring(11, 16), y: result[i].value, toolTipContent: result[i].timestamp + " : " + result[i].value});
                 }
 
             }
