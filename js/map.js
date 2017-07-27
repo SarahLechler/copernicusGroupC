@@ -94,10 +94,8 @@ var processedDataLayer = L.esri.dynamicMapLayer({
     url: 'https://www.copernicushub.eu/arcgis/rest/services/waterdetect/MapServer', 
     attribution: 'Sentinel1 Data after water detection process',
     layers: [3],
-    noData: 'LowPS',
-    noDataInterpretation: null,
-    to: Date(2017-01-01),
-    from: Date(2017-01-01)
+    to: Date.now(),
+    from: Date.now()
    
 });
 

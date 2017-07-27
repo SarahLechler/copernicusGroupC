@@ -14,7 +14,6 @@ function getWeather() {
         
         var date = selectedTime();
         date = date.substr(0,4) + "_" + date.substr(5,2)+ "_" + date.substr(8,2);
-        console.log(date);
         var URL = "http://52.59.157.69:8000//weather"+date+".json";
         //var URL = "http://api.openweathermap.org/data/2.5/box/city?bbox=5.77,50.31,9.46,52.62,9&APPID=3e4e9e28f3ee43f6058e966b7f2be8c6";
         $.ajax({
