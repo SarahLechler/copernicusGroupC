@@ -25,7 +25,7 @@ function getWeather() {
             crossDomain: true,
             success: function (result) {
                 console.log(result);
-                //addToMap(result);
+                addToMap(result);
             },
             error: function (xhr, textStatus, errorThrown) {
                 alert("Unable to fetch Server data")
