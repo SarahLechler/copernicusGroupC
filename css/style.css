@@ -174,6 +174,14 @@ html, body {
     background-color: #ffffff !important;
     border-radius: 4px;               
 }
+.workers_pressed{
+    background-color: #196fa6 !important;
+    border-radius: 4px;               
+}
+.workers_unpressed{
+    background-color: #ffffff !important;
+    border-radius: 4px;               
+}
 .modal {
     display: none; /* Hidden by default */
     padding-top: 100px; /* Location of the box */
@@ -271,6 +279,7 @@ html, body {
     padding: 1.6vw 0.8vw 1.6vw 1.6vw;
     background-color: #FFFFFF;
     max-width: 40.5em;
+    min-width: 10.5em;
     max-height: 50em;
     height: auto;
     line-height: 1.75em;
