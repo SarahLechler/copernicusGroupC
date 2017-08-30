@@ -1,17 +1,11 @@
-//http://api.openweathermap.org/data/2.5/box/city?bbox=5.77,50.31,9.46,52.62,9&APPID=3e4e9e28f3ee43f6058e966b7f2be8c6
-
-//a5c1af14a4a35b7c0d34a54ff1b30811
-
-//31df404cdb420dc1bb780fffc9a100c7
-
-//http://api.openweathermap.org/data/2.5/forecast?q={muenster}&appid=3e4e9e28f3ee43f6058e966b7f2be8c6
-
+//JavaScript that fetches weather data from GeoEvent Server and display the weather icons 
 var markers = new L.FeatureGroup();
 var weather_pressed = false;
 function getWeather() {
     var weather_button = document.getElementById('weather_button');
     if (!weather_pressed) {
         
+		//to get the date that is currently selected on the range slider
         var date = selectedTime();
         date = date.substr(0,4) + "_" + date.substr(5,2)+ "_" + date.substr(8,2);
         var URL = "http://52.59.157.69:8000//weather"+date+".json";
@@ -31,7 +25,8 @@ function getWeather() {
                 alert("Unable to fetch Server data")
             }
         });
-
+		
+        //to add weather icons on the map
         function addToMap(data) {
             var count = Object.keys(data.list).length;
 
@@ -62,3 +57,4 @@ function getWeather() {
     }
     updateLegend();
 }
+
