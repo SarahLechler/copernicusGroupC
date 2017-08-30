@@ -289,7 +289,7 @@
 
 
 
-
+        <!--to hide some elements while printing -->
         <div class="hideInPrint" style="width: 100%;">
             <img src = "images/play.png" style = " height : 30px ; width : 30px ; display:inline-block; position: absolute; bottom: 15px; left: 2px; cursor:pointer" id = "play" >play</img>
             <div style="position: absolute; bottom: 0; left: 35px; width: 90%;" data-intro='Change the slider to get information for the last 30 days' data-step=9 data-position='auto'>
@@ -329,6 +329,7 @@
 
         <!--script src="https://esri.github.io/calcite-bootstrap/scripts/vendor.js"></script-->
         <!--script src="https://esri.github.io/calcite-bootstrap/scripts/plugins.js"></script-->
+        <!--Including all js files --> 
         <script src="js/MakiMarkers.js"></script>
         <script src="dist/js/jquery/calcitemaps-v0.3.js"></script>
         <script src="js/map.js"></script>
@@ -397,14 +398,14 @@
 
 			var check_sidenav;
 
-			//adding form to add workers
+			//form to get information about workers
 			function form_worker() {
 
 				document.getElementById('road_worker').innerHTML = '';
 				$("<div id = 'form'><form>Entered_By:<br><input id = 'author' type='text' ><br>Number of Workers:<br><input id = 'number' type='text' ><br>Description:<br><input id = 'worker_desc' type='text'></form><br><button class = 'btn' id = 'submit' onclick = 'addFeature_worker()'>submit</button></div>").appendTo('#road_worker');
 
 			}
-			//adding form to add inaccessable roads
+			//form to get information about inaccessible roads
 			function form_road() {
 				document.getElementById('road_worker').innerHTML = '';
 				$("<div id = 'form'><form>Entered_By:<br><input id = 'author' type='text' ><br>Description:<br><input id = 'road_desc' type='text'></form><br><button class = 'btn' id = 'submit' onclick = 'addFeature_road()'>submit</button></div>").appendTo('#road_worker');
@@ -412,13 +413,15 @@
 			}
 
 			var count_gauging_station = 0;
+		        //to open the sidebar for multiple gauging stations
 			function openNav() {
 				count_gauging_station = 0;
 				document.getElementById("mySidenav").style.width = "350px";
 				document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 				check_sidenav = true;
 			}
-
+		
+                        //to close the sidebar
 			function closeNav() {
 				document.getElementById("mySidenav").style.width = "0";
 				document.body.style.backgroundColor = "white";
