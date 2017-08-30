@@ -1,7 +1,5 @@
 
-var editableLayers_roads = new L.FeatureGroup();
-map.addLayer(editableLayers_roads);
-
+//icon for the marker to be placed
 var marker_icon = L.Icon.extend({
     options: {
         shadowUrl: null,
@@ -11,6 +9,7 @@ var marker_icon = L.Icon.extend({
     }
 });
 
+//disable all the options of drawing except the marker
 var options = {
     position: 'topright',
     draw: {
@@ -25,22 +24,28 @@ var options = {
     },
 };
 
+//add draw control on the map
 var drawControl = new L.Control.Draw(options);
 map.addControl(drawControl);
 
 
-//Inaccessible Roads 
+//Inaccessible Roads
+
+// add ESRI feature layer 
 var inaccessibleRoads = L.esri.featureLayer({
     url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/inaccessibleRoads01/FeatureServer/0',
     editable: true,
 }).addTo(map);
 
+//to bind the popup with the marker-inaccessible road
 inaccessibleRoads.bindPopup(function (layer) {
     return L.Util.template('<p><b>Created_By : </b>{Name}<br> <b>Description : </b> {Descriptoon_Task}<br><button onclick = "edit_roads()">edit</button><button onclick = "delete_roads()">delete</button></p>', layer.feature.properties);
 });
 
 var lat;
 var lon;
+
+//to open the modal which asks if the user wants to place workers or mark inaccessible roads
 map.on(L.Draw.Event.CREATED, function (e) {
     var type = e.layerType,
             layer = e.layer;
@@ -48,7 +53,7 @@ map.on(L.Draw.Event.CREATED, function (e) {
     document.getElementById('road_worker').innerHTML = '';
     $('<p>Do you want to enter details about workers or inaccessible roads?</p><button id = "btn_1" class="btn" onclick = "form_worker()"> Workers </button><button id = "btn_2" class="btn" onclick = "form_road()"> Inaccessible Roads </button>').appendTo('#road_worker');
 
-    // Get the modal
+	// Get the modal
     var modal = document.getElementById('myModal');
 // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -70,6 +75,7 @@ map.on(L.Draw.Event.CREATED, function (e) {
 });
 
 
+//to add the feature road on clicking submit on the form 
 function addFeature_road() {
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
@@ -112,6 +118,7 @@ inaccessibleRoads.on('click', function (event) {
     id = event.layer.feature.id;
 });
 
+//display of new form when clicked to edit the road
 function edit_roads() {
     var modal = document.getElementById('myModal');
     var modal_content = document.getElementById('road_worker');
@@ -136,6 +143,7 @@ function edit_roads() {
 
 }
 
+//function that runs when clicked submit for editing
 function updateFeature_road() {
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
@@ -168,6 +176,7 @@ function updateFeature_road() {
     map.closePopup();
 }
 
+// functions to delete the road feature from the layer.
 function delete_roads() {
     inaccessibleRoads.deleteFeature(id, function (error, response) {
         if (error) {
@@ -182,16 +191,19 @@ function delete_roads() {
 
 // Workers
 
+
+//add feature layer for workers
 var workers = L.esri.featureLayer({
     url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0',
     editable: true,
 }).addTo(map);
 
+//to display the entered information as popup
 workers.bindPopup(function (layer) {
     return L.Util.template('<p><b>Created_By : </b>{Name}<br><b> Number of Workers : </b>{Number}<br><b>Description : </b> {Descriptoon_Task}<br><button onclick = "edit_workers()">edit</button><button onclick = "delete_workers()">delete</button></p>', layer.feature.properties);
 });
 
-
+//to add a marker for the worker 
 function addFeature_worker() {
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
@@ -235,6 +247,8 @@ workers.on('click', function (event) {
     worker_id = event.layer.feature.id;
 });
 
+
+// display new form when the user clicks edit feature
 function edit_workers() {
     var modal = document.getElementById('myModal');
     var modal_content = document.getElementById('road_worker');
@@ -261,6 +275,7 @@ function edit_workers() {
 
 }
 
+//update the information when the user has edited the feature 
 function updateFeature_worker() {
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
@@ -293,7 +308,7 @@ function updateFeature_worker() {
     });
     map.closePopup();
 }
-
+ //to delete the feature worker
 function delete_workers() {
     workers.deleteFeature(worker_id, function (error, response) {
         if (error) {
