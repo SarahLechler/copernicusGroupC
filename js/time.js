@@ -1,3 +1,4 @@
+//to get the time selected on the range slider.
 function selectedTime() {
     var val = document.getElementById('range').value;
     console.log(unique_date[val]);
