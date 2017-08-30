@@ -208,6 +208,7 @@ function getStationData(stationname, lat, lon) {
     }
 }
 ;
+//older version of the web application displaying current water level with different symbolisation
 //function addWater(result) {
 //    for (var i in result) {
 //        var station_name = result[i].shortname;
@@ -318,6 +319,8 @@ function getStationData(stationname, lat, lon) {
 
 var date = [];
 var unique_date = [];
+
+//to get the dates of last 30 days from the current date in PegelOnline
 window.onload = function () {
     var URL = "https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/BONN/W/measurements.json?start=P30D";
     $.ajax({
@@ -347,7 +350,7 @@ window.onload = function () {
     });
 }
 
-
+//to display the list of dates below the range slider.
 function date_for_slider(unique_date) {
     for (var i in unique_date) {
         $('<span class="slider-step-text" >I<br>' + unique_date[i].substr(5, 10) + '</span>').appendTo('#steps');
@@ -360,6 +363,7 @@ var station_3;
 map.on('popupopen', function (e) {
     console.log(e);
     console.log(count_gauging_station);
+    // to check if the side bar is opened and get the station name of first three selected gauging stations
     getChart(e.popup._source.options.icon.options.stationname);
     if (count_gauging_station < 3 && check_sidenav == true) {
         if (count_gauging_station == 0)
@@ -379,6 +383,7 @@ map.on('popupclose', function () {
         chartExists = false;
 });
 
+//to display chart in the popup
 function getChart(station_name) {
     var datapoints = [];
     console.log("trying to obtain chart data for station:" + station_name)
