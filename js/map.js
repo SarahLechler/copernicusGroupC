@@ -1,5 +1,4 @@
 
-
 // ============
 // Esri-Leaflet
 // ============
@@ -15,6 +14,7 @@ var map = L.map('map', {zoomControl: false, zoomAnimation: false,
 
 var precip_pressed = false;
 
+//to toggle on/off the precpitation layer
 function getPrecipitation() {
     precip_pressed = !precip_pressed;
     if (layer)
@@ -80,7 +80,7 @@ L.control.scale({
 //var searchControl = L.esri.Geocoding.Controls.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: false}).addTo(map);
 var searchControl = L.esri.Geocoding.geosearch({expanded: true, collapseAfterResult: false, zoomToResult: true}).addTo(map);
 
-
+//to add the print option in the map
 L.easyPrint({
     title: 'Click to print the map',
     position: 'topright',
@@ -126,24 +126,8 @@ function getSatelliteImagee() {
 }
 ;
 
-var workers = L.esri.featureLayer({
-    url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/WorkerFeature/FeatureServer/0'
-});
 
-workers.bindPopup(function (layer) {
-    return L.Util.template('<p>Name: {Name}<br>Description: {Descriptoon_Task}</p>', layer.feature.properties);
-});
-
-//adding Feature layer for Inaccessible Roads
-var inaccessibleRoads = L.esri.featureLayer({
-    url: 'https://services1.arcgis.com/W47q82gM5Y2xNen1/arcgis/rest/services/inaccessibleRoads01/FeatureServer/0'
-});
-//adding Feature layer for Workers
-
-inaccessibleRoads.bindPopup(function (layer) {
-    return L.Util.template('<p>Name: {Name}<br>Description: {Descriptoon_Task}</p>', layer.feature.properties);
-});
-
+//to toggle on/off the markers layer
 var workers_pressed = true;
 function getWorkers() {
 	workers_pressed = !workers_pressed;
