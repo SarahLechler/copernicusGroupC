@@ -1,3 +1,4 @@
+//to display the water levels of multiple gauging station when the side bar is opened
 
 function multiple_chart(station_name,count_gauging_station){
 	var datapoints = [];
@@ -42,5 +43,7 @@ function multiple_chart(station_name,count_gauging_station){
     });
 	chartExists = true;
 }
+
+	
 
 	
